@@ -8,7 +8,8 @@ export interface Project {
   description: string;
   technologies: string[];
   collaborators: Collaborator[];
-  github: string;
+  github?: string;
+  website?: string;
   images: string[];
 }
 
@@ -21,6 +22,7 @@ export const projects: Project[] = [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     github: "https://github.com/OoEthanoO/me",
+    website: "https://www.ethanyanxu.com",
     images: ["/me.png"]
   },
   {
@@ -32,5 +34,25 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/OoEthanoO/cora_project",
     images: ["/cora1.png", "/cora2.png", "/cora3.png"]
-  }
+  },
+  {
+    title: "Dotfiles",
+    description: "My personal Arch Linux dotfiles repository, showcasing my customized setup and configurations.",
+    technologies: ["Hypr*", "Nvim", "Waybar"],
+    collaborators: [
+      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    ],
+    github: "https://github.com/OoEthanoO/dotfiles",
+    images: ["/dotfiles1.png"]
+  },
+  {
+    title: "Ethan's Coding Class",
+    description: "A web application for showcasing my volunteering work, managing my students, and allowing them to have a platform to learn coding and fundraise for SickKids.",
+    technologies: ["React", "Firebase", "Express.js", "Node.js", "Nodemailer"],
+    collaborators: [
+      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    ],
+    images: ["/codingclass1.png", "/codingclass2.png", "/codingclass3.png"],
+    website: "https://my-volunteering-website-becd2.web.app/"
+  },
 ];

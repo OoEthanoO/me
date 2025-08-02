@@ -73,21 +73,46 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
                 href={collab.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+                className="collaborator-tag inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
                 onClick={(e) => e.stopPropagation()}
                 >
                 {collab.name}
                 </a>
             ))}
           </div>
-          <a
-            href={project.github}
-            className="github-link inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View on GitHub →
-          </a>
+          {project.github ? (
+            <a
+              href={project.github}
+              className="github-link inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on GitHub →
+            </a>
+          ) : (
+            <div className="mb-2">
+              <span
+                className="github-link inline-block text-white font-medium text-base"
+                style={{ opacity: 0.9 }}
+                title="Closed Source"
+              >
+                Closed Source
+              </span>
+            </div>
+          )}
+          {project.website && (
+            <div>
+              <a
+                href={project.website}
+                className="github-link inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ animationDelay: "1.65s" }}
+              >
+                Visit Website →
+              </a>
+            </div>
+          )}
           {project.images.length > 0 && (
             <div className="project-images flex flex-col gap-6">
               {project.images.map((img, idx) => (
@@ -118,12 +143,6 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
             className="modal-content relative max-w-5xl max-h-full"
             onClick={(e) => e.stopPropagation()}
           >
-            <button
-              onClick={handleCloseModal}
-              className="absolute -top-12 right-0 text-white hover:text-fuchsia-400 transition-colors text-2xl font-bold z-10"
-            >
-              ✕
-            </button>
             <div className={`w-full ${isClosing ? 'closing' : ''}`}>
               <img
                 src={expandedImage}
@@ -137,7 +156,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
       <div className="mt-12 flex justify-center">
         <a
           href="/"
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-semibold shadow hover:scale-105 transition-transform"
+          className="back-home-btn inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-semibold shadow hover:scale-105 transition-transform"
         >
           <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
           Back to Home

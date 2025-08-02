@@ -284,3 +284,8 @@ body {
 .github-button:hover svg {
   transform: rotate(12deg);
 }
+
+.back-home-btn {
+  animation: fadeInUp 0.7s ease-out 1.7s;
+  animation-fill-mode: both;
+}
