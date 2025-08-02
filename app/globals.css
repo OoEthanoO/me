@@ -28,10 +28,115 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Page load animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes imageZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes imageZoomOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Apply animations to page elements */
+.page-container {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.header-animation {
+  animation: fadeInUp 1s ease-out;
+}
+
+.projects-grid {
+  animation: fadeInUp 1.2s ease-out;
+}
+
 .project-card {
   position: relative;
   transition: all 0.3s ease-in-out;
+  animation: scaleIn 0.6s ease-out;
+  animation-fill-mode: both;
 }
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
 
 .project-card::before {
   content: "";
@@ -41,7 +146,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   background: radial-gradient(
-    1200px circle at var(--mouse-x) var(--mouse-y),
+    400px circle at var(--mouse-x) var(--mouse-y),
     rgba(162, 28, 175, 0.4),
     rgba(75, 0, 130, 0.25) 40%,
     transparent 70%
@@ -57,4 +162,120 @@ body {
 
 .project-card:hover::before {
   opacity: 1;
+}
+
+/* Project detail page animations */
+.project-detail {
+  position: relative;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.project-detail-content {
+  animation: fadeInUp 1s ease-out 0.3s;
+  animation-fill-mode: both;
+}
+
+.project-detail::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  background: radial-gradient(
+    500px circle at var(--mouse-x) var(--mouse-y),
+    rgba(162, 28, 175, 0.3),
+    rgba(75, 0, 130, 0.2) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-detail::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: 
+    linear-gradient(rgba(162, 28, 175, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(162, 28, 175, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+  mask: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    black 20%,
+    transparent 80%
+  );
+  -webkit-mask: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    black 20%,
+    transparent 80%
+  );
+  transition: all 0.3s ease-in-out;
+}
+
+.project-detail:hover::before {
+  opacity: 1;
+}
+
+.project-detail:hover::after {
+  opacity: 0.6;
+}
+
+/* Technology and collaborator tags animations */
+.tech-tag {
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.tech-tag:nth-child(1) { animation-delay: 0.8s; }
+.tech-tag:nth-child(2) { animation-delay: 0.9s; }
+.tech-tag:nth-child(3) { animation-delay: 1s; }
+.tech-tag:nth-child(4) { animation-delay: 1.1s; }
+.tech-tag:nth-child(5) { animation-delay: 1.2s; }
+
+.collaborator-tag {
+  animation: fadeIn 0.5s ease-out;
+  animation-fill-mode: both;
+}
+
+.collaborator-tag:nth-child(1) { animation-delay: 1.3s; }
+.collaborator-tag:nth-child(2) { animation-delay: 1.4s; }
+.collaborator-tag:nth-child(3) { animation-delay: 1.5s; }
+
+/* GitHub link animation */
+.github-link {
+  animation: fadeInUp 0.6s ease-out 1.6s;
+  animation-fill-mode: both;
+}
+
+/* Images animation */
+.project-images {
+  animation: fadeInUp 0.8s ease-out 1.8s;
+  animation-fill-mode: both;
+}
+
+/* Image Modal Animations */
+.image-modal {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.image-modal.closing {
+  animation: modalFadeOut 0.3s ease-out forwards;
+}
+
+.expanded-image {
+  animation: imageZoomIn 0.4s ease-out;
+}
+
+.expanded-image.closing {
+  animation: imageZoomOut 0.3s ease-out forwards;
+}
+
+/* Modal backdrop blur */
+.image-modal {
+  backdrop-filter: blur(10px);
 }

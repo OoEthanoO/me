@@ -9,11 +9,11 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "My Awesome Project",
-    description: "A brief description of what this project does.",
-    technologies: ["React", "TypeScript", "Next.js"],
-    collaborators: ["Alice", "Bob"],
+    title: "Me",
+    description: "A portfolio website showcasing my projects and skills.",
+    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
+    collaborators: ["Solo"],
     github: "https://github.com/yourusername/awesome-project",
-    images: ["/file.svg", "/globe.svg"]
+    images: ["/test.png"]
   },
 ];

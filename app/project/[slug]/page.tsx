@@ -1,6 +1,8 @@
+"use client";
+
 import { notFound } from 'next/navigation';
 import { projects } from '../../../data/projects';
-import { use } from 'react';
+import { use, useRef, useState, MouseEvent } from 'react';
 
 function slugify(title: string) {
   return title.toLowerCase().replace(/\s+/g, '-');
@@ -8,6 +10,32 @@ function slugify(title: string) {
 
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
   const { slug } = use(params);
+  const detailRef = useRef<HTMLDivElement>(null);
+  const [expandedImage, setExpandedImage] = useState<string | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (detailRef.current) {
+      const rect = detailRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      detailRef.current.style.setProperty('--mouse-x', `${x}px`);
+      detailRef.current.style.setProperty('--mouse-y', `${y}px`);
+    }
+  };
+
+  const handleImageClick = (imageSrc: string) => {
+    setExpandedImage(imageSrc);
+    setIsClosing(false);
+  };
+
+  const handleCloseModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setExpandedImage(null);
+      setIsClosing(false);
+    }, 300);
+  };
 
   const project = projects.find(
     (p) => slugify(p.title) === slug
@@ -17,53 +45,91 @@ export default function ProjectDetail({ params }: { params: { slug: string } }) 
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#181824] via-[#23243a] to-[#181824] text-gray-100 px-4 py-12 flex flex-col items-center">
-      <div className="w-full max-w-3xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-lg p-10 relative">
-        <h1 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-fuchsia-500 text-transparent bg-clip-text drop-shadow-lg">
-          {project.title}
-        </h1>
-        <p className="text-lg text-gray-300 mb-6">{project.description}</p>
-        <div className="mb-6 flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="inline-block bg-gradient-to-r from-blue-700 to-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full text-white shadow"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <div className="mb-6 flex flex-wrap gap-2 items-center">
-          <span className="text-xs text-gray-400">Collaborators:</span>
-          {project.collaborators.map((collab) => (
-            <span
-              key={collab}
-              className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10"
-            >
-              {collab}
-            </span>
-          ))}
-        </div>
-        <a
-          href={project.github}
-          className="inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View on GitHub →
-        </a>
-        {project.images.length > 0 && (
-          <div className="flex flex-wrap gap-4 justify-center">
-            {project.images.map((img, idx) => (
-              <img
-                key={idx}
-                src={img}
-                alt={project.title}
-                className="w-40 h-40 object-contain rounded-lg border border-white/10 bg-white/10 shadow"
-              />
+      <div 
+        ref={detailRef}
+        className="project-detail w-full max-w-3xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-lg p-10 relative"
+        onMouseMove={handleMouseMove}
+      >
+        <div className="relative z-10">
+          <h1 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-fuchsia-500 text-transparent bg-clip-text drop-shadow-lg">
+            {project.title}
+          </h1>
+          <p className="text-lg text-gray-300 mb-6">{project.description}</p>
+          <div className="mb-6 flex flex-wrap gap-2">
+            {project.technologies.map((tech) => (
+              <span
+                key={tech}
+                className="tech-tag inline-block bg-gradient-to-r from-blue-700 to-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full text-white shadow"
+              >
+                {tech}
+              </span>
             ))}
           </div>
-        )}
+          <div className="mb-6 flex flex-wrap gap-2 items-center">
+            <span className="text-xs text-gray-400">Collaborators:</span>
+            {project.collaborators.map((collab) => (
+              <span
+                key={collab}
+                className="collaborator-tag inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10"
+              >
+                {collab}
+              </span>
+            ))}
+          </div>
+          <a
+            href={project.github}
+            className="github-link inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub →
+          </a>
+          {project.images.length > 0 && (
+            <div className="project-images flex flex-col gap-6">
+              {project.images.map((img, idx) => (
+                <div
+                  key={idx}
+                  className="w-full rounded-2xl overflow-hidden border border-white/20 bg-white/5 shadow-2xl backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform duration-300"
+                  onClick={() => handleImageClick(img)}
+                >
+                  <img
+                    src={img}
+                    alt={`${project.title} screenshot ${idx + 1}`}
+                    className="w-full h-auto object-cover rounded-2xl"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Image Modal */}
+      {expandedImage && (
+        <div 
+          className={`image-modal fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 ${isClosing ? 'closing' : ''}`}
+          onClick={handleCloseModal}
+        >
+          <div 
+            className="modal-content relative max-w-5xl max-h-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={handleCloseModal}
+              className="absolute -top-12 right-0 text-white hover:text-fuchsia-400 transition-colors text-2xl font-bold z-10"
+            >
+              ✕
+            </button>
+            <div className={`w-full ${isClosing ? 'closing' : ''}`}>
+              <img
+                src={expandedImage}
+                alt={`${project.title} expanded`}
+                className={`expanded-image w-full h-auto max-h-[90vh] object-contain rounded-2xl shadow-2xl border border-white/20 ${isClosing ? 'closing' : ''}`}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
