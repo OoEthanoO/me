@@ -53,6 +53,16 @@ export const projects: Project[] = [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     images: ["/codingclass1.png", "/codingclass2.png", "/codingclass3.png"],
-    website: "https://my-volunteering-website-becd2.web.app/"
+    website: "https://class.ethanyanxu.com/"
+  },
+  {
+    title: "Macam",
+    description: "A macOS camera application that allow users to quickly snap pictures with a simple design.",
+    technologies: ["Swift", "SwiftUI", "AppKit", "AVFoundation"],
+    collaborators: [
+      { name: "Dean", github: "https://github.com/Penguin60" }
+    ],
+    github: "https://github.com/STRNerds/Macam",
+    images: ["/macam1.png"]
   },
 ];
