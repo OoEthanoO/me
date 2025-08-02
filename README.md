@@ -22,7 +22,7 @@ Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Credits
 
-The style and design of this website are **heavily inspired by [Hyprland's website](https://hypr.land)**.
+The style and design of this website are **heavily inspired by [Hyprland's website](https://hypr.land)**, because Hyprland is the best WM in the world.
 
 ---
 
