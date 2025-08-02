@@ -8,8 +8,8 @@ function slugify(title: string) {
   return title.toLowerCase().replace(/\s+/g, '-');
 }
 
-export default function ProjectDetail({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
   const detailRef = useRef<HTMLDivElement>(null);
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
