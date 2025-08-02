@@ -9,7 +9,7 @@ function slugify(title: string) {
 }
 
 export default function ProjectDetail({ params }: { params: { slug: string } }) {
-  const { slug } = use(params);
+  const { slug } = params;
   const detailRef = useRef<HTMLDivElement>(null);
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
