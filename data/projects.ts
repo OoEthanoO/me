@@ -10,10 +10,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Me",
-    description: "A portfolio website showcasing my projects and skills.",
+    description: "A portfolio website for showcasing my projects and skills.",
     technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
     collaborators: ["Solo"],
-    github: "https://github.com/yourusername/awesome-project",
-    images: ["/test.png"]
+    github: "https://github.com/OoEthanoO/me",
+    images: ["/me.png"]
   },
 ];
