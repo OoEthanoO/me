@@ -28,6 +28,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.project-card {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
 .project-card::before {
   content: "";
   position: absolute;
@@ -36,10 +41,18 @@ body {
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
   background: radial-gradient(
-    350px circle at var(--mouse-x) var(--mouse-y),
-    rgba(162, 28, 175, 0.25),
-    transparent 80%
+    1200px circle at var(--mouse-x) var(--mouse-y),
+    rgba(162, 28, 175, 0.4),
+    rgba(75, 0, 130, 0.25) 40%,
+    transparent 70%
   );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.project-card:hover {
+  border-color: rgba(162, 28, 175, 0.8);
+  box-shadow: 0 0 20px rgba(162, 28, 175, 0.3);
 }
 
 .project-card:hover::before {
