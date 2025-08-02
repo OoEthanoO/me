@@ -68,12 +68,16 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
           <div className="mb-6 flex flex-wrap gap-2 items-center">
             <span className="text-xs text-gray-400">Collaborators:</span>
             {project.collaborators.map((collab) => (
-              <span
-                key={collab}
-                className="collaborator-tag inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10"
-              >
-                {collab}
-              </span>
+                <a
+                key={collab.name}
+                href={collab.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+                onClick={(e) => e.stopPropagation()}
+                >
+                {collab.name}
+                </a>
             ))}
           </div>
           <a
@@ -130,6 +134,15 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
           </div>
         </div>
       )}
+      <div className="mt-12 flex justify-center">
+        <a
+          href="/"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-semibold shadow hover:scale-105 transition-transform"
+        >
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+          Back to Home
+        </a>
+      </div>
     </main>
   );
 }

@@ -47,16 +47,17 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <span className="text-xs text-gray-400">Collaborators:</span>
             {project.collaborators.map((collab) => (
                 <span
-                key={collab}
-                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10"
+                key={collab.name}
+                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  window.open(collab.github, '_blank');
+                }}
                 >
-                {collab}
+                {collab.name}
                 </span>
             ))}
             </div>
-            <span className="inline-block mt-2 text-fuchsia-400 underline font-medium transition-colors">
-            View Details →
-            </span>
         </div>
     </Link>
   );

@@ -246,19 +246,16 @@ body {
 .collaborator-tag:nth-child(2) { animation-delay: 1.4s; }
 .collaborator-tag:nth-child(3) { animation-delay: 1.5s; }
 
-/* GitHub link animation */
 .github-link {
   animation: fadeInUp 0.6s ease-out 1.6s;
   animation-fill-mode: both;
 }
 
-/* Images animation */
 .project-images {
   animation: fadeInUp 0.8s ease-out 1.8s;
   animation-fill-mode: both;
 }
 
-/* Image Modal Animations */
 .image-modal {
   animation: modalFadeIn 0.3s ease-out;
 }
@@ -275,7 +272,15 @@ body {
   animation: imageZoomOut 0.3s ease-out forwards;
 }
 
-/* Modal backdrop blur */
 .image-modal {
   backdrop-filter: blur(10px);
+}
+
+.github-button {
+  animation: fadeInUp 1.2s ease-out 0.6s;
+  animation-fill-mode: both;
+}
+
+.github-button:hover svg {
+  transform: rotate(12deg);
 }
