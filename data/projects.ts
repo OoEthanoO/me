@@ -74,5 +74,6 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/STRNerds/yan-dashboard",
     images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
+    website: "https://www.yandashboard.com/"
   },
 ];
