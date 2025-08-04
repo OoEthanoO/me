@@ -9,7 +9,7 @@ export default function Home() {
           Ethan Yan Xu
         </h1>
         <p className="text-lg text-gray-300 max-w-xl mx-auto mb-6">
-          A Toronto 10th grader with a passion for software
+          A Toronto 11th grader with a passion for software
         </p>
         <a
           href="https://github.com/OoEthanoO"
