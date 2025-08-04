@@ -65,4 +65,14 @@ export const projects: Project[] = [
     github: "https://github.com/STRNerds/Macam",
     images: ["/macam1.png"]
   },
+  {
+    title: "YanDashboard",
+    description: "An web application and academic productivity helper that allows students to track assignments, manage courses, and log study sessions in an environment that ensures privacy with E2E encryption.",
+    technologies: ["React Native", "Expo", "MongoDB", "Node.js", "TypeScript"],
+    collaborators: [
+      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    ],
+    github: "https://github.com/STRNerds/yan-dashboard",
+    images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
+  },
 ];
