@@ -72,7 +72,7 @@ export const projects: Project[] = [
     collaborators: [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
-    github: "https://github.com/STRNerds/yan-dashboard",
+    github: "https://github.com/OoEthanoO/yan-dashboard",
     images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
     website: "https://www.yandashboard.com/"
   },
