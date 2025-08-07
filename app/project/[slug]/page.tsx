@@ -115,19 +115,32 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
           )}
           {project.images.length > 0 && (
             <div className="project-images flex flex-col gap-6">
-              {project.images.map((img, idx) => (
-                <div
-                  key={idx}
-                  className="w-full rounded-2xl overflow-hidden border border-white/20 bg-white/5 shadow-2xl backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform duration-300"
-                  onClick={() => handleImageClick(img)}
-                >
-                  <img
-                    src={img}
-                    alt={`${project.title} screenshot ${idx + 1}`}
-                    className="w-full h-auto object-cover rounded-2xl"
-                  />
-                </div>
-              ))}
+              <div className="image-grid grid gap-4 md:gap-6">
+                {project.images.map((img, idx) => (
+                  <div
+                    key={idx}
+                    className="image-container w-full rounded-2xl overflow-hidden border border-white/20 bg-white/5 shadow-2xl backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform duration-300"
+                    onClick={() => handleImageClick(img)}
+                  >
+                    <img
+                      src={img}
+                      alt={`${project.title} screenshot ${idx + 1}`}
+                      className="w-full h-auto object-cover rounded-2xl"
+                      onLoad={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        const aspectRatio = img.naturalWidth / img.naturalHeight;
+                        const container = img.closest('.image-container') as HTMLElement;
+                        const grid = img.closest('.image-grid') as HTMLElement;
+                        
+                        if (aspectRatio < 1.2) {
+                          container.classList.add('portrait-image');
+                          grid.classList.add('has-portrait-images');
+                        }
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>

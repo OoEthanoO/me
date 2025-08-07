@@ -75,4 +75,13 @@ export const projects: Project[] = [
     images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
     website: "https://www.yandashboard.com/"
   },
+  {
+    title: "EthanToDoList",
+    description: "A macOS todo list application that allows users to manage their tasks with smart and automatic time allocation and scheduling with handy features like Pomodoro streak tracking and daily progress tracking",
+    technologies: ["Swift", "SwiftUI", "SwiftData", "UserNotifications", "AppStorage"],
+    collaborators: [
+      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    ],
+    images: ["/ethantodolist1.jpeg", "/ethantodolist2.jpeg", "/ethantodolist3.jpeg", "/ethantodolist4.jpeg", "/ethantodolist5.jpeg"],
+  }
 ];

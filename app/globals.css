@@ -289,3 +289,50 @@ body {
   animation: fadeInUp 0.7s ease-out 1.7s;
   animation-fill-mode: both;
 }
+
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.image-grid.has-portrait-images {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.image-container.portrait-image {
+  grid-column: span 1;
+}
+
+.image-grid.has-portrait-images .image-container:not(.portrait-image) {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .image-grid.has-portrait-images {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    max-width: 100%;
+  }
+  
+  .image-grid.has-portrait-images .image-container.portrait-image:nth-child(2n+1):nth-last-child(1) {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .image-grid.has-portrait-images {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.image-grid.has-portrait-images .image-container.portrait-image img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.image-grid.has-portrait-images .image-container:not(.portrait-image) img {
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+}
