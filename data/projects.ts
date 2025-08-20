@@ -11,6 +11,7 @@ export interface Project {
   github?: string;
   website?: string;
   images: string[];
+  status?: string;
 }
 
 export const projects: Project[] = [
@@ -23,7 +24,8 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/OoEthanoO/me",
     website: "https://www.ethanyanxu.com",
-    images: ["/me.png"]
+    images: ["/me.png"],
+    status: "Completed & Actively Maintained"
   },
   {
     title: "CORA",
@@ -32,7 +34,8 @@ export const projects: Project[] = [
     collaborators: [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
-    images: ["/cora1.png", "/cora2.png", "/cora3.png"]
+    images: ["/cora1.png", "/cora2.png", "/cora3.png"],
+    status: "In Progress"
   },
   {
     title: "Dotfiles",
@@ -42,7 +45,8 @@ export const projects: Project[] = [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     github: "https://github.com/OoEthanoO/dotfiles",
-    images: ["/dotfiles1.png"]
+    images: ["/dotfiles1.png"],
+    status: "Perpetually Updated"
   },
   {
     title: "Ethan's Coding Class",
@@ -52,7 +56,8 @@ export const projects: Project[] = [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     images: ["/codingclass1.png", "/codingclass2.png", "/codingclass3.png"],
-    website: "https://class.ethanyanxu.com/"
+    website: "https://class.ethanyanxu.com/",
+    status: "Completed & Actively Maintained",
   },
   {
     title: "Macam",
@@ -62,7 +67,8 @@ export const projects: Project[] = [
       { name: "Dean", github: "https://github.com/Penguin60" }
     ],
     github: "https://github.com/STRNerds/Macam",
-    images: ["/macam1.png"]
+    images: ["/macam1.png"],
+    status: "Completed and Stable",
   },
   {
     title: "YanDashboard",
@@ -73,7 +79,8 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/OoEthanoO/yan-dashboard",
     images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
-    website: "https://www.yandashboard.com/"
+    website: "https://www.yandashboard.com/",
+    status: "Completed but Not Actively Maintained",
   },
   {
     title: "EthanToDoList",
@@ -83,5 +90,6 @@ export const projects: Project[] = [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     images: ["/ethantodolist1.jpeg", "/ethantodolist2.jpeg", "/ethantodolist3.jpeg", "/ethantodolist4.jpeg", "/ethantodolist5.jpeg"],
+    status: "Completed and Stable"
   }
 ];
