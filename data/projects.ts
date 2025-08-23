@@ -25,7 +25,7 @@ export const projects: Project[] = [
     github: "https://github.com/OoEthanoO/me",
     website: "https://www.ethanyanxu.com",
     images: ["/me.png"],
-    status: "Completed & Actively Maintained"
+    status: "Perpetually Updated"
   },
   {
     title: "CORA",
@@ -46,7 +46,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/OoEthanoO/dotfiles",
     images: ["/dotfiles1.png"],
-    status: "Perpetually Updated"
+    status: "Completed & Not Actively Maintained"
   },
   {
     title: "Ethan's Coding Class",
@@ -68,7 +68,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/STRNerds/Macam",
     images: ["/macam1.png"],
-    status: "Completed and Stable",
+    status: "Stable & Actively Maintained",
   },
   {
     title: "YanDashboard",
@@ -90,6 +90,6 @@ export const projects: Project[] = [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     images: ["/ethantodolist1.jpeg", "/ethantodolist2.jpeg", "/ethantodolist3.jpeg", "/ethantodolist4.jpeg", "/ethantodolist5.jpeg"],
-    status: "Completed and Stable"
+    status: "Stable & Actively Maintained"
   }
 ];

@@ -68,17 +68,28 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
           <div className="mb-6 flex flex-wrap gap-2 items-center">
             <span className="text-xs text-gray-400">Collaborators:</span>
             {project.collaborators.map((collab) => (
-                <a
+              <a
                 key={collab.name}
                 href={collab.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="collaborator-tag inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
                 onClick={(e) => e.stopPropagation()}
-                >
+              >
                 {collab.name}
-                </a>
+              </a>
             ))}
+          </div>
+          <div className="mb-6 flex flex-wrap gap-2 items-center">
+            <span className="text-xs text-gray-400">Status:</span>
+            {project.status && (
+              <span
+                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors"
+                style={{ animation: 'fadeIn 0.5s ease-out 1.3s', animationFillMode: 'both' }}
+              >
+                {project.status}
+              </span>
+            )}
           </div>
           {project.github ? (
             <a

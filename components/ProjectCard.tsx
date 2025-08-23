@@ -30,35 +30,45 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       className="project-card relative group bg-white/5 border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col backdrop-blur-lg transition-transform hover:-translate-y-2 cursor-pointer"
       onMouseMove={handleMouseMove}
     >
-        <div className="flex-1 p-8 flex flex-col z-10 relative">
-            <h2 className="text-2xl font-bold mb-2 text-white drop-shadow">{project.title}</h2>
-            <p className="mb-4 text-gray-300">{project.description}</p>
-            <div className="mb-3 flex flex-wrap gap-2">
-            {project.technologies.map((tech) => (
-                <span
-                key={tech}
-                className="inline-block bg-gradient-to-r from-blue-700 to-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full text-white shadow hover:scale-105 transition-transform"
-                >
-                {tech}
-                </span>
-            ))}
-            </div>
-            <div className="mb-3 flex flex-wrap gap-2 items-center">
-            <span className="text-xs text-gray-400">Collaborators:</span>
-            {project.collaborators.map((collab) => (
-                <span
-                key={collab.name}
-                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  window.open(collab.github, '_blank');
-                }}
-                >
-                {collab.name}
-                </span>
-            ))}
-            </div>
+      <div className="flex-1 p-8 flex flex-col z-10 relative">
+        <h2 className="text-2xl font-bold mb-2 text-white drop-shadow">{project.title}</h2>
+        <p className="mb-4 text-gray-300">{project.description}</p>
+        <div className="mb-3 flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="inline-block bg-gradient-to-r from-blue-700 to-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full text-white shadow hover:scale-105 transition-transform"
+            >
+              {tech}
+            </span>
+          ))}
         </div>
+        <div className="mb-3 flex flex-wrap gap-2 items-center">
+          <span className="text-xs text-gray-400">Collaborators:</span>
+          {project.collaborators.map((collab) => (
+            <span
+              key={collab.name}
+              className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                window.open(collab.github, '_blank');
+              }}
+            >
+              {collab.name}
+            </span>
+          ))}
+        </div>
+        <div className="mb-3 flex flex-wrap gap-2 items-center">
+          <span className="text-xs text-gray-400">Status:</span>
+          {project.status && (
+            <span
+              className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors"
+            >
+              {project.status}
+            </span>
+          )}
+        </div>
+      </div>
     </Link>
   );
 }
