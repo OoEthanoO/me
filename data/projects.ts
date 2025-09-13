@@ -34,7 +34,7 @@ export const projects: Project[] = [
     collaborators: [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
-    images: ["/cora1.png", "/cora2.png", "/cora3.png"],
+    images: ["/cora1.png", "/cora2.png", "/cora3.png", "/cora4.png", "/cora5.png"],
     status: "In Progress"
   },
   {
