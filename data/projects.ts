@@ -80,17 +80,28 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/OoEthanoO/yan-dashboard",
     images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
-    website: "https://www.yandashboard.com/",
+    website: "https://dashboard.ethanyanxu.com",
     status: "Completed but Not Actively Maintained",
   },
   {
     title: "EthanToDoList",
-    description: "A macOS todo list application that allows users to manage their tasks with smart and automatic time allocation and scheduling with handy features like Pomodoro streak tracking and daily progress tracking",
+    description: "An iOS todo list application that allows users to manage their tasks with smart and automatic time allocation and scheduling with handy features like Pomodoro streak tracking and daily progress tracking",
     technologies: ["Swift", "SwiftUI", "SwiftData", "UserNotifications", "AppStorage"],
     collaborators: [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
     images: ["/ethantodolist1.jpeg", "/ethantodolist2.jpeg", "/ethantodolist3.jpeg", "/ethantodolist4.jpeg", "/ethantodolist5.jpeg"],
     status: "Stable & Actively Maintained"
+  },
+  {
+    title: "YanToDoList",
+    description: "A web todo list application that allows users to manage their tasks with a smart task recommendation system",
+    technologies: ["Next.js", "Tailwind CSS"],
+    collaborators: [
+      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    ],
+    images: [],
+    status: "Stable & Actively Maintained",
+    website: "https://todo.ethanyanxu.com/"
   }
 ];
