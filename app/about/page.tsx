@@ -40,6 +40,7 @@ export default function About() {
                 <p className="text-gray-200 font-medium">This Feels Like the End</p>
                 <p className="text-gray-400 text-sm">Nothing But Thieves • Moral Panic</p>
                 <p className="text-gray-500 text-xs">Alternative • 2020</p>
+                <p className="text-gray-600 text-xs font-light italic">Hard Rock • Indie Rock • Pop Rock</p>
               </div>
               <div className="aspect-video rounded-lg overflow-hidden">
                 <iframe 
@@ -60,6 +61,7 @@ export default function About() {
                 <p className="text-gray-200 font-medium">Stop Beating on My Heart (Like a Bass Drum)</p>
                 <p className="text-gray-400 text-sm">Tigercub • As Blue as Indigo</p>
                 <p className="text-gray-500 text-xs">Rock • 2021</p>
+                <p className="text-gray-600 text-xs font-light italic">Grunge • Stoner Rock • Psychedelic Rock</p>
               </div>
               <div className="aspect-video rounded-lg overflow-hidden">
                 <iframe 
