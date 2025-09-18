@@ -29,7 +29,7 @@ export default function About() {
           </ul>
           <h2 className="text-3xl font-bold mb-4 text-fuchsia-400">Interests</h2>
           <p className="text-gray-300 mb-6">
-            Outside of coding, I enjoy volunteering, learning about AI, contributing to open-source projects, and playing badminton.
+            Outside of coding, I enjoy volunteering, listening to music, learning about AI, and playing badminton.
           </p>
           
           <h2 className="text-3xl font-bold mb-6 text-fuchsia-400">Favorite Music</h2>
@@ -48,7 +48,7 @@ export default function About() {
                   height="175" 
                   width="100%"
                   sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
-                  src="https://embed.music.apple.com/ca/album/this-feels-like-the-end/1589232674?i=1589232795"
+                  src="https://embed.music.apple.com/ca/song/this-feels-like-the-end/1519414142"
                   className="rounded-lg"
                 ></iframe>
               </div>
