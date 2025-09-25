@@ -100,8 +100,8 @@ export const projects: Project[] = [
     collaborators: [
       { name: "Solo", github: "https://github.com/OoEthanoO" }
     ],
-    images: [],
+    images: ["/yantodolist1.png", "/yantodolist2.png"],
     status: "Stable & Actively Maintained",
     website: "https://todo.ethanyanxu.com/"
-  }
+  },
 ];

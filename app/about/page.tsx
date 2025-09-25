@@ -58,10 +58,10 @@ export default function About() {
             <div className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-fuchsia-400/50 transition-all duration-300">
               <h3 className="text-xl font-semibold mb-3 text-purple-400">Recently Discovered Favorite</h3>
               <div className="mb-4 space-y-1">
-                <p className="text-gray-200 font-medium">Stop Beating on My Heart (Like a Bass Drum)</p>
-                <p className="text-gray-400 text-sm">Tigercub • As Blue as Indigo</p>
-                <p className="text-gray-500 text-xs">Rock • 2021</p>
-                <p className="text-gray-600 text-xs font-light italic">Grunge • Stoner Rock • Psychedelic Rock</p>
+                <p className="text-gray-200 font-medium">Save Me (I'm Not Crazy)</p>
+                <p className="text-gray-400 text-sm">Electric Enemy • Electric Enemy</p>
+                <p className="text-gray-500 text-xs">Rock • 2023</p>
+                <p className="text-gray-600 text-xs font-light italic">Alternative Rock • Indie Rock • Garage Rock</p>
               </div>
               <div className="aspect-video rounded-lg overflow-hidden">
                 <iframe 
@@ -70,68 +70,9 @@ export default function About() {
                   height="175" 
                   width="100%"
                   sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
-                  src="https://embed.music.apple.com/ca/album/stop-beating-on-my-heart-like-a-bass-drum/1547326193?i=1547326449"
+                  src="https://embed.music.apple.com/ca/album/save-me-im-not-crazy/1660786624?i=1660787010"
                   className="rounded-lg"
                 ></iframe>
-              </div>
-            </div>
-          </div>
-          
-          <h2 className="text-3xl font-bold mb-4 text-fuchsia-400">Favorite Music Genres</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-8">
-            <div className="group bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/30 rounded-lg p-4 hover:border-blue-400/60 hover:bg-blue-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-blue-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Alternative Rock</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/30 rounded-lg p-4 hover:border-purple-400/60 hover:bg-purple-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-purple-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Indie Rock</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-fuchsia-500/20 to-fuchsia-600/10 border border-fuchsia-500/30 rounded-lg p-4 hover:border-fuchsia-400/60 hover:bg-fuchsia-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-fuchsia-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Pop</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 border border-cyan-500/30 rounded-lg p-4 hover:border-cyan-400/60 hover:bg-cyan-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-cyan-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Psychedelic Rock</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/30 rounded-lg p-4 hover:border-emerald-400/60 hover:bg-emerald-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-emerald-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Hip-hop</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/30 rounded-lg p-4 hover:border-orange-400/60 hover:bg-orange-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-orange-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">R&B</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-pink-500/20 to-pink-600/10 border border-pink-500/30 rounded-lg p-4 hover:border-pink-400/60 hover:bg-pink-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-pink-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Soul</span>
-              </div>
-            </div>
-            
-            <div className="group bg-gradient-to-br from-violet-500/20 to-violet-600/10 border border-violet-500/30 rounded-lg p-4 hover:border-violet-400/60 hover:bg-violet-500/25 transition-all duration-300">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-violet-400 rounded-full group-hover:scale-110 transition-transform"></div>
-                <span className="text-gray-200 font-medium text-sm">Progressive Rock</span>
               </div>
             </div>
           </div>
