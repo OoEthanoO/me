@@ -2,7 +2,7 @@
 
 import { notFound } from 'next/navigation';
 import { projects } from '../../../data/projects';
-import { use, useRef, useState, MouseEvent } from 'react';
+import { use, useState } from 'react';
 
 function slugify(title: string) {
   return title.toLowerCase().replace(/\s+/g, '-');
@@ -10,19 +10,8 @@ function slugify(title: string) {
 
 export default function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
-  const detailRef = useRef<HTMLDivElement>(null);
   const [expandedImage, setExpandedImage] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
-
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    if (detailRef.current) {
-      const rect = detailRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      detailRef.current.style.setProperty('--mouse-x', `${x}px`);
-      detailRef.current.style.setProperty('--mouse-y', `${y}px`);
-    }
-  };
 
   const handleImageClick = (imageSrc: string) => {
     setExpandedImage(imageSrc);
@@ -44,147 +33,134 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
   if (!project) return notFound();
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-[#181824] via-[#23243a] to-[#181824] text-gray-100 px-4 py-12 flex flex-col items-center">
-      <div 
-        ref={detailRef}
-        className="project-detail w-full max-w-3xl bg-white/5 border border-white/10 rounded-2xl shadow-2xl backdrop-blur-lg p-10 relative"
-        onMouseMove={handleMouseMove}
-      >
-        <div className="relative z-10">
-          <h1 className="text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-fuchsia-500 text-transparent bg-clip-text drop-shadow-lg">
-            {project.title}
-          </h1>
-          <p className="text-lg text-gray-300 mb-6">{project.description}</p>
-          <div className="mb-6 flex flex-wrap gap-2">
-            {project.technologies.map((tech) => (
-              <span
-                key={tech}
-                className="tech-tag inline-block bg-gradient-to-r from-blue-700 to-fuchsia-700 text-xs font-semibold px-3 py-1 rounded-full text-white shadow"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-          <div className="mb-6 flex flex-wrap gap-2 items-center">
-            <span className="text-xs text-gray-400">Collaborators:</span>
-            {project.collaborators.map((collab) => (
-              <a
-                key={collab.name}
-                href={collab.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="collaborator-tag inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors cursor-pointer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {collab.name}
-              </a>
-            ))}
-          </div>
-          <div className="mb-6 flex flex-wrap gap-2 items-center">
-            <span className="text-xs text-gray-400">Status:</span>
-            {project.status && (
-              <span
-                className="inline-block bg-white/10 text-gray-200 text-xs px-2 py-1 rounded-full border border-white/10 hover:bg-white/20 hover:text-white transition-colors"
-                style={{ animation: 'fadeIn 0.5s ease-out 1.3s', animationFillMode: 'both' }}
-              >
-                {project.status}
-              </span>
+    <main className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
+      <div className="mx-auto max-w-5xl px-6 py-12">
+        <a href="/" className="text-sm font-semibold text-[#0071e3] hover:underline">
+          ← Back to home
+        </a>
+        <div className="project-detail mt-8 rounded-[32px] border border-black/5 bg-white p-10 shadow-[0_20px_45px_rgba(0,0,0,0.08)]">
+          <div className="project-detail-content">
+            <p className="text-xs uppercase tracking-[0.3em] text-[#86868b]">Project</p>
+            <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
+              {project.title}
+            </h1>
+            <p className="mt-4 text-lg text-[#6e6e73]">{project.description}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className="tech-tag inline-flex items-center rounded-full border border-black/10 bg-[#f5f5f7] px-3 py-1 text-[11px] font-semibold text-[#1d1d1f]"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2 items-center">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#86868b]">Collaborators</span>
+              {project.collaborators.map((collab) => (
+                <a
+                  key={collab.name}
+                  href={collab.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="collaborator-tag inline-flex items-center rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-semibold text-[#1d1d1f] hover:border-black/20 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {collab.name}
+                </a>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2 items-center">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-[#86868b]">Status</span>
+              {project.status && (
+                <span
+                  className="inline-flex items-center rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-semibold text-[#1d1d1f]"
+                  style={{ animation: 'fadeIn 0.5s ease-out 1.3s', animationFillMode: 'both' }}
+                >
+                  {project.status}
+                </span>
+              )}
+            </div>
+            <div className="mt-8 flex flex-wrap gap-4">
+              {project.github ? (
+                <a
+                  href={project.github}
+                  className="github-link inline-flex items-center rounded-full bg-[#0071e3] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(0,113,227,0.25)] hover:bg-[#0077ed] transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View on GitHub
+                </a>
+              ) : (
+                <span className="github-link inline-flex items-center rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#1d1d1f]">
+                  Closed Source
+                </span>
+              )}
+              {project.website && (
+                <a
+                  href={project.website}
+                  className="github-link inline-flex items-center rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-semibold text-[#1d1d1f] hover:border-black/20 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ animationDelay: "1.65s" }}
+                >
+                  Visit Website
+                </a>
+              )}
+            </div>
+            {project.images.length > 0 && (
+              <div className="project-images mt-10 flex flex-col gap-6">
+                <div className="image-grid grid gap-4 md:gap-6">
+                  {project.images.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="image-container w-full overflow-hidden rounded-[24px] border border-black/10 bg-white shadow-[0_15px_30px_rgba(0,0,0,0.08)] cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+                      onClick={() => handleImageClick(img)}
+                    >
+                      <img
+                        src={img}
+                        alt={`${project.title} screenshot ${idx + 1}`}
+                        className="w-full h-auto object-cover"
+                        onLoad={(e) => {
+                          const img = e.target as HTMLImageElement;
+                          const aspectRatio = img.naturalWidth / img.naturalHeight;
+                          const container = img.closest('.image-container') as HTMLElement;
+                          const grid = img.closest('.image-grid') as HTMLElement;
+
+                          if (aspectRatio < 1.2) {
+                            container.classList.add('portrait-image');
+                            grid.classList.add('has-portrait-images');
+                          }
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
           </div>
-          {project.github ? (
-            <a
-              href={project.github}
-              className="github-link inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
+        </div>
+
+        {/* Image Modal */}
+        {expandedImage && (
+          <div 
+            className={`image-modal fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 ${isClosing ? 'closing' : ''}`}
+            onClick={handleCloseModal}
+          >
+            <div 
+              className="modal-content relative max-w-5xl max-h-full"
+              onClick={(e) => e.stopPropagation()}
             >
-              View on GitHub →
-            </a>
-          ) : (
-            <div className="mb-2">
-              <span
-                className="github-link inline-block text-white font-medium text-base"
-                style={{ opacity: 0.9 }}
-                title="Closed Source"
-              >
-                Closed Source
-              </span>
-            </div>
-          )}
-          {project.website && (
-            <div>
-              <a
-                href={project.website}
-                className="github-link inline-block mb-8 text-fuchsia-400 hover:text-fuchsia-200 underline font-medium transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ animationDelay: "1.65s" }}
-              >
-                Visit Website →
-              </a>
-            </div>
-          )}
-          {project.images.length > 0 && (
-            <div className="project-images flex flex-col gap-6">
-              <div className="image-grid grid gap-4 md:gap-6">
-                {project.images.map((img, idx) => (
-                  <div
-                    key={idx}
-                    className="image-container w-full rounded-2xl overflow-hidden border border-white/20 bg-white/5 shadow-2xl backdrop-blur-sm cursor-pointer hover:scale-105 transition-transform duration-300"
-                    onClick={() => handleImageClick(img)}
-                  >
-                    <img
-                      src={img}
-                      alt={`${project.title} screenshot ${idx + 1}`}
-                      className="w-full h-auto object-cover rounded-2xl"
-                      onLoad={(e) => {
-                        const img = e.target as HTMLImageElement;
-                        const aspectRatio = img.naturalWidth / img.naturalHeight;
-                        const container = img.closest('.image-container') as HTMLElement;
-                        const grid = img.closest('.image-grid') as HTMLElement;
-                        
-                        if (aspectRatio < 1.2) {
-                          container.classList.add('portrait-image');
-                          grid.classList.add('has-portrait-images');
-                        }
-                      }}
-                    />
-                  </div>
-                ))}
+              <div className={`w-full ${isClosing ? 'closing' : ''}`}>
+                <img
+                  src={expandedImage}
+                  alt={`${project.title} expanded`}
+                  className={`expanded-image w-full h-auto max-h-[90vh] object-contain rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.35)] border border-white/20 ${isClosing ? 'closing' : ''}`}
+                />
               </div>
             </div>
-          )}
-        </div>
-      </div>
-
-      {/* Image Modal */}
-      {expandedImage && (
-        <div 
-          className={`image-modal fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 ${isClosing ? 'closing' : ''}`}
-          onClick={handleCloseModal}
-        >
-          <div 
-            className="modal-content relative max-w-5xl max-h-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={`w-full ${isClosing ? 'closing' : ''}`}>
-              <img
-                src={expandedImage}
-                alt={`${project.title} expanded`}
-                className={`expanded-image w-full h-auto max-h-[90vh] object-contain rounded-2xl shadow-2xl border border-white/20 ${isClosing ? 'closing' : ''}`}
-              />
-            </div>
           </div>
-        </div>
-      )}
-      <div className="mt-12 flex justify-center">
-        <a
-          href="/"
-          className="back-home-btn inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-semibold shadow hover:scale-105 transition-transform"
-        >
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-          Back to Home
-        </a>
+        )}
       </div>
     </main>
   );

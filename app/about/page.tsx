@@ -4,99 +4,113 @@ import { achievements } from '@/data/achievements';
 
 export default function About() {
   return (
-    <main className="page-container min-h-screen bg-gradient-to-br from-[#181824] via-[#23243a] to-[#181824] text-gray-100 px-4 py-12">
-      <header className="header-animation mb-16 text-center">
-        <h1 className="text-5xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-fuchsia-500 text-transparent bg-clip-text drop-shadow-lg">
-          About Me
-        </h1>
-        <p className="text-lg text-gray-300 max-w-xl mx-auto mb-6">
-          A Toronto 11th grader with a passion for software development.
-        </p>
-      </header>
-      <section className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-2xl shadow-2xl p-8 backdrop-blur-lg project-detail">
-        <div className="project-detail-content">
-          <h2 className="text-3xl font-bold mb-4 text-fuchsia-400">Bio</h2>
-          <p className="text-gray-300 mb-6">
-            Hi, I&apos;m Ethan Yan Xu, a high school student from Toronto passionate about building innovative software solutions. I enjoy working on projects that solve real-world problems and exploring new technologies.
-          </p>
-          <h2 className="text-3xl font-bold mb-4 text-fuchsia-400">Achievements & Scores</h2>
-          <ul className="space-y-2 text-gray-300 mb-6">
-            {achievements.map((ach, index) => (
-              <li key={index} className="bg-white/5 p-2 rounded-lg border border-white/10">
-                {ach.name}: {ach.result}
-              </li>
-            ))}
-          </ul>
-          <h2 className="text-3xl font-bold mb-4 text-fuchsia-400">Interests</h2>
-          <p className="text-gray-300 mb-6">
-            Outside of coding, I enjoy volunteering, listening to music, learning about AI, and playing badminton.
-          </p>
-          
-          <h2 className="text-3xl font-bold mb-6 text-fuchsia-400">Favorite Music</h2>
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-fuchsia-400/50 transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-3 text-blue-400">Favorite Song of All Time</h3>
-              <div className="mb-4 space-y-1">
-                <p className="text-gray-200 font-medium">This Feels Like the End</p>
-                <p className="text-gray-400 text-sm">Nothing But Thieves • Moral Panic</p>
-                <p className="text-gray-500 text-xs">Alternative • 2020</p>
-                <p className="text-gray-600 text-xs font-light italic">Hard Rock • Indie Rock • Pop Rock</p>
-              </div>
-              <div className="aspect-video rounded-lg overflow-hidden">
-                <iframe 
-                  allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
-                  frameBorder="0" 
-                  height="175" 
-                  width="100%"
-                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
-                  src="https://embed.music.apple.com/ca/song/this-feels-like-the-end/1519414142"
-                  className="rounded-lg"
-                ></iframe>
-              </div>
+    <main className="page-container min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
+      <div className="mx-auto max-w-5xl px-6 py-12">
+        <Link href="/" className="text-sm font-semibold text-[#0071e3] hover:underline">
+          ← Back to home
+        </Link>
+        <header className="header-animation mt-10">
+          <p className="text-xs uppercase tracking-[0.3em] text-[#86868b]">About</p>
+          <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
+            About
+          </h1>
+        </header>
+
+        <section className="mt-10 grid gap-8">
+          <div className="project-detail rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_18px_35px_rgba(0,0,0,0.08)]">
+            <div className="project-detail-content">
+              <h2 className="text-2xl font-semibold text-[#1d1d1f]">Bio</h2>
+              <p className="mt-3 text-[#6e6e73]">
+                Hi, I&apos;m Ethan Yan Xu, a high school student from Toronto passionate about building
+                innovative software solutions. I enjoy working on projects that solve real-world
+                problems and exploring new technologies.
+              </p>
             </div>
-            
-            <div className="bg-white/5 p-6 rounded-xl border border-white/10 hover:border-fuchsia-400/50 transition-all duration-300">
-              <h3 className="text-xl font-semibold mb-3 text-purple-400">Recently Discovered Favorite</h3>
-              <div className="mb-4 space-y-1">
-                <p className="text-gray-200 font-medium">Save Me (I'm Not Crazy)</p>
-                <p className="text-gray-400 text-sm">Electric Enemy • Electric Enemy</p>
-                <p className="text-gray-500 text-xs">Rock • 2023</p>
-                <p className="text-gray-600 text-xs font-light italic">Alternative Rock • Indie Rock • Garage Rock</p>
-              </div>
-              <div className="aspect-video rounded-lg overflow-hidden">
-                <iframe 
-                  allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
-                  frameBorder="0" 
-                  height="175" 
-                  width="100%"
-                  sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
-                  src="https://embed.music.apple.com/ca/album/save-me-im-not-crazy/1660786624?i=1660787010"
-                  className="rounded-lg"
-                ></iframe>
+          </div>
+
+          <div className="project-detail rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_18px_35px_rgba(0,0,0,0.08)]">
+            <div className="project-detail-content">
+              <h2 className="text-2xl font-semibold text-[#1d1d1f]">Achievements & Scores</h2>
+              <ul className="mt-4 space-y-3 text-[#1d1d1f]">
+                {achievements.map((ach, index) => (
+                  <li key={index} className="rounded-2xl border border-black/5 bg-[#f5f5f7] px-4 py-3 text-sm text-[#1d1d1f]">
+                    <span className="font-semibold">{ach.name}</span>
+                    <span className="text-[#6e6e73]"> · {ach.result}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="project-detail rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_18px_35px_rgba(0,0,0,0.08)]">
+            <div className="project-detail-content">
+              <h2 className="text-2xl font-semibold text-[#1d1d1f]">Interests</h2>
+              <p className="mt-3 text-[#6e6e73]">
+                Outside of coding, I enjoy volunteering, listening to music, learning about AI, and
+                playing badminton.
+              </p>
+            </div>
+          </div>
+
+          <div className="project-detail rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_18px_35px_rgba(0,0,0,0.08)]">
+            <div className="project-detail-content">
+              <h2 className="text-2xl font-semibold text-[#1d1d1f]">Favorite Music</h2>
+              <div className="mt-6 grid gap-6 md:grid-cols-2">
+                <div className="rounded-[24px] border border-black/5 bg-[#f5f5f7] p-6">
+                  <h3 className="text-lg font-semibold text-[#1d1d1f]">Favorite Song of All Time</h3>
+                  <div className="mt-3 space-y-1 text-sm text-[#6e6e73]">
+                    <p className="text-[#1d1d1f] font-semibold">This Feels Like the End</p>
+                    <p>Nothing But Thieves · Moral Panic</p>
+                    <p>Alternative · 2020</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#86868b]">
+                      Hard Rock · Indie Rock · Pop Rock
+                    </p>
+                  </div>
+                  <iframe 
+                    allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
+                    frameBorder="0" 
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
+                    src="https://embed.music.apple.com/ca/song/this-feels-like-the-end/1519414142"
+                    className="mt-4 w-full rounded-xl border border-black/5 bg-white"
+                  ></iframe>
+                </div>
+
+                <div className="rounded-[24px] border border-black/5 bg-[#f5f5f7] p-6">
+                  <h3 className="text-lg font-semibold text-[#1d1d1f]">Recently Discovered Favorite</h3>
+                  <div className="mt-3 space-y-1 text-sm text-[#6e6e73]">
+                    <p className="text-[#1d1d1f] font-semibold">Save Me (I'm Not Crazy)</p>
+                    <p>Electric Enemy · Electric Enemy</p>
+                    <p>Rock · 2023</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#86868b]">
+                      Alternative Rock · Indie Rock · Garage Rock
+                    </p>
+                  </div>
+                  <iframe 
+                    allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" 
+                    frameBorder="0" 
+                    sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" 
+                    src="https://embed.music.apple.com/ca/album/save-me-im-not-crazy/1660786624?i=1660787010"
+                    className="mt-4 w-full rounded-xl border border-black/5 bg-white"
+                  ></iframe>
+                </div>
               </div>
             </div>
           </div>
-          
-          <h2 className="text-3xl font-bold mb-4 text-fuchsia-400">Technology Gear and Setup</h2>
-          <ul className="space-y-2 text-gray-300 mb-6">
-            {gears.map((gear, index) => (
-              <li key={index} className="bg-white/5 p-2 rounded-lg border border-white/10">
-                {gear.category}: {gear.model}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-      <div className="mt-12 flex justify-center">
-        <Link
-          href="/"
-          className="back-home-btn inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-blue-600 to-fuchsia-600 text-white font-semibold shadow hover:scale-105 transition-transform"
-        >
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" className="mr-2" viewBox="0 0 24 24">
-            <path d="M15 19l-7-7 7-7"/>
-          </svg>
-          Back to Home
-        </Link>
+
+          <div className="project-detail rounded-[28px] border border-black/5 bg-white p-8 shadow-[0_18px_35px_rgba(0,0,0,0.08)]">
+            <div className="project-detail-content">
+              <h2 className="text-2xl font-semibold text-[#1d1d1f]">Technology Gear and Setup</h2>
+              <ul className="mt-4 space-y-3 text-[#1d1d1f]">
+                {gears.map((gear, index) => (
+                  <li key={index} className="rounded-2xl border border-black/5 bg-[#f5f5f7] px-4 py-3 text-sm text-[#1d1d1f]">
+                    <span className="font-semibold">{gear.category}</span>
+                    <span className="text-[#6e6e73]"> · {gear.model}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );
