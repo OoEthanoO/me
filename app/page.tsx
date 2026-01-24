@@ -13,7 +13,7 @@ export default function Home() {
             Ethan Yan Xu
           </h1>
           <p className="mt-6 text-xl text-[#6e6e73] max-w-2xl">
-            A Toront 11th grader with a passion for software.
+            A Toronto 11th grader with a passion for software.
           </p>
           <div className="mt-10"></div>
         </header>
