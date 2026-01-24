@@ -1,14 +1,12 @@
-import Link from 'next/link';
 import { gears } from '@/data/gear';
 import { achievements } from '@/data/achievements';
+import Navbar from '@/components/Navbar';
 
 export default function About() {
   return (
     <main className="page-container min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
-      <div className="mx-auto max-w-5xl px-6 py-12">
-        <Link href="/" className="text-sm font-semibold text-[#0071e3] hover:underline">
-          ← Back to home
-        </Link>
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <Navbar />
         <header className="header-animation mt-10">
           <p className="text-xs uppercase tracking-[0.3em] text-[#86868b]">About</p>
           <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">

@@ -3,6 +3,7 @@
 import { notFound } from 'next/navigation';
 import { projects } from '../../../data/projects';
 import { use, useState } from 'react';
+import Navbar from '@/components/Navbar';
 
 function slugify(title: string) {
   return title.toLowerCase().replace(/\s+/g, '-');
@@ -34,10 +35,8 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
 
   return (
     <main className="min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
-      <div className="mx-auto max-w-5xl px-6 py-12">
-        <a href="/" className="text-sm font-semibold text-[#0071e3] hover:underline">
-          ← Back to home
-        </a>
+      <div className="mx-auto max-w-6xl px-6 py-12">
+        <Navbar />
         <div className="project-detail mt-8 rounded-[32px] border border-black/5 bg-white p-10 shadow-[0_20px_45px_rgba(0,0,0,0.08)]">
           <div className="project-detail-content">
             <p className="text-xs uppercase tracking-[0.3em] text-[#86868b]">Project</p>
@@ -85,7 +84,7 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
               {project.github ? (
                 <a
                   href={project.github}
-                  className="github-link inline-flex items-center rounded-full bg-[#0071e3] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_25px_rgba(0,113,227,0.25)] hover:bg-[#0077ed] transition-colors"
+                  className="github-link inline-flex items-center text-sm font-semibold text-[#1d1d1f] transition-colors hover:text-[#0071e3]"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

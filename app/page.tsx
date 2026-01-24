@@ -1,17 +1,12 @@
 import { projects } from '../data/projects';
 import ProjectCard from '../components/ProjectCard';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   return (
     <main className="page-container min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
       <div className="mx-auto max-w-6xl px-6 py-12">
-        <nav className="flex items-center justify-between text-sm text-[#6e6e73]">
-          <span className="uppercase tracking-[0.2em]">Portfolio</span>
-          <div className="flex items-center gap-6">
-            <a href="/about" className="hover:text-[#1d1d1f] transition-colors">About</a>
-            <a href="mailto:ethanxucoder@gmail.com" className="hover:text-[#1d1d1f] transition-colors">Contact</a>
-          </div>
-        </nav>
+        <Navbar />
 
         <header className="header-animation mt-14">
           <h1 className="mt-4 text-5xl md:text-7xl font-semibold tracking-tight text-[#1d1d1f]">
