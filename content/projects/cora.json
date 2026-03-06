@@ -1,0 +1,27 @@
+{
+  "title": "CORA",
+  "description": "A Python application for visualizing and assessing coastal flood risks using geospatial and infrastructure data.",
+  "technologies": [
+    "Python",
+    "PyQt6",
+    "Matplotlib",
+    "OSMnx",
+    "GeoPandas"
+  ],
+  "collaborators": [
+    {
+      "name": "Solo",
+      "github": "https://github.com/OoEthanoO"
+    }
+  ],
+  "github": "https://github.com/OoEthanoO/cora_project",
+  "website": null,
+  "images": [
+    "cora1.png",
+    "cora2.png",
+    "cora3.png",
+    "cora4.png",
+    "cora5.png"
+  ],
+  "status": "In Progress"
+}

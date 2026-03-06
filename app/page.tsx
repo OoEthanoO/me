@@ -1,8 +1,28 @@
-import { projects } from '../data/projects';
 import ProjectCard from '../components/ProjectCard';
 import Navbar from '@/components/Navbar';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../keystatic.config';
 
-export default function Home() {
+const reader = createReader(process.cwd(), keystaticConfig);
+
+export default async function Home() {
+  const projectsData = await reader.collections.projects.all();
+  // Map Keystatic format to match the old Project interface used by ProjectCard
+  const projects = projectsData.map(p => ({
+    title: p.entry.title,
+    description: p.entry.description,
+    technologies: [...p.entry.technologies],
+    collaborators: p.entry.collaborators.map(c => ({
+      name: c.name,
+      github: c.github || ''
+    })),
+    github: p.entry.github || undefined,
+    website: p.entry.website || undefined,
+    images: (p.entry.images || []).map(img => `/images/projects/${img}`),
+    status: p.entry.status || undefined,
+    slug: p.slug
+  }));
+
   return (
     <main className="page-container min-h-screen bg-[#f5f5f7] text-[#1d1d1f]">
       <div className="mx-auto max-w-6xl px-6 py-12">

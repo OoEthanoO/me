@@ -1,0 +1,25 @@
+{
+  "title": "Ethan's Coding Class",
+  "description": "A web application for showcasing my volunteering work, managing my students, and allowing them to have a platform to learn coding and fundraise for SickKids.",
+  "technologies": [
+    "React",
+    "Firebase",
+    "Express.js",
+    "Node.js",
+    "Nodemailer"
+  ],
+  "collaborators": [
+    {
+      "name": "Solo",
+      "github": "https://github.com/OoEthanoO"
+    }
+  ],
+  "github": null,
+  "website": "https://class.ethanyanxu.com/",
+  "images": [
+    "codingclass1.png",
+    "codingclass2.png",
+    "codingclass3.png"
+  ],
+  "status": "Completed & Actively Maintained"
+}

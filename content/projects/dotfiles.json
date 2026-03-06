@@ -1,0 +1,21 @@
+{
+  "title": "Dotfiles",
+  "description": "My personal Arch Linux dotfiles repository, showcasing my customized setup and configurations.",
+  "technologies": [
+    "Hypr*",
+    "Nvim",
+    "Waybar"
+  ],
+  "collaborators": [
+    {
+      "name": "Solo",
+      "github": "https://github.com/OoEthanoO"
+    }
+  ],
+  "github": "https://github.com/OoEthanoO/dotfiles",
+  "website": null,
+  "images": [
+    "dotfiles1.png"
+  ],
+  "status": "Completed & Not Actively Maintained"
+}

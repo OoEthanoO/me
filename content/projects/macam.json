@@ -1,0 +1,22 @@
+{
+  "title": "Macam",
+  "description": "A macOS camera application that allow users to quickly snap pictures with a simple design.",
+  "technologies": [
+    "Swift",
+    "SwiftUI",
+    "AppKit",
+    "AVFoundation"
+  ],
+  "collaborators": [
+    {
+      "name": "Dean",
+      "github": "https://github.com/Penguin60"
+    }
+  ],
+  "github": "https://github.com/STRNerds/Macam",
+  "website": null,
+  "images": [
+    "macam1.png"
+  ],
+  "status": "Stable & Actively Maintained"
+}

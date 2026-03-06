@@ -1,0 +1,21 @@
+{
+  "title": "YanToDoList",
+  "description": "A web todo list application that allows users to manage their tasks with a smart task recommendation system",
+  "technologies": [
+    "Next.js",
+    "Tailwind CSS"
+  ],
+  "collaborators": [
+    {
+      "name": "Solo",
+      "github": "https://github.com/OoEthanoO"
+    }
+  ],
+  "github": null,
+  "website": "https://todo.ethanyanxu.com/",
+  "images": [
+    "yantodolist1.png",
+    "yantodolist2.png"
+  ],
+  "status": "Stable & Actively Maintained"
+}
