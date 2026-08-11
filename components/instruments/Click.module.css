@@ -1,0 +1,71 @@
+.rig {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  height: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.axisRow {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.4rem;
+  flex: 1;
+  min-height: 160px;
+}
+
+.axis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 1px 0;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--ink-4);
+}
+
+.canvasWrap {
+  position: relative;
+  min-height: 0;
+  background: var(--paper-raised);
+}
+
+.canvasWrap canvas { display: block; }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.peak {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-left: auto;
+}
+.peak strong { color: var(--signal); font-style: normal; font-size: 12px; }
+
+.error {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin: 0;
+  line-height: 1.42;
+}

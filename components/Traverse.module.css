@@ -1,0 +1,32 @@
+/*
+  The scroll surface. Its only content that occupies space is the spacer at the
+  end; everything visible is a fixed-position child, pinned to the viewport
+  while this element is what actually scrolls.
+
+  It must not create a containing block for fixed descendants, so nothing here
+  may set transform, filter, perspective, backdrop-filter or contain: paint.
+*/
+.scroller {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+
+.scroller::-webkit-scrollbar { width: 11px; }
+.scroller::-webkit-scrollbar-track { background: transparent; }
+.scroller::-webkit-scrollbar-thumb {
+  background: var(--rule-fine);
+  border: 4px solid var(--paper);
+  border-radius: 0;
+}
+.scroller::-webkit-scrollbar-thumb:hover { background: var(--rule); }
+
+.stage {
+  position: relative;
+  height: 0;
+}

@@ -1,0 +1,171 @@
+.rail {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--rail);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0 18px 14px;
+  border-right: 1px solid var(--rule-fine);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  user-select: none;
+  touch-action: none;
+}
+
+.readout {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 14px;
+  padding-right: 10px;
+}
+
+.readout :global(.label) {
+  font-size: 8.5px;
+  letter-spacing: 0.13em;
+}
+
+.metres {
+  font-size: 12px;
+  color: var(--signal);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  cursor: ns-resize;
+  margin-right: 10px;
+}
+
+.spine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+.decade {
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.tickMajor {
+  display: block;
+  width: 15px;
+  height: 1px;
+  background: var(--ink-3);
+}
+
+.decadeLabel {
+  font-size: 9px;
+  color: var(--ink-3);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tickMinor {
+  position: absolute;
+  left: 0;
+  height: 1px;
+  background: var(--rule);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.station {
+  position: absolute;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.stationTick {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--ink-4);
+  transition: background 140ms;
+}
+
+.stationLabel {
+  position: absolute;
+  left: 26px;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-3px);
+  transition: opacity 140ms, transform 140ms, color 140ms;
+  pointer-events: none;
+  background: var(--paper);
+  padding: 2px 5px;
+  border: 1px solid var(--rule-fine);
+}
+
+.station:hover .stationTick { background: var(--signal); }
+.station:hover .stationLabel {
+  opacity: 1;
+  transform: translateX(0);
+  color: var(--signal);
+  border-color: var(--signal);
+  z-index: 2;
+}
+
+.cursor {
+  position: absolute;
+  left: -14px;
+  right: -10px;
+  height: 0;
+  pointer-events: none;
+}
+
+/* The cursor is a hairline with a filled index mark, the way a slide-rule
+   cursor reads: the line is the measurement, the mark is only there to find
+   the line. */
+.cursorHair {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.5px;
+  height: 1px;
+  background: var(--signal);
+}
+
+.cursorHair::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: -3.5px;
+  width: 7px;
+  height: 7px;
+  background: var(--signal);
+  transform: rotate(45deg);
+}
+
+@media (max-width: 860px) {
+  .rail {
+    width: 54px;
+    padding-left: 9px;
+  }
+  .readout { display: none; }
+  .decadeLabel { display: none; }
+  .stationLabel { font-size: 8px; }
+}

@@ -1,0 +1,74 @@
+.station {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 30vw);
+  align-items: center;
+  padding-left: var(--rail);
+  contain: layout paint;
+}
+
+.figure {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 3.2rem 1.5rem 3.2rem 2.5rem;
+  transform-origin: 50% 50%;
+}
+
+.plate {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* `safe` centring: centred while it fits, but it stops centring rather than
+     pushing the heading off the top edge when a plate is taller than the
+     window. Overflow then happens only at the bottom, where it is visible. */
+  justify-content: safe center;
+  gap: 0.9rem;
+  padding: 4rem var(--gutter) 3.4rem 2rem;
+  border-left: 1px solid var(--rule-fine);
+  /* Never its own scroll container: a wheel gesture over the text has to move
+     the traverse, not nudge a paragraph. Plates are written to fit. */
+  overflow: hidden;
+}
+
+/*
+  Narrow screens get the figure and the plate stacked rather than side by side,
+  and the plate becomes its own scroll container — the one place on the site
+  where that is right, because a thumb has no other way through a long plate on
+  a 375 px screen. The traverse is still reachable from the rule and the
+  arrow keys, so nothing is lost by letting a drag inside the plate scroll it.
+
+  Both rows are explicitly sized and both clip: the header and footer are fixed,
+  so a row that sizes to its content runs underneath them.
+*/
+@media (max-width: 1100px) {
+  .station {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 40vh) minmax(0, 1fr);
+    align-items: stretch;
+    padding-top: 3.1rem;
+    padding-bottom: 2.6rem;
+  }
+  .figure {
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0.9rem 1rem 0.4rem 1.2rem;
+  }
+  .plate {
+    height: auto;
+    border-left: 0;
+    border-top: 1px solid var(--rule-fine);
+    padding: 0.9rem var(--gutter) 1.2rem 1.2rem;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .plate::-webkit-scrollbar { display: none; }
+}

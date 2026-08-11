@@ -1,0 +1,214 @@
+.fig {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 560px;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.svg {
+  width: 100%;
+  height: auto;
+  max-height: 42vh;
+}
+
+.note {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ink-3);
+  margin: 0;
+  min-height: 2.8em;
+}
+.note strong { font-style: normal; color: var(--signal); font-size: 12.5px; }
+
+.axis { stroke: var(--rule); stroke-width: 1px; }
+.tick {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  fill: var(--ink-4);
+  text-transform: uppercase;
+}
+
+/* ── basin ── */
+.blockLow { fill: var(--ink-4); opacity: 0.18; }
+.blockHigh { fill: var(--signal); opacity: 0.13; }
+.blockText { font-family: var(--mono); font-size: 12px; fill: var(--ink-3); }
+.blockTextHi { font-family: var(--mono); font-size: 15px; fill: var(--signal); }
+.threshold { stroke: var(--ink); stroke-width: 1px; stroke-dasharray: 3 2; }
+.mark { cursor: help; }
+.markLine { stroke: var(--ink-3); stroke-width: 0.8px; stroke-dasharray: 2 2; }
+.markDot { fill: var(--paper); stroke: var(--ink); stroke-width: 1.2px; }
+.mark:hover .markDot { fill: var(--signal); stroke: var(--signal); }
+.markLabel {
+  font-family: var(--mono);
+  font-size: 6.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  fill: var(--ink-3);
+}
+
+/* ── gauges ── */
+/* The frame hugs the plate rather than the column: these are matplotlib
+   figures on white, so a frame wider than the image reads as blank paper. */
+.plateFrame {
+  border: 1px solid var(--rule-fine);
+  background: #fff;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  max-width: 100%;
+}
+.figure {
+  width: auto;
+  height: auto;
+  max-height: 32vh;
+  max-width: 100%;
+  object-fit: contain;
+}
+.figNav {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+.figNav :global(.switch) { padding: 3px 7px; }
+.figCaption {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 12px;
+  color: var(--ink-3);
+  margin-left: 0.4rem;
+}
+.cite {
+  font-family: var(--serif);
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--ink-3);
+  margin: 0;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--rule-ghost);
+}
+
+/* ── block ── */
+.street rect { fill: var(--ink-4); opacity: 0.1; }
+.building { fill: var(--paper-raised); stroke: var(--ink); stroke-width: 1px; }
+.shadow { fill: var(--ink); opacity: 0.16; }
+.hLabel { font-family: var(--mono); font-size: 5.5px; fill: var(--ink-3); }
+.row { display: grid; grid-template-columns: 3rem 1fr auto; align-items: center; gap: 0.6rem; }
+.out { font-size: 12px; color: var(--signal); min-width: 3.4em; text-align: right; }
+
+/* ── classroom ── */
+.sync td[data-drift='true'] { color: var(--signal); }
+.syncMark { text-align: right; color: var(--ink-4); }
+.impact {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  font-family: var(--serif);
+  font-size: 12.5px;
+  color: var(--ink-3);
+  border-top: 1px solid var(--rule-fine);
+  padding-top: 0.5rem;
+}
+.impact strong { color: var(--signal); font-size: 12.5px; }
+
+/* ── origin ── */
+.datum { display: grid; place-items: center; }
+.datumMark { width: min(200px, 34vh); height: auto; }
+.datumRing { fill: none; stroke: var(--rule); stroke-width: 1px; }
+.datumHair { stroke: var(--rule); stroke-width: 1px; }
+.datumDot { fill: var(--signal); }
+.record { margin-top: 0.2rem; }
+.year { color: var(--ink-4); }
+
+/* ── device ── */
+.devices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 1.35fr;
+  gap: 0.6rem;
+  align-items: center;
+}
+.phone { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.shot {
+  width: 100%;
+  height: auto;
+  max-height: 30vh;
+  object-fit: contain;
+  border: 1px solid var(--rule-fine);
+}
+.shotLabel {
+  font-family: var(--mono);
+  font-size: 7.5px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+}
+.head svg { width: 100%; height: auto; max-height: 32vh; }
+.scalp { fill: none; stroke: var(--ink-3); stroke-width: 1.2px; }
+.electrode { fill: var(--paper-raised); stroke: var(--ink-3); stroke-width: 0.9px; }
+.electrodeLabel { font-family: var(--mono); font-size: 5.4px; fill: var(--ink-2); }
+
+@media (max-width: 900px) {
+  .devices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ── tissue ── */
+.tiles { display: flex; gap: 0.7rem; }
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  padding: 4px;
+  border: 1px solid var(--rule-fine);
+  background: var(--paper-raised);
+}
+.tile img { width: 100%; height: auto; max-height: 24vh; object-fit: cover; }
+.tile[data-on='true'] { border-color: var(--signal); }
+.tile[data-on='true'] :global(.label) { color: var(--signal); }
+
+.classes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.classes li {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  border: 1px solid var(--rule-ghost);
+  padding: 2px 6px;
+}
+.classes li[data-on='true'] {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+
+/*
+  On a narrow screen the figure row is 40vh, which is not enough for both a
+  decorative datum and the record beneath it, or for six device shots. The
+  substance wins: the crosshair goes, the images get smaller.
+*/
+@media (max-width: 1100px) {
+  .datum { display: none; }
+  .record { margin-top: 0; }
+  .shot { max-height: 15vh; }
+  .head svg { max-height: 19vh; }
+  .devices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.4rem; }
+  .figure { max-height: 22vh; }
+  .tile img { max-height: 15vh; }
+  .svg { max-height: 26vh; }
+  .note { min-height: 0; }
+}

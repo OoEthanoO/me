@@ -1,0 +1,134 @@
+/*
+  Plates never scroll — a wheel gesture over the text has to move the traverse.
+  So the type is sized against viewport *height* as well as width, which is
+  what keeps a full plate inside a short window instead of clipping its caveat.
+*/
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.34rem, 0.9vh, 0.72rem);
+  max-width: 32rem;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.scale {
+  font-size: 11px;
+  color: var(--signal);
+  letter-spacing: 0.04em;
+}
+
+.subject {
+  font-family: var(--serif);
+  font-size: clamp(1.3rem, min(2.5vw, 3.4vh), 2.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.018em;
+  margin-top: 0.1rem;
+}
+
+.attrib {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.project {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.status {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--rule-fine);
+  padding: 2px 6px;
+}
+
+.ruler {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+  margin: -0.2rem 0 0;
+}
+
+.ruler::before {
+  content: '⊢ ';
+  color: var(--ink-4);
+}
+
+.body {
+  font-size: clamp(13.2px, 1.85vh, 15.5px);
+  line-height: 1.55;
+  margin-top: 0.1rem;
+}
+.body p { margin-bottom: 0.6em; }
+
+.sheetWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.caveat {
+  border-left: 2px solid var(--signal);
+  padding: 0.1rem 0 0.1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.caveat p {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13.5px;
+  line-height: 1.48;
+  color: var(--ink-3);
+  margin: 0;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 0.35rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule-ghost);
+}
+
+.links a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+}
+
+.links a:hover {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+
+@media (max-width: 1100px) {
+  .plate { gap: 0.55rem; max-width: none; }
+  .subject { font-size: 1.4rem; }
+  .body { font-size: 14.5px; }
+}
