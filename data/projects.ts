@@ -5,7 +5,10 @@ export interface Collaborator {
 
 export interface Project {
   title: string;
+  /** Short blurb shown on the project card. Keep it to a sentence or two. */
   description: string;
+  /** Full write-up shown on the project's own page. Falls back to `description`. */
+  longDescription?: string;
   technologies: string[];
   collaborators: Collaborator[];
   github?: string;
@@ -16,103 +19,31 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "YanAIEngine",
-    description: "A multimodal inference engine built natively for Apple Silicon, optimized for direct GPU control via Swift and Metal for high-performance AI inference.",
-    technologies: ["Swift", "Metal", "MSL", "Hummingbird", "NIO"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
-    ],
-    github: "https://github.com/OoEthanoO/yanaiengine",
-    images: [],
-    status: "In Progress"
-  },
-  {
-    title: "YanDashboard",
-    description: "An web application and academic productivity helper that allows students to track assignments, manage courses, and log study sessions in an environment that ensures privacy with E2E encryption.",
-    technologies: ["React Native", "Expo", "MongoDB", "Node.js", "TypeScript"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
-    ],
-    github: "https://github.com/OoEthanoO/yan-dashboard",
-    images: ["/yandashboard1.png", "/yandashboard2.png", "/yandashboard3.png"],
-    website: "https://dashboard.ethanyanxu.com",
-    status: "Complete",
-  },
-  {
-    title: "CORA",
-    description: "A Python application for visualizing and assessing coastal flood risks using geospatial and infrastructure data.",
-    technologies: ["Python", "PyQt6", "Matplotlib", "OSMnx", "GeoPandas"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
-    ],
-    github: "https://github.com/OoEthanoO/cora_project",
-    images: ["/cora1.png", "/cora2.png", "/cora3.png", "/cora4.png", "/cora5.png"],
-    status: "Complete"
-  },
-  {
-    title: "EthanToDoList",
-    description: "An iOS todo list application that allows users to manage their tasks with smart and automatic time allocation and scheduling with handy features like Pomodoro streak tracking and daily progress tracking",
-    technologies: ["Swift", "SwiftUI", "SwiftData", "UserNotifications", "AppStorage"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
-    ],
-    images: ["/ethantodolist1.jpeg", "/ethantodolist2.jpeg", "/ethantodolist3.jpeg", "/ethantodolist4.jpeg", "/ethantodolist5.jpeg"],
-    status: "Complete"
-  },
-  {
-    title: "Macam",
-    description: "A macOS camera application that allow users to quickly snap pictures with a simple design.",
-    technologies: ["Swift", "SwiftUI", "AppKit", "AVFoundation"],
-    collaborators: [
-      { name: "Dean", github: "https://github.com/Penguin60" }
-    ],
-    github: "https://github.com/STRNerds/Macam",
-    images: ["/macam1.png"],
-    status: "Complete",
-  },
-  {
     title: "YanLearn",
-    description: "A specialized academic platform for managing volunteering work, student enrollments, and course content. Features a robust dashboard for tutors and students, administrative tools for course management, and a secure environment for fundraising for SickKids.",
-    technologies: ["Next.js 16", "Supabase", "React 19", "Tailwind CSS 4", "TypeScript"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    description:
+      "A free online tutoring platform for students in grades 6-12, taught by a team of high school volunteers.",
+    longDescription:
+      "A free online tutoring platform for students in grades 6-12, taught by a team of high school volunteers. The site handles everything around the teaching itself: accounts and roles, course catalogues, enrollment, class scheduling, volunteer hour tracking, and the admin tooling the team runs day to day.\n\nThe automation is the interesting half. A sync service treats the Discord server as derived state, continuously reconciling membership, roles, channels, and nicknames against the site's data, so a student who enrolls simply finds the right channels waiting for them. A scheduled job handles the rest: it sends email and Discord reminders, opens a temporary voice channel for each live class (tutors let in fifteen minutes early, students five), records attendance from voice state, and flags tutors or students who never show. An analytics dashboard tracks signups, enrollments, hours taught, and donations over time.\n\nIt runs on Next.js and Supabase, with every table locked behind row-level security and reached only through server-side routes. The \"Coding for SickKids\" fundraising campaign donates directly to hospitals through the SickKids Foundation platform.",
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "Supabase",
+      "Tailwind CSS 4",
+      "TypeScript",
+      "Discord API",
+      "Zoom API",
+      "Recharts",
     ],
-    images: ["/codingclass1.png", "/codingclass2.png", "/codingclass3.png", "/codingclass4.png", "/codingclass5.png"],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/tutoring",
     website: "https://learn.ethanyanxu.com/",
-    status: "Complete",
-  },
-  {
-    title: "YanToDoList",
-    description: "A web todo list application that allows users to manage their tasks with a smart task recommendation system",
-    technologies: ["Next.js", "Tailwind CSS"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
+    images: [
+      "/codingclass1.png",
+      "/codingclass2.png",
+      "/codingclass3.png",
+      "/codingclass4.png",
+      "/codingclass5.png",
     ],
-    images: ["/yantodolist1.png", "/yantodolist2.png"],
-    status: "Complete",
-    website: "https://todo.ethanyanxu.com/"
-  },
-  {
-    title: "Me",
-    description: "A portfolio website for showcasing my projects and skills.",
-    technologies: ["React", "TypeScript", "Next.js", "Tailwind CSS"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
-    ],
-    github: "https://github.com/OoEthanoO/me",
-    website: "https://www.ethanyanxu.com",
-    images: ["/me.png"],
-    status: "Complete"
-  },
-  {
-    title: "Dotfiles",
-    description: "My personal Arch Linux dotfiles repository, showcasing my customized setup and configurations.",
-    technologies: ["Hypr*", "Nvim", "Waybar"],
-    collaborators: [
-      { name: "Solo", github: "https://github.com/OoEthanoO" }
-    ],
-    github: "https://github.com/OoEthanoO/dotfiles",
-    images: ["/dotfiles1.png"],
-    status: "Complete"
+    status: "In Progress",
   },
 ];

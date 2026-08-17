@@ -43,7 +43,15 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
             <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
               {project.title}
             </h1>
-            <p className="mt-4 text-lg text-[#6e6e73]">{project.description}</p>
+            <div className="mt-4 flex flex-col gap-4">
+              {(project.longDescription ?? project.description)
+                .split("\n\n")
+                .map((paragraph, idx) => (
+                  <p key={idx} className="text-lg leading-relaxed text-[#6e6e73]">
+                    {paragraph}
+                  </p>
+                ))}
+            </div>
             <div className="mt-6 flex flex-wrap gap-2">
               {project.technologies.map((tech) => (
                 <span
