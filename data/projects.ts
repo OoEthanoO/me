@@ -44,4 +44,26 @@ export const projects: Project[] = [
       "/yanlearn5.png",
     ],
   },
+  {
+    title: "YanPlanner",
+    description:
+      "An AI study planner that turns assignments, exams, and projects into day-by-day plans with automatically generated subtasks.",
+    longDescription:
+      "YanPlanner takes the things students actually get handed — an assignment, an exam date, a long-term project — and turns them into a plan they can follow day by day. You add a task with a due date and any relevant materials, and the AI splits it into smaller subtasks that inherit context from the title, description, and attachments. Subtasks can be split again, nesting beneath their parent so the whole plan stays visible at a glance, and a work-days picker keeps the schedule on the days you actually intend to study.\n\nAlongside the tree is a context-aware chat. You can talk to the planner to reshape scope, move due dates, or ask for pacing advice, and that conversation feeds back in as context the next time it splits a task, so the plan and the reasoning behind it stay in sync. Attachments are parsed from PDF and Word documents and passed to a multimodal model, with the files themselves kept in Cloudflare R2 to sidestep serverless payload limits.\n\nThe frontend is React and Vite on Vercel; the API is an Express server backed by Prisma and Postgres. It carries the full account layer too — registration with email verification, a credit-based billing system with Stripe checkout and webhooks, and an admin panel for usage summaries.",
+    technologies: [
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Stripe",
+      "Cloudflare R2",
+      "OpenRouter",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/project",
+    website: "https://planner.ethanyanxu.com/",
+    images: [],
+  },
 ];
