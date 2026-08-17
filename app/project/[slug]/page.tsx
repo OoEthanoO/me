@@ -53,9 +53,10 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
                 ))}
             </div>
             <div className="mt-6 flex flex-wrap gap-2">
-              {project.technologies.map((tech) => (
+              {project.technologies.map((tech, idx) => (
                 <span
                   key={tech}
+                  style={{ '--i': idx } as React.CSSProperties}
                   className="tech-tag inline-flex items-center rounded-full border border-black/10 bg-[#f5f5f7] px-3 py-1 text-[11px] font-semibold text-[#1d1d1f]"
                 >
                   {tech}
@@ -64,9 +65,10 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
             </div>
             <div className="mt-6 flex flex-wrap gap-2 items-center">
               <span className="text-[11px] uppercase tracking-[0.2em] text-[#86868b]">Collaborators</span>
-              {project.collaborators.map((collab) => (
+              {project.collaborators.map((collab, idx) => (
                 <a
                   key={collab.name}
+                  style={{ '--i': idx } as React.CSSProperties}
                   href={collab.github}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -76,17 +78,6 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
                   {collab.name}
                 </a>
               ))}
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2 items-center">
-              <span className="text-[11px] uppercase tracking-[0.2em] text-[#86868b]">Status</span>
-              {project.status && (
-                <span
-                  className="inline-flex items-center rounded-full border border-black/10 bg-white px-3 py-1 text-[11px] font-semibold text-[#1d1d1f]"
-                  style={{ animation: 'fadeIn 0.5s ease-out 1.3s', animationFillMode: 'both' }}
-                >
-                  {project.status}
-                </span>
-              )}
             </div>
             <div className="mt-8 flex flex-wrap gap-4">
               {project.github ? (

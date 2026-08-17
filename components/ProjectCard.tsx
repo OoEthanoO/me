@@ -47,16 +47,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </span>
           ))}
         </div>
-        <div className="mt-5 flex flex-wrap gap-2 items-center">
-          <span className="text-[11px] uppercase tracking-[0.15em] text-[#86868b]">Status</span>
-          {project.status && (
-            <span
-              className="inline-flex items-center rounded-full border border-black/10 bg-white px-2.5 py-1 text-[11px] font-semibold text-[#1d1d1f]"
-            >
-              {project.status}
-            </span>
-          )}
-        </div>
       </div>
     </Link>
   );

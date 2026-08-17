@@ -14,7 +14,6 @@ export interface Project {
   github?: string;
   website?: string;
   images: string[];
-  status?: string;
 }
 
 export const projects: Project[] = [
@@ -44,6 +43,5 @@ export const projects: Project[] = [
       "/yanlearn4.png",
       "/yanlearn5.png",
     ],
-    status: "In Progress",
   },
 ];
