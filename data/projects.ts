@@ -23,7 +23,7 @@ export const projects: Project[] = [
     description:
       "A free online tutoring platform for students in grades 6-12, taught by a team of high school volunteers.",
     longDescription:
-      "A free online tutoring platform for students in grades 6-12, taught by a team of high school volunteers. The site handles everything around the teaching itself: accounts and roles, course catalogues, enrollment, class scheduling, volunteer hour tracking, and the admin tooling the team runs day to day.\n\nThe automation is the interesting half. A sync service treats the Discord server as derived state, continuously reconciling membership, roles, channels, and nicknames against the site's data, so a student who enrolls simply finds the right channels waiting for them. A scheduled job handles the rest: it sends email and Discord reminders, opens a temporary voice channel for each live class (tutors let in fifteen minutes early, students five), records attendance from voice state, and flags tutors or students who never show. An analytics dashboard tracks signups, enrollments, hours taught, and donations over time.\n\nIt runs on Next.js and Supabase, with every table locked behind row-level security and reached only through server-side routes. The \"Coding for SickKids\" fundraising campaign donates directly to hospitals through the SickKids Foundation platform.",
+      "A free online tutoring platform for students in grades 6-12, taught by a team of high school volunteers. The site handles everything around the teaching itself: accounts and roles, course catalogues, enrollment, class scheduling, volunteer hour tracking, and the admin tooling the team runs day to day.\n\nThe automation is the interesting half. A sync service treats the Discord server as derived state, continuously reconciling membership, roles, channels, and nicknames against the site's data, so a student who enrolls simply finds the right channels waiting for them. A scheduled job handles the rest: it sends email and Discord reminders, opens a temporary voice channel for each live class (tutors let in fifteen minutes early, students five), records attendance from voice state, and flags tutors or students who never show. An analytics dashboard tracks signups, enrollments, hours taught, and donations over time.\n\nIt runs on Next.js and Supabase, with every table locked behind row-level security and reached only through server-side routes. To date the platform has delivered more than 500 hours of free tutoring across 500+ classes, with 26 volunteer tutors teaching over 120 students, and the \"Coding for SickKids\" campaign has raised over $15,000 — donated directly to hospitals through the SickKids Foundation platform.",
     technologies: [
       "Next.js 16",
       "React 19",
@@ -38,11 +38,11 @@ export const projects: Project[] = [
     github: "https://github.com/OoEthanoO/tutoring",
     website: "https://learn.ethanyanxu.com/",
     images: [
-      "/codingclass1.png",
-      "/codingclass2.png",
-      "/codingclass3.png",
-      "/codingclass4.png",
-      "/codingclass5.png",
+      "/yanlearn1.png",
+      "/yanlearn2.png",
+      "/yanlearn3.png",
+      "/yanlearn4.png",
+      "/yanlearn5.png",
     ],
     status: "In Progress",
   },
