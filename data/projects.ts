@@ -66,4 +66,24 @@ export const projects: Project[] = [
     website: "https://planner.ethanyanxu.com/",
     images: [],
   },
+  {
+    title: "Stroj",
+    description:
+      "A self-hosted online judge. Users submit code against a problem's test data; it compiles, runs it under time and memory limits, and returns a verdict.",
+    longDescription:
+      "Stroj is a competitive programming judge, the kind of site a class or a team practises on. A submission arrives against a problem's test data, and the judge compiles it, runs it test by test under time, memory and output limits, compares what came out against the answer, and returns one of the usual verdicts. Problems can be all-or-nothing or partially scored, and tests can be grouped into weighted subtasks so a beginner who only solves the small cases still earns something rather than nothing. Contests sit on top: a timed window, a problem set sealed until the clock starts, and either an ICPC or an IOI scoreboard.\n\nThe sandbox is the half worth reading. Each submission runs in a throwaway directory as its own process group under CPU, address-space and file-size rlimits, with a wall-clock watchdog that kills the whole group so a submission cannot outlive its timeout by forking, and an active RSS sampler that enforces the memory ceiling — necessary because macOS accepts RLIMIT_AS and then quietly ignores it. Network and filesystem writes are denied through sandbox-exec on macOS and a network namespace on Linux, where privilege separation and a read-only container rootfs carry the rest. It is deliberately honest about the gap: doctor and the site footer both report the isolation actually in force rather than the one you asked for.\n\nThe stack is small on purpose — Python and FastAPI over SQLite in WAL mode, with judge workers as plain threads that atomically claim one pending submission at a time, and a dependency-free vanilla JS frontend with no build step. Because judging needs fork, real compilers, a persistent volume and minutes of wall time, none of which serverless offers, the deployment splits: the static frontend on Vercel proxying /api back to a container host running the judge. Problem authoring is a zip and a JSON manifest, and an express mode creates the problem hidden, runs the intended solutions, and reports what they actually measured so limits get set from real numbers. 138 tests spawn real compilers and assert on real TLE, MLE and CE outcomes.",
+    technologies: [
+      "Python 3",
+      "FastAPI",
+      "SQLite",
+      "Vanilla JS",
+      "Docker",
+      "Vercel",
+      "pytest",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/stroj-v2",
+    website: "https://stroj.ethanyanxu.com/",
+    images: [],
+  },
 ];
