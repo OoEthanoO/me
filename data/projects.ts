@@ -117,6 +117,11 @@ export const projects: Project[] = [
       { name: "aqariio", github: "https://github.com/aqariio" },
     ],
     github: "https://github.com/aqariio/farkle",
-    images: [],
+    images: [
+      "/farkle1.png",
+      "/farkle2.png",
+      "/farkle3.png",
+      "/farkle4.png",
+    ],
   },
 ];
