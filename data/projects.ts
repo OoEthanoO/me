@@ -86,7 +86,9 @@ export const projects: Project[] = [
       "Vercel",
       "pytest",
     ],
-    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    collaborators: [
+      { name: "Penguin60", github: "https://github.com/Penguin60" },
+    ],
     github: "https://github.com/OoEthanoO/stroj-v2",
     website: "https://stroj.ethanyanxu.com/",
     images: [
@@ -96,5 +98,25 @@ export const projects: Project[] = [
       "/stroj4.png",
       "/stroj5.png",
     ],
+  },
+  {
+    title: "Farkle",
+    description:
+      "A two-player Farkle dice game that runs in a terminal window, with local hot-seat play and LAN multiplayer.",
+    longDescription:
+      "Farkle is a push-your-luck dice game: you throw six dice, set aside the ones that score, and choose between banking what you have or throwing the rest again. Roll nothing that scores and the whole turn is wiped. This is a two-player version that runs in a terminal window. The scoring engine handles single ones and fives, three or more of a kind with the score doubling for each extra die, and the 1-5, 2-6 and full 1-6 straights — and it refuses a selection outright unless every die in it belongs to a scoring pattern, so you cannot smuggle a dead die into a good throw.\n\nThere is no game framework underneath it. The interface is a small component and layout system written for the project and drawn through Lanterna: positions and sizes are fractions of the parent rather than fixed cells, so the board reflows when the window is resized, and screens are pushed and popped as a stack. Multiplayer runs over plain TCP sockets with JSON packets, and the host is authoritative — the client sends actions like move cursor, toggle a die, roll again, or end turn, and the host applies the rules and broadcasts the entire game state back, so the two boards cannot drift apart. Native macOS full screen is wired up and remembered between launches.",
+    technologies: [
+      "Kotlin",
+      "Lanterna",
+      "Ktor",
+      "kotlinx.serialization",
+      "Coroutines",
+      "Gradle",
+    ],
+    collaborators: [
+      { name: "aqariio", github: "https://github.com/aqariio" },
+    ],
+    github: "https://github.com/aqariio/farkle",
+    images: [],
   },
 ];
