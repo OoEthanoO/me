@@ -141,6 +141,11 @@ export const projects: Project[] = [
     collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
     github: "https://github.com/OoEthanoO/YanFarkle",
     website: "https://apps.apple.com/ca/app/yanfarkle/id6761668136",
-    images: [],
+    images: [
+      "/yanfarkle1.png",
+      "/yanfarkle2.png",
+      "/yanfarkle3.png",
+      "/yanfarkle4.png",
+    ],
   },
 ];

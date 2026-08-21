@@ -5,6 +5,14 @@ import { projects } from '../../../data/projects';
 import { use, useState } from 'react';
 import Navbar from '@/components/Navbar';
 
+function markOrientation(img: HTMLImageElement) {
+  if (!img.naturalWidth || !img.naturalHeight) return;
+  if (img.naturalWidth / img.naturalHeight >= 1.2) return;
+
+  img.closest('.image-container')?.classList.add('portrait-image');
+  img.closest('.image-grid')?.classList.add('has-portrait-images');
+}
+
 function slugify(title: string) {
   return title.toLowerCase().replace(/\s+/g, '-');
 }
@@ -119,17 +127,12 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
                         src={img}
                         alt={`${project.title} screenshot ${idx + 1}`}
                         className="w-full h-auto object-cover"
-                        onLoad={(e) => {
-                          const img = e.target as HTMLImageElement;
-                          const aspectRatio = img.naturalWidth / img.naturalHeight;
-                          const container = img.closest('.image-container') as HTMLElement;
-                          const grid = img.closest('.image-grid') as HTMLElement;
-
-                          if (aspectRatio < 1.2) {
-                            container.classList.add('portrait-image');
-                            grid.classList.add('has-portrait-images');
-                          }
+                        ref={(img) => {
+                          // Cached images can finish loading before React attaches
+                          // onLoad, so classify those here instead.
+                          if (img?.complete) markOrientation(img);
                         }}
+                        onLoad={(e) => markOrientation(e.currentTarget)}
                       />
                     </div>
                   ))}

@@ -245,8 +245,8 @@ body {
 }
 
 .image-grid.has-portrait-images .image-container.portrait-image img {
-  height: 400px;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 .image-grid.has-portrait-images .image-container:not(.portrait-image) img {
