@@ -124,4 +124,23 @@ export const projects: Project[] = [
       "/farkle4.png",
     ],
   },
+  {
+    title: "YanFarkle",
+    description:
+      "A Farkle dice game for iPhone, iPad, and Mac, on the App Store — with a bot, pass-and-play, LAN matches, and Game Center multiplayer.",
+    longDescription:
+      "YanFarkle is a native version of the push-your-luck dice game: throw six dice, set aside the ones that score, then choose between banking the turn or throwing the rest again and risking everything you have built up. It ships on the App Store as a universal app for iPhone, iPad and Mac, and plays four ways — against a bot, pass-and-play on a single device, across two devices on the same network, or online through Game Center matchmaking and invites.\n\nThe two online paths sit behind one game. Local matches run over Network.framework: the host opens a TCP listener and the other device joins either by typing the address or by scanning a QR code that encodes a yanfarkle:// link, which saves anyone from reading an IP out loud. Online matches run over GameKit. Either way the host is authoritative — the client sends actions and the host applies the rules and broadcasts the resulting state — and in-game chat with quick emotes rides the same channel.\n\nThe bot plays a real strategy rather than a random one: it banks immediately when the turn would win, always re-rolls on hot dice, and otherwise stops once the turn clears 300 points or only two dice are left. The dice are vector art with spring animations, WASD and single-key shortcuts drive the board on Mac and iPad, and nothing leaves the device — no accounts, no analytics, no third-party services.",
+    technologies: [
+      "Swift",
+      "SwiftUI",
+      "Combine",
+      "Network.framework",
+      "GameKit",
+      "AVFoundation",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/YanFarkle",
+    website: "https://apps.apple.com/ca/app/yanfarkle/id6761668136",
+    images: [],
+  },
 ];
