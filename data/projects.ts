@@ -14,9 +14,35 @@ export interface Project {
   github?: string;
   website?: string;
   images: string[];
+  /** Flagship work. Renders as a full-width, accented card at the top of the grid. */
+  featured?: boolean;
 }
 
 export const projects: Project[] = [
+  {
+    title: "Bare Metal Bard",
+    description:
+      "A CUDA SGEMM written from scratch, taken from 1.2% of cuBLAS to 117% with tensor cores, then used to train a GPT — no PyTorch, cuBLAS or cuDNN anywhere in the training path.",
+    longDescription:
+      "Nine matmul kernels, each one the same idea applied a level further down the memory hierarchy: load a value once, then spend it on as much arithmetic as possible before letting it go. The first is the textbook one thread per output element, at 82.8 GFLOP/s — 1.2% of cuBLAS. The last reaches 8298.9, a hundredfold gain, on an RTX 4070 Laptop with 36 SMs and a 55 W budget. Along the way the fp32 kernel closes to 95% of cuBLAS through coalescing, shared-memory tiling, register tiling, float4 loads, warp-level blocking and double buffering, and the tensor-core kernel passes it at 117%. That last number is quoted with its caveat rather than on its own: cuBLAS has its own TF32 path, it is 21% faster still, and TF32 buys the speed with 4000x more numerical error.\n\nThose kernels then train a 10.8M-parameter GPT on TinyShakespeare, character level, with every matmul, layernorm, softmax, attention, GELU, cross-entropy and AdamW kernel written from scratch. The backward pass is gradient-checked against finite differences along the gradient direction, which puts the signal three orders of magnitude above fp32 noise — sensitive enough that deliberately dropping one term from layernorm's backward fails 14 of the 16 parameter tensors instead of quietly training slightly worse.\n\nThe attention is a fused FlashAttention-style kernel that never materializes the score matrix at all, keeping each score tile in registers and carrying a running max and sum forward instead. It is 3.4x faster on the forward pass and cuts activation memory by 30%, but the memory is the part that changes what the card can do: the unfused footprint grows quadratically with context length and the fused one grows linearly, so an 8 GB card that topped out at 1024 tokens now trains at 2048.\n\nThe work that took longest to find is in the measurements. A compiler upgrade cost the tensor-core kernel 19% of its throughput by spending 14 extra registers to remove a 12-byte spill, crossing an occupancy cliff — a regression that passed every correctness test, every gradient check and every loss curve without a murmur, and that only surfaced because a version number in a document looked wrong. A from-scratch ring all-reduce on two A40s found peer-to-peer copies that returned success and silently delivered nothing, and then found that communication was 6% of a step while the single host loop driving both devices was the actual bottleneck — the opposite of the lesson everyone quotes.",
+    technologies: [
+      "CUDA",
+      "C++",
+      "Tensor Cores (WMMA)",
+      "Nsight Compute",
+      "Next.js",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/bare-metal-bard",
+    website: "https://sgemm.ethanyanxu.com/",
+    images: [
+      "/bard1.png",
+      "/bard2.png",
+      "/bard3.png",
+      "/bard4.png",
+    ],
+    featured: true,
+  },
   {
     title: "YanLearn",
     description:

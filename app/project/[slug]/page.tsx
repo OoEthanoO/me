@@ -47,7 +47,13 @@ export default function ProjectDetail({ params }: { params: Promise<{ slug: stri
         <Navbar />
         <div className="project-detail mt-8 rounded-[32px] border border-black/5 bg-white p-10 shadow-[0_20px_45px_rgba(0,0,0,0.08)]">
           <div className="project-detail-content">
-            <p className="text-xs uppercase tracking-[0.3em] text-[#86868b]">Project</p>
+            <p
+              className={`text-xs uppercase tracking-[0.3em] ${
+                project.featured ? 'font-semibold text-[#0071e3]' : 'text-[#86868b]'
+              }`}
+            >
+              {project.featured ? 'Flagship Project' : 'Project'}
+            </p>
             <h1 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-[#1d1d1f]">
               {project.title}
             </h1>

@@ -9,19 +9,38 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const slug = encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, '-'));
+  const featured = project.featured === true;
 
   return (
     <Link
       href={`/project/${slug}`}
-      className="project-card group relative flex flex-col rounded-[28px] border border-black/5 bg-white p-7 shadow-[0_18px_35px_rgba(0,0,0,0.08)]"
+      className={`project-card group relative flex flex-col rounded-[28px] border p-7 shadow-[0_18px_35px_rgba(0,0,0,0.08)] ${
+        featured
+          ? 'featured-card border-[#0071e3]/25 bg-white md:col-span-2 lg:col-span-3 md:p-10'
+          : 'border-black/5 bg-white'
+      }`}
     >
       <div className="flex-1 flex flex-col">
         <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#86868b]">
-          <span>Project</span>
+          <span className={featured ? 'font-semibold text-[#0071e3]' : undefined}>
+            {featured ? 'Flagship Project' : 'Project'}
+          </span>
           <span className="text-[11px] font-semibold text-[#0071e3]">View →</span>
         </div>
-        <h2 className="mt-4 text-2xl font-semibold text-[#1d1d1f]">{project.title}</h2>
-        <p className="mt-3 text-sm leading-relaxed text-[#6e6e73]">{project.description}</p>
+        <h2
+          className={`mt-4 font-semibold text-[#1d1d1f] ${
+            featured ? 'text-3xl md:text-4xl tracking-tight' : 'text-2xl'
+          }`}
+        >
+          {project.title}
+        </h2>
+        <p
+          className={`mt-3 leading-relaxed text-[#6e6e73] ${
+            featured ? 'text-base md:text-lg max-w-3xl' : 'text-sm'
+          }`}
+        >
+          {project.description}
+        </p>
         <div className="mt-5 flex flex-wrap gap-2">
           {project.technologies.map((tech) => (
             <span

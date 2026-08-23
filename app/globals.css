@@ -133,9 +133,30 @@ body {
 .project-card:nth-child(5) { animation-delay: 0.5s; }
 .project-card:nth-child(6) { animation-delay: 0.6s; }
 
+/* Flagship card: full-width, accented, and lifted above the rest of the grid. */
+.featured-card {
+  background:
+    linear-gradient(135deg, rgba(0, 113, 227, 0.06), rgba(0, 113, 227, 0) 55%),
+    #ffffff;
+  box-shadow: 0 24px 50px rgba(0, 113, 227, 0.14);
+}
+
+.featured-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 113, 227, 0.18);
+  pointer-events: none;
+}
+
 .project-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
+}
+
+.featured-card:hover {
+  box-shadow: 0 30px 60px rgba(0, 113, 227, 0.2);
 }
 
 /* Project detail page animations */
