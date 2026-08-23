@@ -174,4 +174,27 @@ export const projects: Project[] = [
       "/yanfarkle4.png",
     ],
   },
+  {
+    title: "Portfolio",
+    description:
+      "This site — a Next.js portfolio where every project, achievement and piece of gear is a typed object rather than a CMS entry.",
+    longDescription:
+      "The site you are reading. It is a Next.js App Router project on React 19 and Tailwind, deployed on Vercel, and it has no CMS and no database behind it — every project, achievement and piece of gear is an object in a typed data module, so adding a project means adding an object literal and the pages that map over it pick it up. Each project gets its own page from a single dynamic route, with the write-up split into paragraphs, technologies and collaborators rendered as tags, and links out to the source and the live thing.\n\nThe screenshot gallery does the one piece of real work. Screenshots arrive in whatever shape their platform produces — browser windows, a terminal window, phone screens — so each image is measured as it loads and classified by aspect ratio: landscape shots take the full width one per row, and portrait shots fall into a multi-column grid instead, with any of them opening full-size in a modal. Because a cached image can finish loading before React attaches its handler, that measurement also runs from a ref callback, which is the difference between the layout working on a first visit and working on every visit.\n\nEverything moves through CSS keyframes rather than an animation library. Cards scale in on the home grid, the detail panel slides in and its content follows, and the tag rows stagger by index through a custom property, so a project with nine technologies staggers as cleanly as one with three. A project can also be marked as flagship, which gives it a full-width accented card at the top of the grid rather than a slot in the same three-column rhythm as everything else.",
+    technologies: [
+      "Next.js 15",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "Vercel",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/me",
+    website: "https://www.ethanyanxu.com/",
+    images: [
+      "/portfolio1.png",
+      "/portfolio2.png",
+      "/portfolio3.png",
+      "/portfolio4.png",
+    ],
+  },
 ];
