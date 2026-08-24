@@ -10,9 +10,6 @@ const Navbar = () => {
         Portfolio
       </Link>
       <div className="flex items-center gap-6">
-        <Link href="/about" className="transition-colors hover:text-[#1d1d1f]">
-          About
-        </Link>
         <a
           href="mailto:ethanxucoder@gmail.com"
           className="transition-colors hover:text-[#1d1d1f]"

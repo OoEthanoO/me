@@ -19,13 +19,8 @@ export default function Home() {
         </header>
 
         <section className="projects-grid mt-16">
-          <div className="mb-8 flex items-end justify-between gap-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-semibold text-[#1d1d1f]">Selected Projects</h2>
-            </div>
-            <a href="/about" className="text-sm font-semibold text-[#0071e3] hover:underline">
-              More about me →
-            </a>
+          <div className="mb-8">
+            <h2 className="text-3xl md:text-4xl font-semibold text-[#1d1d1f]">Selected Projects</h2>
           </div>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project) => (
