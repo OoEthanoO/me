@@ -1,72 +1,54 @@
-"use client";
-
-import Link from 'next/link';
-import type { Project } from '@/data/projects';
+import Link from "next/link";
+import type { Project } from "@/data/projects";
 
 interface ProjectCardProps {
   project: Project;
+  /** Two-digit index printed as an editorial folio in the card corner. */
+  index: number;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
-  const slug = encodeURIComponent(project.title.toLowerCase().replace(/\s+/g, '-'));
-  const featured = project.featured === true;
+export function slugify(title: string) {
+  return title.toLowerCase().replace(/\s+/g, "-");
+}
 
+export default function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <Link
-      href={`/project/${slug}`}
-      className={`project-card group relative flex flex-col rounded-[28px] border p-7 shadow-[0_18px_35px_rgba(0,0,0,0.08)] ${
-        featured
-          ? 'featured-card border-[#0071e3]/25 bg-white md:col-span-2 lg:col-span-3 md:p-10'
-          : 'border-black/5 bg-white'
-      }`}
+      href={`/project/${encodeURIComponent(slugify(project.title))}`}
+      className="project-card group flex h-full flex-col border-b border-r border-[var(--tan)]/35 bg-[var(--cream)] p-8 md:p-10"
     >
-      <div className="flex-1 flex flex-col">
-        <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#86868b]">
-          <span className={featured ? 'font-semibold text-[#0071e3]' : undefined}>
-            {featured ? 'Flagship Project' : 'Project'}
-          </span>
-          <span className="text-[11px] font-semibold text-[#0071e3]">View →</span>
-        </div>
-        <h2
-          className={`mt-4 font-semibold text-[#1d1d1f] ${
-            featured ? 'text-3xl md:text-4xl tracking-tight' : 'text-2xl'
-          }`}
-        >
-          {project.title}
-        </h2>
-        <p
-          className={`mt-3 leading-relaxed text-[#6e6e73] ${
-            featured ? 'text-base md:text-lg max-w-3xl' : 'text-sm'
-          }`}
-        >
-          {project.description}
-        </p>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <span
-              key={tech}
-              className="inline-flex items-center rounded-full border border-black/10 bg-[#f5f5f7] px-3 py-1 text-[11px] font-semibold text-[#1d1d1f]"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-        <div className="mt-5 flex flex-wrap gap-2 items-center">
-          <span className="text-[11px] uppercase tracking-[0.15em] text-[#86868b]">Collaborators</span>
-          {project.collaborators.map((collab) => (
-            <span
-              key={collab.name}
-              className="inline-flex items-center rounded-full border border-black/10 bg-white px-2.5 py-1 text-[11px] font-semibold text-[#1d1d1f] hover:border-black/20 transition-colors cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(collab.github, '_blank');
-              }}
-            >
-              {collab.name}
-            </span>
-          ))}
-        </div>
+      <div className="flex items-baseline justify-between">
+        <span className="font-display text-3xl text-[var(--tan)]">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+        <span className="eyebrow text-[var(--tan)]">
+          {project.technologies[0]}
+        </span>
       </div>
+
+      <h3 className="card-title font-display mt-7 text-[1.9rem] leading-tight text-[var(--ink)]">
+        {project.title}
+      </h3>
+
+      <p className="mt-4 flex-1 text-[0.95rem] font-light leading-relaxed text-[var(--ink)]/75">
+        {project.description}
+      </p>
+
+      <div className="mt-7 flex flex-wrap gap-x-3 gap-y-2 border-t border-[var(--tan)]/30 pt-6">
+        {project.technologies.slice(0, 4).map((tech) => (
+          <span
+            key={tech}
+            className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-[var(--ink)]/50"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <span className="eyebrow mt-6 inline-flex items-center gap-2 text-[var(--burgundy)]">
+        View Project
+        <span className="card-arrow inline-block">&#8594;</span>
+      </span>
     </Link>
   );
 }

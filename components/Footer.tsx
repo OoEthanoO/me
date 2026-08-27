@@ -1,41 +1,30 @@
-import Link from 'next/link';
+const links = [
+  { label: "GitHub", href: "https://github.com/OoEthanoO" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/yan-xu-b0143230b/" },
+  { label: "Email", href: "mailto:ethanxucoder@gmail.com" },
+];
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t border-black/5 bg-[#f5f5f7]">
-      <div className="mx-auto max-w-6xl px-6 py-10 text-sm text-[#6e6e73]">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#86868b]">
-            Ethan Yan Xu
-          </p>
-          <div className="flex items-center gap-6">
+    <footer className="w-full border-t border-[var(--cream)]/15 bg-[var(--ink)] text-[var(--cream)]">
+      <div className="mx-auto flex max-w-[1180px] flex-col items-center justify-between gap-6 px-6 py-10 md:flex-row md:px-10">
+        <p className="font-display text-lg">Ethan Yan Xu</p>
+        <div className="eyebrow flex items-center gap-7">
+          {links.map((link) => (
             <a
-              href="https://github.com/OoEthanoO"
-              target="_blank"
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
               rel="noopener noreferrer"
-              className="font-semibold text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
+              className="text-[var(--cream)]/70 transition-colors hover:text-[var(--tan)]"
             >
-              GitHub
+              {link.label}
             </a>
-            <a
-              href="https://www.linkedin.com/in/yan-xu-b0143230b/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="mailto:ethanxucoder@gmail.com"
-              className="font-semibold text-[#1d1d1f] hover:text-[#0071e3] transition-colors"
-            >
-              Email
-            </a>
-          </div>
-          <p className="text-xs text-[#86868b]">
-            © {new Date().getFullYear()} Ethan Yan Xu
-          </p>
+          ))}
         </div>
+        <p className="text-xs tracking-widest text-[var(--cream)]/50">
+          © {new Date().getFullYear()}
+        </p>
       </div>
     </footer>
   );

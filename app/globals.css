@@ -1,33 +1,123 @@
 @import "tailwindcss";
 
-html, body {
-  background: #f5f5f7;
-  color: #1d1d1f;
-}
-
+/* ---------------------------------------------------------------------------
+   Editorial palette. Warm cream ground, ink text, and three saturated tones
+   used as full-bleed section grounds so the page reads as a sequence of
+   coloured strips rather than cards floating on grey.
+   --------------------------------------------------------------------------- */
 :root {
-  --background: #f5f5f7;
-  --foreground: #1d1d1f;
+  --cream: #fff0ec;
+  --cream-deep: #f8e2db;
+  --ink: #282936;
+  --ink-soft: #5c5d69;
+  --burgundy: #8a1f37;
+  --navy: #253b52;
+  --navy-deep: #143454;
+  --tan: #b09785;
+  --mist: #c9cacd;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-cream-deep: var(--cream-deep);
+  --color-ink: var(--ink);
+  --color-burgundy: var(--burgundy);
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-tan: var(--tan);
+  --color-mist: var(--mist);
+  --font-serif: var(--font-fraunces);
+  --font-sans: var(--font-jost);
+}
+
+html,
+body {
+  background: var(--cream);
+  color: var(--ink);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-    "Helvetica Neue", Helvetica, Arial, sans-serif;
-  letter-spacing: -0.01em;
+  font-family: var(--font-jost), "Avenir Next", Avenir, "Segoe UI", sans-serif;
 }
 
-/* Page load animations */
-@keyframes fadeInUp {
+/* Fraunces is the voice of the page: every display line is set in it. */
+.font-display {
+  font-family: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+/* Small uppercase labels that sit above each section heading. */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+/* Sharp-cornered, solid-fill CTA — the reference uses no rounding at all. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2.1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  transition: background-color 0.35s ease, color 0.35s ease,
+    border-color 0.35s ease, transform 0.35s ease;
+}
+
+.btn:hover {
+  transform: translateX(4px);
+}
+
+.btn-burgundy {
+  background: var(--burgundy);
+  color: var(--cream);
+}
+
+.btn-burgundy:hover {
+  background: var(--ink);
+}
+
+.btn-cream {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.btn-cream:hover {
+  background: var(--tan);
+  color: var(--cream);
+}
+
+.btn-outline {
+  border-color: currentColor;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+/* ---------------------------------------------------------------------------
+   Entrance motion. Sections rise once on load; anything below the fold waits
+   for the scroll observer in components/Reveal.tsx to add `.is-visible`.
+   --------------------------------------------------------------------------- */
+@keyframes riseIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -44,225 +134,73 @@ body {
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
+.rise {
+  animation: riseIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise,
+  .reveal {
+    animation: none;
     opacity: 1;
-    transform: translateX(0);
+    transform: none;
+    transition: none;
   }
 }
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes modalFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modalFadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes imageZoomIn {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes imageZoomOut {
-  from {
-    opacity: 1;
-    transform: scale(1);
-  }
-  to {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-}
-
-/* Apply animations to page elements */
-.page-container {
-  animation: fadeIn 0.8s ease-out;
-}
-
-.header-animation {
-  animation: fadeInUp 1s ease-out;
-}
-
-.projects-grid {
-  animation: fadeInUp 1.2s ease-out;
-}
-
+/* ---------------------------------------------------------------------------
+   Project index. Cards are flat, square-cornered panels separated by hairlines
+   rather than shadowed tiles.
+   --------------------------------------------------------------------------- */
 .project-card {
-  position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  animation: scaleIn 0.6s ease-out;
-  animation-fill-mode: both;
-}
-
-.project-card:nth-child(1) { animation-delay: 0.1s; }
-.project-card:nth-child(2) { animation-delay: 0.2s; }
-.project-card:nth-child(3) { animation-delay: 0.3s; }
-.project-card:nth-child(4) { animation-delay: 0.4s; }
-.project-card:nth-child(5) { animation-delay: 0.5s; }
-.project-card:nth-child(6) { animation-delay: 0.6s; }
-
-/* Flagship card: full-width, accented, and lifted above the rest of the grid. */
-.featured-card {
-  background:
-    linear-gradient(135deg, rgba(0, 113, 227, 0.06), rgba(0, 113, 227, 0) 55%),
-    #ffffff;
-  box-shadow: 0 24px 50px rgba(0, 113, 227, 0.14);
-}
-
-.featured-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  border: 1px solid rgba(0, 113, 227, 0.18);
-  pointer-events: none;
+  transition: background-color 0.4s ease, transform 0.4s ease;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.12);
+  background: var(--cream-deep);
 }
 
-.featured-card:hover {
-  box-shadow: 0 30px 60px rgba(0, 113, 227, 0.2);
+.project-card:hover .card-title {
+  color: var(--burgundy);
 }
 
-/* Project detail page animations */
-.project-detail {
-  position: relative;
-  animation: slideInLeft 0.8s ease-out;
+.project-card:hover .card-arrow {
+  transform: translateX(6px);
 }
 
-.project-detail-content {
-  animation: fadeInUp 1s ease-out 0.3s;
-  animation-fill-mode: both;
+.card-title,
+.card-arrow {
+  transition: color 0.35s ease, transform 0.35s ease;
 }
 
-/* Technology and collaborator tags animations */
-/* Delay is driven by --i (the item's index), so any number of tags stagger
-   correctly rather than only the first few. */
-.tech-tag {
-  animation: fadeIn 0.5s ease-out;
-  animation-fill-mode: both;
-  animation-delay: calc(0.8s + var(--i, 0) * 0.1s);
-}
-
-.collaborator-tag {
-  animation: fadeIn 0.5s ease-out;
-  animation-fill-mode: both;
-  animation-delay: calc(1.3s + var(--i, 0) * 0.1s);
-}
-
-.github-link {
-  animation: fadeInUp 0.6s ease-out 1.6s;
-  animation-fill-mode: both;
-}
-
-.project-images {
-  animation: fadeInUp 0.8s ease-out 1.8s;
-  animation-fill-mode: both;
-}
-
-.image-modal {
-  animation: modalFadeIn 0.3s ease-out;
-}
-
-.image-modal.closing {
-  animation: modalFadeOut 0.3s ease-out forwards;
-}
-
-.expanded-image {
-  animation: imageZoomIn 0.4s ease-out;
-}
-
-.expanded-image.closing {
-  animation: imageZoomOut 0.3s ease-out forwards;
-}
-
-.image-modal {
-  backdrop-filter: blur(10px);
-}
-
-.github-button {
-  animation: fadeInUp 1.2s ease-out 0.6s;
-  animation-fill-mode: both;
-}
-
-.github-button:hover svg {
-  transform: rotate(12deg);
-}
-
-.back-home-btn {
-  animation: fadeInUp 0.7s ease-out 1.7s;
-  animation-fill-mode: both;
-}
-
+/* ---------------------------------------------------------------------------
+   Project detail: image grid + lightbox.
+   --------------------------------------------------------------------------- */
 .image-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .image-grid.has-portrait-images {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-
-.image-container.portrait-image {
-  grid-column: span 1;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
 .image-grid.has-portrait-images .image-container:not(.portrait-image) {
   grid-column: 1 / -1;
-}
-
-@media (min-width: 768px) {
-  .image-grid.has-portrait-images {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    max-width: 100%;
-  }
-  
-  .image-grid.has-portrait-images .image-container.portrait-image:nth-child(2n+1):nth-last-child(1) {
-    grid-column: span 2;
-  }
-}
-
-@media (min-width: 1024px) {
-  .image-grid.has-portrait-images {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
 }
 
 .image-grid.has-portrait-images .image-container.portrait-image img {
@@ -272,6 +210,51 @@ body {
 
 .image-grid.has-portrait-images .image-container:not(.portrait-image) img {
   height: auto;
-  max-height: 500px;
+  max-height: 520px;
   object-fit: contain;
+}
+
+.image-container {
+  transition: transform 0.4s ease;
+}
+
+.image-container:hover {
+  transform: translateY(-6px);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes imageZoomIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes imageZoomOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.9); }
+}
+
+.image-modal {
+  animation: modalFadeIn 0.3s ease-out;
+  backdrop-filter: blur(12px);
+}
+
+.image-modal.closing {
+  animation: modalFadeOut 0.3s ease-out forwards;
+}
+
+.expanded-image {
+  animation: imageZoomIn 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.expanded-image.closing {
+  animation: imageZoomOut 0.3s ease-out forwards;
 }
