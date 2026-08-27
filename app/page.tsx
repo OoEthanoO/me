@@ -21,7 +21,7 @@ export default function Home() {
     <div>
       {/* ---- Hero: copy left, portrait right ---- */}
       <section className="bg-[var(--cream)] px-6 pb-24 pt-20 md:px-10 md:pb-32 md:pt-24">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
           <div>
             <p className="eyebrow rise text-[var(--tan)]">Portfolio — Toronto</p>
             <h1
@@ -55,8 +55,8 @@ export default function Home() {
             <img
               src="/portrait.jpg"
               alt="Ethan Yan Xu"
-              className="w-full max-w-[340px] border border-[var(--tan)]/35 object-cover object-top lg:ml-auto lg:max-w-[400px]"
-              style={{ aspectRatio: "3 / 4" }}
+              className="w-full max-w-[160px] rounded-full border border-[var(--tan)]/35 object-cover lg:ml-auto lg:max-w-[200px]"
+              style={{ aspectRatio: "1 / 1" }}
             />
           </div>
         </div>
