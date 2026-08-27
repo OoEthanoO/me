@@ -135,7 +135,9 @@ export const liveChannelTutorAbsenceMs = 30 * 60 * 1000;`,
     title: "Coding for SickKids",
     description:
       "A campaign run through the tutoring platform, turning lessons into donations. Every dollar goes directly to hospitals through the SickKids Foundation platform rather than passing through the project.",
-    stats: [{ value: "$15,858", label: "Raised for SickKids" }],
+    // Tracks the SickKids Foundation page, which is where donations actually
+    // land; YanLearn's own impact page mirrors it and can lag slightly.
+    stats: [{ value: "$15,958", label: "Raised for SickKids" }],
     images: [
       {
         src: "/sickkids-cheque.jpg",
