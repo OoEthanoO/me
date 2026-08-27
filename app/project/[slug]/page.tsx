@@ -58,7 +58,7 @@ export default function ProjectDetail({
       >
         <div className="mx-auto max-w-[1180px]">
           <Link
-            href="/#work"
+            href="/tech"
             className="eyebrow text-[var(--tan)] transition-colors hover:text-[var(--cream)]"
           >
             &#8592; All Work
@@ -187,7 +187,7 @@ export default function ProjectDetail({
 
       <section className="bg-[var(--burgundy)] px-6 py-20 text-[var(--cream)] md:px-10">
         <div className="mx-auto max-w-[1180px]">
-          <Link href="/#work" className="btn btn-cream">
+          <Link href="/tech" className="btn btn-cream">
             &#8592; Back to All Work
           </Link>
         </div>

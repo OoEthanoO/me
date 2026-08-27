@@ -1,14 +1,20 @@
 export interface Achievement {
   name: string;
   result: string;
+  /** Competition and exam results sit on /awards; service figures on /social-impact. */
+  category: "award" | "service";
+  /** Optional context line printed under the result. */
+  note?: string;
 }
 
 export const achievements: Achievement[] = [
-  { name: "CCC Junior 2023", result: "75/75" },
-  { name: "CCC Senior 2024", result: "45/75" },
-  { name: "USACO", result: "Silver" },
-  { name: "AP CS A", result: "5" },
-  { name: "Submitted Volunteering Hours", result: "331 Hours" },
-  { name: "SickKids Money Raised", result: "$3480" },
-  { name: "ACSL Senior 2025", result: "Bronze" },
+  { name: "CCC Junior", result: "75/75", category: "award", note: "2023 — perfect score" },
+  { name: "CCC Senior", result: "45/75", category: "award", note: "2024" },
+  { name: "USACO", result: "Silver", category: "award", note: "Division" },
+  { name: "AP Computer Science A", result: "5", category: "award", note: "Top score" },
+  { name: "ACSL Senior", result: "Bronze", category: "award", note: "2025" },
+  { name: "Submitted Volunteering Hours", result: "331 Hours", category: "service" },
+  { name: "SickKids Money Raised", result: "$3480", category: "service" },
 ];
+
+export const awards = achievements.filter((a) => a.category === "award");

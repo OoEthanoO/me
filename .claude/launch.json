@@ -3,10 +3,16 @@
   "configurations": [
     {
       "name": "portfolio",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev"],
-      "port": 3000,
-      "autoPort": true
+      "runtimeExecutable": "wsl.exe",
+      "runtimeArgs": [
+        "-d",
+        "Ubuntu",
+        "--",
+        "bash",
+        "-lc",
+        "cd ~/me && npm run dev"
+      ],
+      "port": 3000
     }
   ]
 }
