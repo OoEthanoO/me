@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { papers } from "@/data/research";
+import { papers, figures, paperPdf } from "@/data/research";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
@@ -36,14 +36,24 @@ export default function ResearchPage() {
                 <p className="mt-9 max-w-2xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
                   {paper.motivation}
                 </p>
-                <a
-                  href={paper.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-cream mt-11"
-                >
-                  Read the Paper
-                </a>
+                <div className="mt-11 flex flex-wrap items-center gap-5">
+                  <a
+                    href={paper.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-cream"
+                  >
+                    Read the Paper
+                  </a>
+                  <a
+                    href={paperPdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline text-[var(--cream)]"
+                  >
+                    Download PDF
+                  </a>
+                </div>
               </Reveal>
             </div>
           </section>
@@ -126,6 +136,49 @@ export default function ResearchPage() {
           )}
         </div>
       ))}
+
+      {/* ---- Figures, with the paper's own captions ---- */}
+      <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
+        <div className="mx-auto max-w-[1180px]">
+          <Reveal>
+            <p className="eyebrow text-[var(--tan)]">Figures</p>
+            <h2 className="font-display mt-6 max-w-3xl text-[clamp(1.8rem,4vw,2.8rem)] text-[var(--ink)]">
+              What the models actually did.
+            </h2>
+          </Reveal>
+
+          <div className="mt-14 grid gap-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">
+            {figures.map((figure, i) => (
+              <Reveal key={figure.src} delay={(i % 2) * 0.08}>
+                <figure>
+                  {/* Charts are drawn on white, so they get their own ground. */}
+                  <div className="border border-[var(--tan)]/35 bg-white p-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={figure.src}
+                      alt={figure.alt}
+                      width={figure.width}
+                      height={figure.height}
+                      className="w-full"
+                    />
+                  </div>
+                  <figcaption className="mt-5">
+                    <p className="eyebrow text-[var(--tan)]">
+                      Figure {figure.number}
+                    </p>
+                    <p className="font-display mt-3 text-xl text-[var(--ink)]">
+                      {figure.title}
+                    </p>
+                    <p className="mt-3 text-[0.95rem] font-light leading-relaxed text-[var(--ink)]/75">
+                      {figure.caption}
+                    </p>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

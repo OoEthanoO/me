@@ -1,56 +1,77 @@
 import type { Metadata } from "next";
-import { awards } from "@/data/achievements";
+import { timeline } from "@/data/achievements";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
   title: "Awards — Yan Xu",
-  description: "Competition results and exam scores.",
+  description: "Scholastic excellence awards and certificates.",
 };
 
 export default function AwardsPage() {
   return (
     <div>
-      <PageHeader
-        eyebrow="Awards"
-        title="Results, in order."
-        lede="Competitive programming and coursework, listed with the scores as they came — including the ones I would rather have been higher."
-      />
+      <PageHeader eyebrow="Awards" title="Awards & Certificates" />
 
       <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
         <div className="mx-auto max-w-[1180px]">
-          <dl className="border-t border-[var(--tan)]/35">
-            {awards.map((award, idx) => (
-              <Reveal key={award.name} delay={(idx % 4) * 0.06}>
-                <div className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-2 border-b border-[var(--tan)]/35 py-8 md:py-10">
-                  <div className="flex items-baseline gap-6">
-                    <span className="font-display text-2xl text-[var(--tan)]">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <dt className="font-display text-[clamp(1.4rem,3vw,2.1rem)] text-[var(--ink)]">
-                        {award.name}
-                      </dt>
-                      {award.note && (
-                        <p className="mt-2 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-[var(--ink)]/50">
-                          {award.note}
+          {/* Vertical spine; each entry hangs off a marker on it. */}
+          <ol className="relative ml-3 border-l border-[var(--tan)]/45 md:ml-6">
+            {timeline.map((item, idx) => {
+              const isNewYear =
+                idx === 0 || timeline[idx - 1].year !== item.year;
+
+              return (
+                <li key={`${item.title}-${item.year}`} className="relative">
+                  {isNewYear && (
+                    <Reveal>
+                      <p className="font-display -ml-3 pt-12 text-[clamp(1.6rem,3.2vw,2.4rem)] text-[var(--tan)] md:-ml-6 md:pt-16">
+                        <span className="bg-[var(--cream)] pr-4">
+                          {item.year}
+                        </span>
+                      </p>
+                    </Reveal>
+                  )}
+
+                  <Reveal delay={0.05}>
+                    <div className="relative py-7 pl-8 md:pl-12">
+                      {/* Marker sitting on the spine */}
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-0 top-[2.35rem] h-2 w-2 -translate-x-1/2 rounded-full bg-[var(--burgundy)]"
+                      />
+
+                      <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--tan)]">
+                        {item.kind === "award" ? "Award" : "Certificate"}
+                      </p>
+
+                      <h2 className="font-display mt-3 text-[clamp(1.25rem,2.6vw,1.75rem)] leading-tight text-[var(--ink)]">
+                        {item.title}
+                      </h2>
+
+                      {item.detail && (
+                        <p className="mt-3 max-w-2xl text-[0.98rem] font-light leading-relaxed text-[var(--ink)]/75">
+                          {item.detail}
                         </p>
                       )}
-                    </div>
-                  </div>
-                  <dd className="font-display text-[clamp(1.6rem,3.4vw,2.4rem)] text-[var(--burgundy)]">
-                    {award.result}
-                  </dd>
-                </div>
-              </Reveal>
-            ))}
-          </dl>
 
-          <Reveal>
-            <p className="eyebrow mt-14 text-[var(--tan)]">
-              Service figures live on the Social Impact page
-            </p>
-          </Reveal>
+                      {item.href && (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-4 inline-flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                        >
+                          View
+                          <span aria-hidden="true">&#8594;</span>
+                        </a>
+                      )}
+                    </div>
+                  </Reveal>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </section>
     </div>

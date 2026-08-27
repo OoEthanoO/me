@@ -66,7 +66,7 @@ export default function ProjectDetail({
           <p className="eyebrow mt-10 text-[var(--tan)]">
             {project.featured ? "Flagship Project" : "Project"}
           </p>
-          <h1 className="font-display mt-5 text-[clamp(2.8rem,8vw,6rem)]">
+          <h1 className="font-display mt-5 text-[clamp(2.8rem,8vw,3.4rem)]">
             {project.title}
           </h1>
 

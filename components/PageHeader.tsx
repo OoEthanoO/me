@@ -11,7 +11,7 @@ export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
       <div className="mx-auto max-w-[1180px]">
         <p className="eyebrow rise text-[var(--tan)]">{eyebrow}</p>
         <h1
-          className="font-display rise mt-6 max-w-4xl text-[clamp(2.8rem,8vw,6rem)] text-[var(--burgundy)]"
+          className="font-display rise mt-6 max-w-4xl text-[clamp(2.8rem,8vw,3.4rem)] text-[var(--burgundy)]"
           style={{ animationDelay: "0.1s" }}
         >
           {title}

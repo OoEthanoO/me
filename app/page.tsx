@@ -2,7 +2,7 @@ import Link from "next/link";
 import { projects } from "@/data/projects";
 import { papers } from "@/data/research";
 import { serviceStrands } from "@/data/service";
-import { awards } from "@/data/achievements";
+import { timeline } from "@/data/achievements";
 import Reveal from "@/components/Reveal";
 
 /** Ground colours alternate so the page reads as a sequence of strips. */
@@ -21,7 +21,7 @@ export default function Home() {
     <div>
       {/* ---- Hero: copy left, portrait right ---- */}
       <section className="bg-[var(--cream)] px-6 pb-24 pt-20 md:px-10 md:pb-32 md:pt-24">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[minmax(0,40rem)_auto] lg:justify-start lg:gap-16">
           <div>
             <p className="eyebrow rise text-[var(--tan)]">Portfolio — Toronto</p>
             <h1
@@ -55,7 +55,7 @@ export default function Home() {
             <img
               src="/portrait.jpg"
               alt="Ethan Yan Xu"
-              className="w-full max-w-[160px] rounded-full border border-[var(--tan)]/35 object-cover lg:ml-auto lg:max-w-[200px]"
+              className="w-full max-w-[160px] rounded-full border border-[var(--tan)]/35 object-cover lg:max-w-[200px]"
               style={{ aspectRatio: "1 / 1" }}
             />
           </div>
@@ -67,7 +67,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Tech / Project</p>
-            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,4rem)]">
+            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,3.4rem)]">
               Things I have built.
             </h2>
             {flagship && (
@@ -101,7 +101,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Social Impact</p>
-            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,4rem)] text-[var(--ink)]">
+            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,3.4rem)] text-[var(--ink)]">
               Teaching, for free.
             </h2>
             <Link href="/social-impact" className="btn btn-burgundy mt-11">
@@ -168,8 +168,8 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Awards</p>
-            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,4rem)]">
-              Results, in order.
+            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,3.4rem)]">
+              Awards &amp; Certificates
             </h2>
             <Link href="/awards" className="btn btn-cream mt-11">
               Learn More
@@ -178,16 +178,16 @@ export default function Home() {
 
           <Reveal delay={0.12}>
             <dl className="border-t border-[var(--cream)]/25">
-              {awards.slice(0, 4).map((award) => (
+              {timeline.slice(0, 4).map((item) => (
                 <div
-                  key={award.name}
+                  key={`${item.title}-${item.year}`}
                   className="flex items-baseline justify-between gap-6 border-b border-[var(--cream)]/25 py-6"
                 >
                   <dt className="text-lg font-light text-[var(--cream)]/85">
-                    {award.name}
+                    {item.title}
                   </dt>
-                  <dd className="font-display text-2xl text-[var(--tan)]">
-                    {award.result}
+                  <dd className="font-display shrink-0 text-2xl text-[var(--tan)]">
+                    {item.year}
                   </dd>
                 </div>
               ))}
@@ -203,7 +203,7 @@ export default function Home() {
       >
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
-            <h2 className="font-display text-[clamp(3rem,8vw,6rem)]">
+            <h2 className="font-display text-[clamp(3rem,8vw,3.4rem)]">
               Get in Touch.
             </h2>
             <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">

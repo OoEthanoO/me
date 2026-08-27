@@ -89,3 +89,81 @@ export const papers: ResearchPaper[] = [
     ],
   },
 ];
+
+export interface ResearchFigure {
+  number: number;
+  src: string;
+  width: number;
+  height: number;
+  title: string;
+  caption: string;
+  /** Long-form description of the chart for screen readers. */
+  alt: string;
+}
+
+/** The published PDF, served from this site rather than hot-linked. */
+export const paperPdf = "/research/xu-water-level-residual-correction-cjsj-v11.pdf";
+
+/** Figures and captions as they appear in the paper. */
+export const figures: ResearchFigure[] = [
+  {
+    number: 1,
+    src: "/research/fig1-lightgbm-feature-importance.png",
+    width: 711,
+    height: 455,
+    title: "LightGBM Feature Importance",
+    caption:
+      "Ranks the relative influence of temporal variables on residual prediction accuracy across 15 training stations. Lagged residuals (residual_lag1, residual_lag2) and the rate of change are the dominant predictors.",
+    alt: "Horizontal bar chart of LightGBM feature importance. residual_lag1 dominates at 441352.492, followed by rate_of_change_m at 4495.545 and residual_lag2 at 2935.392, with dayofweek, predicted_m, hour, month, season and tide_phase far smaller.",
+  },
+  {
+    number: 2,
+    src: "/research/fig2-xgboost-feature-importance.png",
+    width: 1035,
+    height: 701,
+    title: "XGBoost Feature Importance",
+    caption:
+      "Ranks the relative influence of combined temporal and geospatial variables on residual prediction accuracy across 15 training stations. Alongside temporal lags, static terrain metrics like mean and maximum elevation (elev_mean, elev_max) emerge as top predictors.",
+    alt: "Horizontal bar chart of XGBoost feature importance. residual_lag1 ranks first at approximately 1044, residual_lag2 second, then elev_mean and elev_max as the leading geospatial features, followed by tide_phase, rate_of_change_m and further terrain statistics.",
+  },
+  {
+    number: 3,
+    src: "/research/fig3-lightgbm-onestep.png",
+    width: 993,
+    height: 503,
+    title: "Model Validation: LightGBM (One-Step-Ahead)",
+    caption:
+      "Compares water level predictions at unseen NOAA station 9411340 over a two-day period (August 22–23, 2025) using true prior residuals. The graph displays the true measured level (observed_m, blue), NOAA's baseline prediction (predicted_m, orange), and the LightGBM-corrected prediction (corrected_predicted_m, green).",
+    alt: "Time series over two days at station 9411340. The LightGBM-corrected line tracks the observed water level closely, sitting nearer to it than the NOAA baseline throughout.",
+  },
+  {
+    number: 4,
+    src: "/research/fig4-xgboost-onestep.png",
+    width: 1012,
+    height: 503,
+    title: "Model Validation: XGBoost (One-Step-Ahead)",
+    caption:
+      "Compares water level predictions at unseen NOAA station 9411340 over a two-day period (August 22–23, 2025) using true prior residuals. The graph displays the true measured level (Observed, blue), NOAA's baseline prediction (Predicted (NOAA), orange), and the geospatially-informed XGBoost correction (Corrected Predicted (XGBoost), green).",
+    alt: "Time series over two days at station 9411340. The geospatially-informed XGBoost correction tracks the observed water level closely against the NOAA baseline.",
+  },
+  {
+    number: 5,
+    src: "/research/fig5-lightgbm-autoregressive.png",
+    width: 993,
+    height: 503,
+    title: "Model Validation: LightGBM (Autoregressive)",
+    caption:
+      "Evaluates autonomous multi-step forecasting at unseen NOAA station 9411340 over a two-day period. The LightGBM-corrected prediction (green) deviates significantly from the true observed level (blue) and NOAA baseline (orange), demonstrating rapid error accumulation.",
+    alt: "Time series over two days at station 9411340. The LightGBM autoregressive forecast drifts progressively away from the observed water level as it feeds on its own predictions.",
+  },
+  {
+    number: 6,
+    src: "/research/fig6-xgboost-autoregressive.png",
+    width: 1013,
+    height: 502,
+    title: "Model Validation: XGBoost (Autoregressive)",
+    caption:
+      "Evaluates autonomous multi-step forecasting at unseen NOAA station 9411340 over a two-day period. The XGBoost-corrected prediction (green) closely tracks the true observed level (blue) against the NOAA baseline (orange), demonstrating model stability.",
+    alt: "Time series over two days at station 9411340. The XGBoost autoregressive forecast stays close to the observed water level across the full horizon, without the drift seen in the temporal-only model.",
+  },
+];

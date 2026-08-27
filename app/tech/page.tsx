@@ -29,7 +29,7 @@ export default function TechPage() {
           <div className="mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
             <Reveal>
               <p className="eyebrow text-[var(--tan)]">Flagship Project</p>
-              <h2 className="font-display mt-6 text-[clamp(2.6rem,6vw,4.4rem)]">
+              <h2 className="font-display mt-6 text-[clamp(2.6rem,6vw,3.4rem)]">
                 {flagship.title}
               </h2>
               <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
@@ -72,7 +72,7 @@ export default function TechPage() {
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Selected Work</p>
-            <h2 className="font-display mt-6 max-w-3xl text-[clamp(2.2rem,5vw,3.6rem)] text-[var(--ink)]">
+            <h2 className="font-display mt-6 max-w-3xl text-[clamp(2.2rem,5vw,3.4rem)] text-[var(--ink)]">
               The rest of the shelf.
             </h2>
           </Reveal>

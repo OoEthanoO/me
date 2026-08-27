@@ -15,7 +15,7 @@ export default function SocialImpactPage() {
       <PageHeader
         eyebrow="Social Impact"
         title="Teaching, for free."
-        lede="The work that does not ship as a product: hours taught, money raised, and the platform built to make both easier to run."
+        lede="Hours taught, money raised, and the platform built to run both."
       />
 
       <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
@@ -38,7 +38,7 @@ export default function SocialImpactPage() {
                         rel={strand.external ? "noopener noreferrer" : undefined}
                         className="eyebrow mt-7 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
                       >
-                        Visit the Platform
+                        {strand.ctaLabel ?? "Visit"}
                         <span aria-hidden="true">&#8594;</span>
                       </a>
                     )}
@@ -66,6 +66,57 @@ export default function SocialImpactPage() {
                     </div>
                   </div>
                 </div>
+
+                {strand.code && (
+                  <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-8">
+                    {/* Each figure is min-w-0 so the code's intrinsic width
+                        cannot widen its grid track and push the page sideways. */}
+                    {strand.code.map((sample) => (
+                      <figure key={sample.path} className="min-w-0">
+                        <div className="min-w-0 overflow-hidden border border-[var(--navy)]/25 bg-[var(--navy)]">
+                          <p className="border-b border-[var(--cream)]/15 px-5 py-3 font-mono text-[0.72rem] tracking-wide text-[var(--tan)]">
+                            {sample.path}
+                          </p>
+                          {/* Long lines scroll inside the panel, never the page. */}
+                          <pre className="overflow-x-auto px-5 py-5">
+                            <code className="font-mono text-[0.72rem] leading-relaxed text-[var(--cream)]/85">
+                              {sample.code}
+                            </code>
+                          </pre>
+                        </div>
+                        <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--ink)]/70">
+                          {sample.caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
+
+                {strand.images && (
+                  <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-x-8 md:gap-y-12">
+                    {strand.images.map((image) => (
+                      <figure key={image.src}>
+                        <div
+                          className={
+                            image.kind === "screenshot"
+                              ? "border border-[var(--tan)]/35 bg-white p-2"
+                              : "border border-[var(--tan)]/35"
+                          }
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            className="w-full object-cover"
+                          />
+                        </div>
+                        <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--ink)]/70">
+                          {image.caption}
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                )}
               </article>
             </Reveal>
           ))}
@@ -76,7 +127,7 @@ export default function SocialImpactPage() {
       <section className="bg-[var(--burgundy)] px-6 py-24 text-[var(--cream)] md:px-10 md:py-32">
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
-            <h2 className="font-display text-[clamp(2.2rem,6vw,4rem)]">
+            <h2 className="font-display text-[clamp(2.2rem,6vw,3.4rem)]">
               Want to tutor, or be tutored?
             </h2>
             <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
