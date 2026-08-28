@@ -17,7 +17,9 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 z-40 border-b border-[var(--tan)]/30 bg-[var(--cream)]/90 backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1180px] flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-10 md:py-5">
+      {/* Full width rather than the 1180px content measure, so the wordmark
+          sits at the edge of the page instead of indented with the copy. */}
+      <div className="flex flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-10 md:py-5">
         <Link
           href="/"
           className="font-display shrink-0 text-2xl text-[var(--ink)] transition-colors hover:text-[var(--burgundy)] md:text-[2rem]"
@@ -26,9 +28,10 @@ const Navbar = () => {
         </Link>
 
         {/* Five items crowd a phone, so the row scrolls sideways instead of wrapping.
-            Sized explicitly rather than with .eyebrow, which is a step smaller. */}
+            Set in Fraunces to match the wordmark; the rest of the site's small
+            labels are Jost. Tracking is tightened as the size goes up. */}
         <div className="-mx-6 overflow-x-auto px-6 md:mx-0 md:overflow-visible md:px-0">
-          <div className="flex items-center gap-5 whitespace-nowrap text-[0.82rem] font-semibold uppercase tracking-[0.18em] text-[var(--ink)]/70 lg:gap-7">
+          <div className="flex items-center gap-5 whitespace-nowrap font-[family-name:var(--font-fraunces)] text-[1rem] font-semibold uppercase tracking-[0.12em] text-[var(--ink)]/70 lg:gap-7">
             {navLinks.map((link) => {
               const isActive =
                 link.href === "/"
