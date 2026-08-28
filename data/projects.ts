@@ -87,9 +87,11 @@ export const projects: Project[] = [
     collaborators: [],
     github: "https://github.com/OoEthanoO/finprint",
     website: "https://finprint.ethanyanxu.com/",
-    // Result, then the flagged case, then a rejected clip, then the empty state.
+    // The listing shows the first three: a result, the spectrogram behind it,
+    // and a flagged call. The refusal and empty state follow on its own page.
     images: [
       "/finprint1.jpg",
+      "/finprint5.jpg",
       "/finprint3.jpg",
       "/finprint4.jpg",
       "/finprint2.jpg",
