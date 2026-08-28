@@ -24,9 +24,8 @@ export default function Home() {
       <section className="bg-[var(--cream)] px-6 pb-16 pt-12 md:px-10 md:pb-20 md:pt-16">
         <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[minmax(0,40rem)_auto] lg:justify-start lg:gap-16">
           <div>
-            <p className="eyebrow rise text-[var(--tan)]">Portfolio — Toronto</p>
             <h1
-              className="font-display rise mt-5 text-[clamp(2.1rem,4.8vw,3.4rem)] leading-[1.04] text-[var(--burgundy)]"
+              className="font-display rise text-[clamp(2.1rem,4.8vw,3.4rem)] leading-[1.04] text-[var(--burgundy)]"
               style={{ animationDelay: "0.1s" }}
             >
               Ethan Yan Xu
