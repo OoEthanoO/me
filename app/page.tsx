@@ -3,6 +3,7 @@ import { projects } from "@/data/projects";
 import { papers } from "@/data/research";
 import { serviceStrands } from "@/data/service";
 import { timeline } from "@/data/achievements";
+import StatRow from "@/components/StatRow";
 import Reveal from "@/components/Reveal";
 
 /** Ground colours alternate so the page reads as a sequence of strips. */
@@ -111,17 +112,8 @@ export default function Home() {
             <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
               {tutoring.description}
             </p>
-            <div className="mt-10 -ml-4 grid grid-cols-2 gap-px bg-[var(--tan)]/35 sm:grid-cols-4">
-              {tutoring.stats.map((stat) => (
-                <div key={stat.label} className="bg-[var(--cream)] px-4 py-6">
-                  <p className="font-display text-[clamp(1.8rem,3.6vw,2.6rem)] text-[var(--burgundy)]">
-                    {stat.value}
-                  </p>
-                  <p className="mt-2 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--ink)]/55">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
+            <div className="mt-10">
+              <StatRow stats={tutoring.stats} />
             </div>
           </Reveal>
         </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { serviceStrands } from "@/data/service";
 import PageHeader from "@/components/PageHeader";
+import StatRow from "@/components/StatRow";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -45,20 +46,8 @@ export default function SocialImpactPage() {
                       {strand.description}
                     </p>
 
-                    <div className="mt-10 -ml-4 grid grid-cols-2 gap-px bg-[var(--tan)]/35 sm:grid-cols-4">
-                      {strand.stats.map((stat) => (
-                        <div
-                          key={stat.label}
-                          className="bg-[var(--cream)] px-4 py-6"
-                        >
-                          <p className="font-display text-[clamp(1.8rem,3.6vw,2.6rem)] text-[var(--burgundy)]">
-                            {stat.value}
-                          </p>
-                          <p className="mt-2 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--ink)]/55">
-                            {stat.label}
-                          </p>
-                        </div>
-                      ))}
+                    <div className="mt-10">
+                      <StatRow stats={strand.stats} />
                     </div>
                   </div>
                 </div>
