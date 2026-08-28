@@ -24,9 +24,6 @@ export interface Project {
   overview?: string;
   /** Headline measurements shown on the wide entry. */
   stats?: { value: string; label: string }[];
-  /** Force screenshots to stack at full width. For captures whose value is the
-   *  text inside them, which a multi-column grid renders too small to read. */
-  imageLayout?: "stack";
 }
 
 /** Order the grouped sections appear in on /tech. */
@@ -90,7 +87,6 @@ export const projects: Project[] = [
     website: "https://finprint.ethanyanxu.com/",
     // Result first, then the flagged case, then the empty state.
     images: ["/finprint1.jpg", "/finprint3.jpg", "/finprint2.jpg"],
-    imageLayout: "stack",
   },
   {
     title: "Bare Metal Bard",

@@ -86,13 +86,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
       </div>
 
       {project.images.length > 0 && (
-        <div
-          className={`mt-9 grid gap-5 ${
-            project.imageLayout === "stack"
-              ? "grid-cols-1"
-              : imageColumns(project.images.length)
-          }`}
-        >
+        <div className={`mt-9 grid gap-5 ${imageColumns(project.images.length)}`}>
           {project.images.map((src, i) => (
             <div
               key={src}
