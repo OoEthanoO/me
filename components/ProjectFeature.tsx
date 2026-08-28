@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { slugify } from "@/components/ProjectCard";
+import StatRow from "@/components/StatRow";
 
 /**
  * Wide entry for projects that sit inside a named category: the write-up is
@@ -26,6 +27,12 @@ export default function ProjectFeature({ project }: { project: Project }) {
           </p>
         ))}
       </div>
+
+      {project.stats && project.stats.length > 0 && (
+        <div className="mt-8 max-w-3xl">
+          <StatRow stats={project.stats} />
+        </div>
+      )}
 
       <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2">
         {project.technologies.map((tech) => (
