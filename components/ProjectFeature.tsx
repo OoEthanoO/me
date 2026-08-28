@@ -21,6 +21,10 @@ const imageColumns = (count: number) => {
 
 export default function ProjectFeature({ project }: { project: Project }) {
   const paragraphs = (project.overview ?? project.description).split("\n\n");
+  // This listing shows at most three; the rest live on the project's own page.
+  const MAX_IMAGES = 3;
+  const shown = project.images.slice(0, MAX_IMAGES);
+  const remaining = project.images.length - shown.length;
 
   return (
     <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
@@ -56,9 +60,9 @@ export default function ProjectFeature({ project }: { project: Project }) {
         ))}
       </div>
 
-      {project.images.length > 0 && (
-        <div className={`mt-6 grid gap-5 ${imageColumns(project.images.length)}`}>
-          {project.images.map((src, i) => (
+      {shown.length > 0 && (
+        <div className={`mt-6 grid gap-5 ${imageColumns(shown.length)}`}>
+          {shown.map((src, i) => (
             <div
               key={src}
               className="border border-[var(--tan)]/35 bg-white p-1.5"
@@ -80,7 +84,9 @@ export default function ProjectFeature({ project }: { project: Project }) {
           href={`/project/${encodeURIComponent(slugify(project.title))}`}
           className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
         >
-          Full Write-up &#8594;
+          Full Write-up
+          {remaining > 0 && ` (+${remaining} more image${remaining > 1 ? "s" : ""})`}
+          {" "}&#8594;
         </Link>
         {project.website && (
           <a

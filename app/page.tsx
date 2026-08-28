@@ -172,37 +172,6 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-
-      {/* ---- Closing strip ---- */}
-      <section
-        id="contact"
-        className="bg-[var(--burgundy)] px-6 py-16 text-[var(--cream)] md:px-10 md:py-20"
-      >
-        <div className="mx-auto max-w-[1180px]">
-          <Reveal>
-            <h2 className="font-display text-[clamp(3rem,8vw,3.4rem)]">
-              Get in Touch.
-            </h2>
-            <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
-              Always happy to talk about kernels, side projects, or anything
-              worth building.
-            </p>
-            <div className="mt-12 flex flex-wrap items-center gap-5">
-              <a href="mailto:ethanxucoder@gmail.com" className="btn btn-cream">
-                Email Me
-              </a>
-              <a
-                href="https://github.com/OoEthanoO"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline text-[var(--cream)]"
-              >
-                GitHub
-              </a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </div>
   );
 }

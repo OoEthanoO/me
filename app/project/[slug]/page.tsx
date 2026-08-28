@@ -130,23 +130,31 @@ export default function ProjectDetail({
               </ul>
             </div>
 
-            <div>
-              <p className="eyebrow text-[var(--tan)]">Collaborators</p>
-              <ul className="mt-5 flex flex-col gap-2.5">
-                {project.collaborators.map((collab) => (
-                  <li key={collab.name}>
-                    <a
-                      href={collab.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-medium text-[var(--ink)]/80 underline decoration-[var(--tan)] underline-offset-4 transition-colors hover:text-[var(--burgundy)]"
-                    >
-                      {collab.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {project.collaborators.length > 0 && (
+              <div>
+                <p className="eyebrow text-[var(--tan)]">Collaborators</p>
+                <ul className="mt-5 flex flex-col gap-2.5">
+                  {project.collaborators.map((collab) => (
+                    <li key={collab.name}>
+                      {collab.github ? (
+                        <a
+                          href={collab.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium text-[var(--ink)]/80 underline decoration-[var(--tan)] underline-offset-4 transition-colors hover:text-[var(--burgundy)]"
+                        >
+                          {collab.name}
+                        </a>
+                      ) : (
+                        <span className="text-sm font-medium text-[var(--ink)]/80">
+                          {collab.name}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </aside>
         </div>
       </section>

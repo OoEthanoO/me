@@ -1,6 +1,8 @@
 export interface Collaborator {
   name: string;
-  github: string;
+  /** Omitted for collaborators without a GitHub account; the name is then
+   *  printed as plain text rather than a link. */
+  github?: string;
 }
 
 export interface Project {
