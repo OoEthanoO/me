@@ -49,11 +49,11 @@ export default function SocialImpactPage() {
                       {strand.description}
                     </p>
 
-                    <div className="mt-10 grid grid-cols-2 gap-px bg-[var(--tan)]/35 sm:grid-cols-4">
+                    <div className="mt-10 -ml-4 grid grid-cols-2 gap-px bg-[var(--tan)]/35 sm:grid-cols-4">
                       {strand.stats.map((stat) => (
                         <div
                           key={stat.label}
-                          className="bg-[var(--cream)] py-6 pr-4"
+                          className="bg-[var(--cream)] px-4 py-6"
                         >
                           <p className="font-display text-[clamp(1.8rem,3.6vw,2.6rem)] text-[var(--burgundy)]">
                             {stat.value}
