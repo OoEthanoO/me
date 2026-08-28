@@ -85,8 +85,13 @@ export const projects: Project[] = [
     collaborators: [],
     github: "https://github.com/OoEthanoO/finprint",
     website: "https://finprint.ethanyanxu.com/",
-    // Result first, then the flagged case, then the empty state.
-    images: ["/finprint1.jpg", "/finprint3.jpg", "/finprint2.jpg"],
+    // Result, then the flagged case, then a rejected clip, then the empty state.
+    images: [
+      "/finprint1.jpg",
+      "/finprint3.jpg",
+      "/finprint4.jpg",
+      "/finprint2.jpg",
+    ],
   },
   {
     title: "Bare Metal Bard",
