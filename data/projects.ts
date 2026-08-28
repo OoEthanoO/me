@@ -36,36 +36,6 @@ export const categoryOrder = ["Environment"];
 
 export const projects: Project[] = [
   {
-    title: "EcoVision",
-    category: "Environment",
-    description:
-      "A computer vision model that uses a phone's camera feed to determine whether an item is recyclable.",
-    // Printed in full on /tech, as supplied for the site.
-    overview:
-      "My passion for computer science stems from its ability to turn messy data into systems that improve our lives and anticipate what's to come. I found this application particularly meaningful in solving ecological and environmental issues. My interest in this area originated in 2024, when at Hack the North, my teammates and I created EcoVision, a computer vision ML model that uses a phone's camera feed to determine whether an item is recyclable. This application showed me the potential of technology changing lifestyles and facilitating environmental initiatives.",
-    longDescription:
-      "My interest in this area originated in 2024, when at Hack the North, my teammates and I created EcoVision, a computer vision ML model that uses a phone's camera feed to determine whether an item is recyclable. This application showed me the potential of technology changing lifestyles and facilitating environmental initiatives.\n\nIt is built in two halves. A SwiftUI iOS app takes frames from the camera, and a Flask server behind it runs a YOLOv5 detector fine-tuned on TACO, the litter dataset, at a 0.33 confidence threshold with non-maximum suppression at 0.45 IoU.\n\nThe part that makes it useful rather than merely accurate is the mapping. Detection alone returns a litter class, which is not the question a person standing over a bin is asking. Each of the eighteen classes is therefore mapped to the only answer that matters — a can, a bottle cap, a carton, a straw resolve to recyclable or garbage — so the app returns a decision instead of a taxonomy.\n\nThe answers are less obvious than they look: a carton and a straw are garbage while a cup and a plastic container are recyclable, which is exactly the sort of thing people get wrong at the bin. Weights were kept at eight, sixteen and thirty-two epochs so the trade-off between training time and detection quality stayed visible rather than being collapsed into a single checkpoint.",
-    technologies: [
-      "Swift",
-      "SwiftUI",
-      "YOLOv5",
-      "PyTorch",
-      "Flask",
-      "OpenCV",
-      "TensorFlow",
-      "TACO dataset",
-    ],
-    collaborators: [],
-    repositories: [
-      { label: "iOS App", url: "https://github.com/OoEthanoO/EcoVision" },
-      {
-        label: "Model & Server",
-        url: "https://github.com/OoEthanoO/garbage-classification",
-      },
-    ],
-    images: ["/ecovision1.jpg"],
-  },
-  {
     title: "CORA",
     category: "Environment",
     description:
@@ -129,6 +99,36 @@ export const projects: Project[] = [
       "/finprint4.jpg",
       "/finprint2.jpg",
     ],
+  },
+  {
+    title: "EcoVision",
+    category: "Environment",
+    description:
+      "A computer vision model that uses a phone's camera feed to determine whether an item is recyclable.",
+    // Printed in full on /tech, as supplied for the site.
+    overview:
+      "My passion for computer science stems from its ability to turn messy data into systems that improve our lives and anticipate what's to come. I found this application particularly meaningful in solving ecological and environmental issues. My interest in this area originated in 2024, when at Hack the North, my teammates and I created EcoVision, a computer vision ML model that uses a phone's camera feed to determine whether an item is recyclable. This application showed me the potential of technology changing lifestyles and facilitating environmental initiatives.",
+    longDescription:
+      "My interest in this area originated in 2024, when at Hack the North, my teammates and I created EcoVision, a computer vision ML model that uses a phone's camera feed to determine whether an item is recyclable. This application showed me the potential of technology changing lifestyles and facilitating environmental initiatives.\n\nIt is built in two halves. A SwiftUI iOS app takes frames from the camera, and a Flask server behind it runs a YOLOv5 detector fine-tuned on TACO, the litter dataset, at a 0.33 confidence threshold with non-maximum suppression at 0.45 IoU.\n\nThe part that makes it useful rather than merely accurate is the mapping. Detection alone returns a litter class, which is not the question a person standing over a bin is asking. Each of the eighteen classes is therefore mapped to the only answer that matters — a can, a bottle cap, a carton, a straw resolve to recyclable or garbage — so the app returns a decision instead of a taxonomy.\n\nThe answers are less obvious than they look: a carton and a straw are garbage while a cup and a plastic container are recyclable, which is exactly the sort of thing people get wrong at the bin. Weights were kept at eight, sixteen and thirty-two epochs so the trade-off between training time and detection quality stayed visible rather than being collapsed into a single checkpoint.",
+    technologies: [
+      "Swift",
+      "SwiftUI",
+      "YOLOv5",
+      "PyTorch",
+      "Flask",
+      "OpenCV",
+      "TensorFlow",
+      "TACO dataset",
+    ],
+    collaborators: [],
+    repositories: [
+      { label: "iOS App", url: "https://github.com/OoEthanoO/EcoVision" },
+      {
+        label: "Model & Server",
+        url: "https://github.com/OoEthanoO/garbage-classification",
+      },
+    ],
+    images: ["/ecovision1.jpg"],
   },
   {
     title: "Bare Metal Bard",
