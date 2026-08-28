@@ -52,7 +52,7 @@ export default function ProjectDetail({
     <div>
       {/* ---- Title band, coloured by whether the project is the flagship ---- */}
       <section
-        className={`px-6 py-24 text-[var(--cream)] md:px-10 md:py-32 ${
+        className={`px-6 py-14 text-[var(--cream)] md:px-10 md:py-18 ${
           project.featured ? "bg-[var(--navy)]" : "bg-[var(--ink)]"
         }`}
       >
@@ -100,7 +100,7 @@ export default function ProjectDetail({
       </section>
 
       {/* ---- Write-up beside a sidebar of stack and collaborators ---- */}
-      <section className="bg-[var(--cream)] px-6 py-24 md:px-10 md:py-32">
+      <section className="bg-[var(--cream)] px-6 py-14 md:px-10 md:py-18">
         <div className="mx-auto grid max-w-[1180px] gap-16 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] lg:gap-24">
           <div className="flex flex-col gap-6">
             {(project.longDescription ?? project.description)
@@ -153,7 +153,7 @@ export default function ProjectDetail({
 
       {/* ---- Screenshots ---- */}
       {project.images.length > 0 && (
-        <section className="bg-[var(--cream-deep)] px-6 py-24 md:px-10 md:py-32">
+        <section className="bg-[var(--cream-deep)] px-6 py-14 md:px-10 md:py-18">
           <div className="mx-auto max-w-[1180px]">
             <p className="eyebrow text-[var(--tan)]">Screens</p>
             <div className="image-grid mt-10">

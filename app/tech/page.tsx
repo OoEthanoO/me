@@ -21,7 +21,7 @@ export default function TechPage() {
 
       {/* ---- Flagship keeps its own dark screen, as on the home page ---- */}
       {flagship && (
-        <section className="bg-[var(--navy)] px-6 py-28 text-[var(--cream)] md:px-10 md:py-36">
+        <section className="bg-[var(--navy)] px-6 py-16 text-[var(--cream)] md:px-10 md:py-20">
           <div className="mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
             <Reveal>
               <p className="eyebrow text-[var(--tan)]">Flagship Project</p>
@@ -64,7 +64,7 @@ export default function TechPage() {
       )}
 
       {/* ---- Everything else ---- */}
-      <section className="bg-[var(--cream)] px-6 py-28 md:px-10 md:py-36">
+      <section className="bg-[var(--cream)] px-6 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Selected Work</p>

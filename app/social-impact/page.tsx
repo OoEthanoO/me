@@ -14,11 +14,11 @@ export default function SocialImpactPage() {
     <div>
       <PageHeader title="Social Impact" />
 
-      <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
+      <section className="bg-[var(--cream)] px-6 pb-16 md:px-10 md:pb-20">
         <div className="mx-auto max-w-[1180px]">
           {serviceStrands.map((strand, idx) => (
             <Reveal key={strand.title} delay={idx * 0.08}>
-              <article className="border-t border-[var(--tan)]/35 py-14 md:py-20">
+              <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
                 <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
                   <div>
                     <p className="eyebrow text-[var(--tan)]">
@@ -120,7 +120,7 @@ export default function SocialImpactPage() {
       </section>
 
       {/* ---- Closing strip ---- */}
-      <section className="bg-[var(--burgundy)] px-6 py-24 text-[var(--cream)] md:px-10 md:py-32">
+      <section className="bg-[var(--burgundy)] px-6 py-14 text-[var(--cream)] md:px-10 md:py-18">
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
             <h2 className="font-display text-[clamp(2.2rem,6vw,3.4rem)]">

@@ -7,7 +7,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
   return (
-    <section className="bg-[var(--cream)] px-6 pb-16 pt-20 md:px-10 md:pb-24 md:pt-28">
+    <section className="bg-[var(--cream)] px-6 pb-8 pt-12 md:px-10 md:pb-10 md:pt-14">
       <div className="mx-auto max-w-[1180px]">
         {eyebrow && <p className="eyebrow rise text-[var(--tan)]">{eyebrow}</p>}
         <h1

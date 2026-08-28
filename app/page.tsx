@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <div>
       {/* ---- Hero: copy left, portrait right ---- */}
-      <section className="bg-[var(--cream)] px-6 pb-24 pt-20 md:px-10 md:pb-32 md:pt-24">
+      <section className="bg-[var(--cream)] px-6 pb-16 pt-12 md:px-10 md:pb-20 md:pt-16">
         <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[minmax(0,40rem)_auto] lg:justify-start lg:gap-16">
           <div>
             <p className="eyebrow rise text-[var(--tan)]">Portfolio — Toronto</p>
@@ -63,7 +63,7 @@ export default function Home() {
       </section>
 
       {/* ---- Tech / Project ---- */}
-      <section className={`${grounds.navy} px-6 py-28 md:px-10 md:py-36`}>
+      <section className={`${grounds.navy} px-6 py-16 md:px-10 md:py-20`}>
         <div className="mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
           <Reveal>
             <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)]">
@@ -96,7 +96,7 @@ export default function Home() {
       </section>
 
       {/* ---- Social Impact ---- */}
-      <section className={`${grounds.cream} px-6 py-28 md:px-10 md:py-36`}>
+      <section className={`${grounds.cream} px-6 py-16 md:px-10 md:py-20`}>
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
             <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)] text-[var(--ink)]">
@@ -128,7 +128,7 @@ export default function Home() {
       </section>
 
       {/* ---- Research ---- */}
-      <section className={`${grounds.creamDeep} px-6 py-28 md:px-10 md:py-36`}>
+      <section className={`${grounds.creamDeep} px-6 py-16 md:px-10 md:py-20`}>
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Research</p>
@@ -162,7 +162,7 @@ export default function Home() {
       </section>
 
       {/* ---- Awards ---- */}
-      <section className={`${grounds.navy} px-6 py-28 md:px-10 md:py-36`}>
+      <section className={`${grounds.navy} px-6 py-16 md:px-10 md:py-20`}>
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
             <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)]">
@@ -196,7 +196,7 @@ export default function Home() {
       {/* ---- Closing strip ---- */}
       <section
         id="contact"
-        className="bg-[var(--burgundy)] px-6 py-28 text-[var(--cream)] md:px-10 md:py-36"
+        className="bg-[var(--burgundy)] px-6 py-16 text-[var(--cream)] md:px-10 md:py-20"
       >
         <div className="mx-auto max-w-[1180px]">
           <Reveal>

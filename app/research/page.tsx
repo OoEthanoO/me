@@ -17,7 +17,7 @@ export default function ResearchPage() {
       {papers.map((paper, idx) => (
         <div key={paper.title}>
           {/* ---- Paper masthead on a dark strip ---- */}
-          <section className="bg-[var(--navy)] px-6 py-24 text-[var(--cream)] md:px-10 md:py-32">
+          <section className="bg-[var(--navy)] px-6 py-14 text-[var(--cream)] md:px-10 md:py-18">
             <div className="mx-auto max-w-[1180px]">
               <Reveal>
                 <p className="eyebrow text-[var(--tan)]">
@@ -55,7 +55,7 @@ export default function ResearchPage() {
           </section>
 
           {/* ---- Headline figures ---- */}
-          <section className="bg-[var(--cream-deep)] px-6 py-24 md:px-10 md:py-32">
+          <section className="bg-[var(--cream-deep)] px-6 py-14 md:px-10 md:py-18">
             <div className="mx-auto max-w-[1180px]">
               <Reveal>
                 <p className="eyebrow text-[var(--tan)]">Results</p>
@@ -81,7 +81,7 @@ export default function ResearchPage() {
           </section>
 
           {/* ---- Abstract, method, takeaway ---- */}
-          <section className="bg-[var(--cream)] px-6 py-24 md:px-10 md:py-32">
+          <section className="bg-[var(--cream)] px-6 py-14 md:px-10 md:py-18">
             <div className="mx-auto grid max-w-[1180px] gap-16 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
               <Reveal>
                 <p className="eyebrow text-[var(--tan)]">Abstract</p>
@@ -134,7 +134,7 @@ export default function ResearchPage() {
       ))}
 
       {/* ---- Figures, with the paper's own captions ---- */}
-      <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
+      <section className="bg-[var(--cream)] px-6 pb-16 md:px-10 md:pb-20">
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Figures</p>
