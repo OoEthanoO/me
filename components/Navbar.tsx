@@ -24,7 +24,7 @@ const Navbar = () => {
             stands in, set in caps to read the same way. */}
         <Link
           href="/"
-          className="shrink-0 font-[family-name:var(--font-poppins)] text-xl font-bold uppercase leading-[1.29] tracking-[0.02em] text-[var(--ink)] transition-colors hover:text-[var(--burgundy)] md:text-[1.6rem]"
+          className="shrink-0 font-[family-name:var(--font-poppins)] text-xl font-bold uppercase leading-[1.29] tracking-[0.02em] [word-spacing:0.35em] text-[var(--ink)] transition-colors hover:text-[var(--burgundy)] md:text-[1.6rem]"
         >
           Yan Xu
         </Link>
