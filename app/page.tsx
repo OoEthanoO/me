@@ -22,10 +22,10 @@ export default function Home() {
     <div>
       {/* ---- Hero: copy left, portrait right ---- */}
       <section className="bg-[var(--cream)] px-6 pb-16 pt-12 md:px-10 md:pb-20 md:pt-16">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[minmax(0,40rem)_auto] lg:justify-start lg:gap-16">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[minmax(0,50rem)_auto] lg:justify-start lg:gap-16">
           <div>
             <h1
-              className="font-display rise text-[clamp(2.1rem,4.8vw,3.4rem)] leading-[1.04] text-[var(--burgundy)]"
+              className="font-display rise text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.06] text-[var(--burgundy)]"
               style={{ animationDelay: "0.1s" }}
             >
               Ethan Yan Xu
@@ -37,17 +37,6 @@ export default function Home() {
               A Toronto 11th grader writing CUDA kernels, shipping products, and
               teaching students for free.
             </p>
-            <div
-              className="rise mt-10 flex flex-wrap items-center gap-5"
-              style={{ animationDelay: "0.34s" }}
-            >
-              <Link href="/tech" className="btn btn-burgundy">
-                See the Work
-              </Link>
-              <Link href="#contact" className="btn btn-outline text-[var(--ink)]">
-                Get in Touch
-              </Link>
-            </div>
           </div>
 
           <div className="rise" style={{ animationDelay: "0.3s" }}>
