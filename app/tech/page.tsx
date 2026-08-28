@@ -87,8 +87,9 @@ export default function TechPage() {
                 </h2>
               </Reveal>
 
-              {/* The heading already draws a rule, so the first entry drops its own. */}
-              <div className="mt-2 [&>*:first-child_article]:border-t-0">
+              {/* The heading already draws a rule, so the first entry drops its
+                  own border and the top padding that spaces stacked entries. */}
+              <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5">
                 {items.map((project) => (
                   <Reveal key={project.title}>
                     <ProjectFeature project={project} />
