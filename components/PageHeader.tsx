@@ -10,8 +10,9 @@ export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
     <section className="bg-[var(--cream)] px-6 pb-8 pt-12 md:px-10 md:pb-10 md:pt-14">
       <div className="mx-auto max-w-[1180px]">
         {eyebrow && <p className="eyebrow rise text-[var(--tan)]">{eyebrow}</p>}
+        {/* Sized to match the nav wordmark exactly, at both breakpoints. */}
         <h1
-          className={`font-display rise max-w-4xl text-[clamp(2.8rem,8vw,3.4rem)] text-[var(--burgundy)] ${
+          className={`font-display rise max-w-4xl text-xl text-[var(--burgundy)] md:text-[1.6rem] ${
             eyebrow ? "mt-6" : ""
           }`}
           style={{ animationDelay: "0.1s" }}
