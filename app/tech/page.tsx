@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { projects, categoryOrder } from "@/data/projects";
 import ProjectCard, { slugify } from "@/components/ProjectCard";
+import ProjectFeature from "@/components/ProjectFeature";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
@@ -82,14 +83,10 @@ export default function TechPage() {
                 <p className="eyebrow text-[var(--tan)]">{category}</p>
               </Reveal>
 
-              <div className="mt-10 grid border-l border-t border-[var(--tan)]/35 md:grid-cols-2 lg:grid-cols-3">
-                {items.map((project, idx) => (
-                  <Reveal
-                    key={project.title}
-                    delay={(idx % 3) * 0.08}
-                    className="h-full"
-                  >
-                    <ProjectCard project={project} index={idx} />
+              <div className="mt-6">
+                {items.map((project) => (
+                  <Reveal key={project.title}>
+                    <ProjectFeature project={project} />
                   </Reveal>
                 ))}
               </div>

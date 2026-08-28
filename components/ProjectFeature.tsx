@@ -1,0 +1,89 @@
+import Link from "next/link";
+import type { Project } from "@/data/projects";
+import { slugify } from "@/components/ProjectCard";
+
+/**
+ * Wide entry for projects that sit inside a named category: the write-up is
+ * printed in full rather than trimmed to a card blurb, with the screenshots
+ * underneath it. The compact ProjectCard still handles the ungrouped grid.
+ */
+export default function ProjectFeature({ project }: { project: Project }) {
+  const paragraphs = (project.overview ?? project.description).split("\n\n");
+
+  return (
+    <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
+      <h3 className="font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight text-[var(--ink)]">
+        {project.title}
+      </h3>
+
+      <div className="mt-5 max-w-3xl space-y-4">
+        {paragraphs.map((para) => (
+          <p
+            key={para.slice(0, 32)}
+            className="text-[1rem] font-light leading-relaxed text-[var(--ink)]/80"
+          >
+            {para}
+          </p>
+        ))}
+      </div>
+
+      <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2">
+        {project.technologies.map((tech) => (
+          <span
+            key={tech}
+            className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-[var(--ink)]/50"
+          >
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
+        <Link
+          href={`/project/${encodeURIComponent(slugify(project.title))}`}
+          className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+        >
+          Full Write-up &#8594;
+        </Link>
+        {project.website && (
+          <a
+            href={project.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+          >
+            Visit Site &#8594;
+          </a>
+        )}
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+          >
+            Source &#8594;
+          </a>
+        )}
+      </div>
+
+      {project.images.length > 0 && (
+        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {project.images.map((src, i) => (
+            <div
+              key={src}
+              className="border border-[var(--tan)]/35 bg-white p-1.5"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={`${project.title} screenshot ${i + 1}`}
+                className="w-full"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+    </article>
+  );
+}
