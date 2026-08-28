@@ -10,9 +10,11 @@ export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
     <section className="bg-[var(--cream)] px-6 pb-8 pt-12 md:px-10 md:pb-10 md:pt-14">
       <div className="mx-auto max-w-[1180px]">
         {eyebrow && <p className="eyebrow rise text-[var(--tan)]">{eyebrow}</p>}
-        {/* Sized to match the nav wordmark exactly, at both breakpoints. */}
+        {/* Derived from the flagship heading on /tech so it stays exactly two
+            pixels smaller than it at every viewport, rather than pinned to one
+            number that only holds at a single width. */}
         <h1
-          className={`font-display rise max-w-4xl text-xl text-[var(--burgundy)] md:text-[1.6rem] ${
+          className={`font-display rise mx-auto max-w-4xl text-center text-[calc(clamp(2.6rem,6vw,3.4rem)-2px)] text-[var(--burgundy)] ${
             eyebrow ? "mt-6" : ""
           }`}
           style={{ animationDelay: "0.1s" }}

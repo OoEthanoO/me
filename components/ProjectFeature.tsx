@@ -15,8 +15,7 @@ import StatRow from "@/components/StatRow";
  * Written out in full so Tailwind sees each class literally.
  */
 const imageColumns = (count: number) => {
-  if (count <= 1) return "grid-cols-1";
-  if (count === 2) return "sm:grid-cols-2";
+  if (count <= 2) return "grid-cols-1";
   return "sm:grid-cols-2 lg:grid-cols-3";
 };
 
@@ -42,7 +41,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
 
       {project.stats && project.stats.length > 0 && (
         <div className="mt-8 max-w-3xl">
-          <StatRow stats={project.stats} />
+          <StatRow stats={project.stats} compact />
         </div>
       )}
 

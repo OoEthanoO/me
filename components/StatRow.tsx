@@ -15,7 +15,15 @@ const columnsFor = (count: number) => {
  * tan block. Columns therefore follow the data, and the tint is only applied
  * when there is more than one cell to divide.
  */
-export default function StatRow({ stats }: { stats: ServiceStat[] }) {
+export default function StatRow({
+  stats,
+  compact = false,
+}: {
+  stats: ServiceStat[];
+  /** Smaller figures, for rows that sit inside a project entry rather than
+   *  carrying a section on their own. */
+  compact?: boolean;
+}) {
   return (
     <div
       className={`-ml-4 grid gap-px ${columnsFor(stats.length)} ${
@@ -24,7 +32,13 @@ export default function StatRow({ stats }: { stats: ServiceStat[] }) {
     >
       {stats.map((stat) => (
         <div key={stat.label} className="bg-[var(--cream)] px-4 py-6">
-          <p className="font-display text-[clamp(1.8rem,3.6vw,2.6rem)] text-[var(--burgundy)]">
+          <p
+            className={`font-display text-[var(--burgundy)] ${
+              compact
+                ? "text-[clamp(1.2rem,2.2vw,1.55rem)]"
+                : "text-[clamp(1.8rem,3.6vw,2.6rem)]"
+            }`}
+          >
             {stat.value}
           </p>
           <p className="mt-2 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--ink)]/55">
