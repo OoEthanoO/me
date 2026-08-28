@@ -8,6 +8,18 @@ import StatRow from "@/components/StatRow";
  * printed in full rather than trimmed to a card blurb, with the screenshots
  * underneath it. The compact ProjectCard still handles the ungrouped grid.
  */
+/**
+ * Columns follow the number of screenshots. A lone wide screenshot dropped into
+ * a three-column grid renders about 366px across, which is far too small to
+ * read the interface inside it — so a single image takes the full width.
+ * Written out in full so Tailwind sees each class literally.
+ */
+const imageColumns = (count: number) => {
+  if (count <= 1) return "grid-cols-1";
+  if (count === 2) return "sm:grid-cols-2";
+  return "sm:grid-cols-2 lg:grid-cols-3";
+};
+
 export default function ProjectFeature({ project }: { project: Project }) {
   const paragraphs = (project.overview ?? project.description).split("\n\n");
 
@@ -75,7 +87,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
       </div>
 
       {project.images.length > 0 && (
-        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className={`mt-9 grid gap-5 ${imageColumns(project.images.length)}`}>
           {project.images.map((src, i) => (
             <div
               key={src}

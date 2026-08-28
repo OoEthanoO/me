@@ -84,7 +84,8 @@ export const projects: Project[] = [
     ],
     collaborators: [],
     github: "https://github.com/OoEthanoO/finprint",
-    images: [],
+    website: "https://finprint.ethanyanxu.com/",
+    images: ["/finprint1.jpg"],
   },
   {
     title: "Bare Metal Bard",
