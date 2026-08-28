@@ -1,7 +1,7 @@
-/** Shared masthead for the category pages, so they all open on the same beat. */
+/** Shared masthead for the category pages. */
 interface PageHeaderProps {
-  eyebrow: string;
   title: string;
+  eyebrow?: string;
   lede?: string;
 }
 
@@ -9,9 +9,11 @@ export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
   return (
     <section className="bg-[var(--cream)] px-6 pb-16 pt-20 md:px-10 md:pb-24 md:pt-28">
       <div className="mx-auto max-w-[1180px]">
-        <p className="eyebrow rise text-[var(--tan)]">{eyebrow}</p>
+        {eyebrow && <p className="eyebrow rise text-[var(--tan)]">{eyebrow}</p>}
         <h1
-          className="font-display rise mt-6 max-w-4xl text-[clamp(2.8rem,8vw,3.4rem)] text-[var(--burgundy)]"
+          className={`font-display rise max-w-4xl text-[clamp(2.8rem,8vw,3.4rem)] text-[var(--burgundy)] ${
+            eyebrow ? "mt-6" : ""
+          }`}
           style={{ animationDelay: "0.1s" }}
         >
           {title}

@@ -12,11 +12,7 @@ export const metadata: Metadata = {
 export default function SocialImpactPage() {
   return (
     <div>
-      <PageHeader
-        eyebrow="Social Impact"
-        title="Teaching, for free."
-        lede="Hours taught, money raised, and the platform built to run both."
-      />
+      <PageHeader title="Social Impact" />
 
       <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
         <div className="mx-auto max-w-[1180px]">

@@ -17,11 +17,7 @@ export default function TechPage() {
 
   return (
     <div>
-      <PageHeader
-        eyebrow="Tech / Project"
-        title="Things I have built."
-        lede="Kernels written down to the metal, products shipped end to end, and the tooling that holds them together."
-      />
+      <PageHeader title="Tech & Projects" />
 
       {/* ---- Flagship keeps its own dark screen, as on the home page ---- */}
       {flagship && (
@@ -72,9 +68,6 @@ export default function TechPage() {
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Selected Work</p>
-            <h2 className="font-display mt-6 max-w-3xl text-[clamp(2.2rem,5vw,3.4rem)] text-[var(--ink)]">
-              The rest of the shelf.
-            </h2>
           </Reveal>
 
           <div className="mt-16 grid border-l border-t border-[var(--tan)]/35 md:grid-cols-2 lg:grid-cols-3">

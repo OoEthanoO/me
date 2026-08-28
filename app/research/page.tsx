@@ -12,11 +12,7 @@ export const metadata: Metadata = {
 export default function ResearchPage() {
   return (
     <div>
-      <PageHeader
-        eyebrow="Research"
-        title="Questions worth measuring."
-        lede="Peer-reviewed work, with the numbers that did not go my way reported alongside the ones that did."
-      />
+      <PageHeader title="Research" />
 
       {papers.map((paper, idx) => (
         <div key={paper.title}>
@@ -142,9 +138,6 @@ export default function ResearchPage() {
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Figures</p>
-            <h2 className="font-display mt-6 max-w-3xl text-[clamp(1.8rem,4vw,2.8rem)] text-[var(--ink)]">
-              What the models actually did.
-            </h2>
           </Reveal>
 
           <div className="mt-14 grid gap-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">

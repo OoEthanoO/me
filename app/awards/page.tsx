@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function AwardsPage() {
   return (
     <div>
-      <PageHeader eyebrow="Awards" title="Awards & Certificates" />
+      <PageHeader title="Awards & Certificates" />
 
       <section className="bg-[var(--cream)] px-6 pb-28 md:px-10 md:pb-36">
         <div className="mx-auto max-w-[1180px]">

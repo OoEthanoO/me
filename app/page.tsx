@@ -66,9 +66,8 @@ export default function Home() {
       <section className={`${grounds.navy} px-6 py-28 md:px-10 md:py-36`}>
         <div className="mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
           <Reveal>
-            <p className="eyebrow text-[var(--tan)]">Tech / Project</p>
-            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,3.4rem)]">
-              Things I have built.
+            <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)]">
+              Tech &amp; Projects
             </h2>
             {flagship && (
               <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
@@ -100,9 +99,8 @@ export default function Home() {
       <section className={`${grounds.cream} px-6 py-28 md:px-10 md:py-36`}>
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
-            <p className="eyebrow text-[var(--tan)]">Social Impact</p>
-            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,3.4rem)] text-[var(--ink)]">
-              Teaching, for free.
+            <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)] text-[var(--ink)]">
+              Social Impact
             </h2>
             <Link href="/social-impact" className="btn btn-burgundy mt-11">
               Learn More
@@ -167,8 +165,7 @@ export default function Home() {
       <section className={`${grounds.navy} px-6 py-28 md:px-10 md:py-36`}>
         <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <Reveal>
-            <p className="eyebrow text-[var(--tan)]">Awards</p>
-            <h2 className="font-display mt-6 text-[clamp(2.4rem,5.5vw,3.4rem)]">
+            <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)]">
               Awards &amp; Certificates
             </h2>
             <Link href="/awards" className="btn btn-cream mt-11">
