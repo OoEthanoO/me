@@ -128,7 +128,7 @@ export const projects: Project[] = [
         url: "https://github.com/OoEthanoO/garbage-classification",
       },
     ],
-    images: ["/ecovision1.jpg"],
+    images: [],
   },
   {
     title: "Bare Metal Bard",
