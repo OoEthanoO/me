@@ -21,7 +21,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
         {paragraphs.map((para) => (
           <p
             key={para.slice(0, 32)}
-            className="text-[1rem] font-light leading-relaxed text-[var(--ink)]/80"
+            className="text-[1.05rem] leading-relaxed text-[var(--ink)] md:text-[1.15rem]"
           >
             {para}
           </p>
