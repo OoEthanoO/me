@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects } from "@/data/projects";
+import { projects, categoryOrder } from "@/data/projects";
 import ProjectCard, { slugify } from "@/components/ProjectCard";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
@@ -14,6 +14,16 @@ export const metadata: Metadata = {
 export default function TechPage() {
   const flagship = projects.find((p) => p.featured);
   const rest = projects.filter((p) => p !== flagship);
+
+  // Named categories render as their own sections, in the declared order;
+  // anything without one stays in the Selected Work list below them.
+  const grouped = categoryOrder
+    .map((category) => ({
+      category,
+      items: rest.filter((p) => p.category === category),
+    }))
+    .filter(({ items }) => items.length > 0);
+  const ungrouped = rest.filter((p) => !p.category);
 
   return (
     <div>
@@ -63,15 +73,35 @@ export default function TechPage() {
         </section>
       )}
 
-      {/* ---- Everything else ---- */}
+      {/* ---- Grouped categories, then everything not yet grouped ---- */}
       <section className="bg-[var(--cream)] px-6 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-[1180px]">
+          {grouped.map(({ category, items }) => (
+            <div key={category} className="mb-16 md:mb-20">
+              <Reveal>
+                <p className="eyebrow text-[var(--tan)]">{category}</p>
+              </Reveal>
+
+              <div className="mt-10 grid border-l border-t border-[var(--tan)]/35 md:grid-cols-2 lg:grid-cols-3">
+                {items.map((project, idx) => (
+                  <Reveal
+                    key={project.title}
+                    delay={(idx % 3) * 0.08}
+                    className="h-full"
+                  >
+                    <ProjectCard project={project} index={idx} />
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          ))}
+
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Selected Work</p>
           </Reveal>
 
-          <div className="mt-16 grid border-l border-t border-[var(--tan)]/35 md:grid-cols-2 lg:grid-cols-3">
-            {rest.map((project, idx) => (
+          <div className="mt-10 grid border-l border-t border-[var(--tan)]/35 md:grid-cols-2 lg:grid-cols-3">
+            {ungrouped.map((project, idx) => (
               <Reveal key={project.title} delay={(idx % 3) * 0.08} className="h-full">
                 <ProjectCard project={project} index={idx} />
               </Reveal>
