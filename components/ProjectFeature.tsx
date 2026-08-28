@@ -12,7 +12,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
 
   return (
     <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
-      <h3 className="font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight text-[var(--ink)]">
+      <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] leading-tight text-[var(--ink)]">
         {project.title}
       </h3>
 

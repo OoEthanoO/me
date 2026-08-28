@@ -79,11 +79,16 @@ export default function TechPage() {
         <div className="mx-auto max-w-[1180px]">
           {grouped.map(({ category, items }) => (
             <div key={category} className="mb-16 md:mb-20">
+              {/* A real heading: it sits above the h3 of each entry, and the
+                  eyebrow treatment was too faint to read as a divider. */}
               <Reveal>
-                <p className="eyebrow text-[var(--tan)]">{category}</p>
+                <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
+                  {category}
+                </h2>
               </Reveal>
 
-              <div className="mt-6">
+              {/* The heading already draws a rule, so the first entry drops its own. */}
+              <div className="mt-2 [&>*:first-child_article]:border-t-0">
                 {items.map((project) => (
                   <Reveal key={project.title}>
                     <ProjectFeature project={project} />
