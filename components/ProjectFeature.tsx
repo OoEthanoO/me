@@ -40,12 +40,12 @@ export default function ProjectFeature({ project }: { project: Project }) {
       </div>
 
       {project.stats && project.stats.length > 0 && (
-        <div className="mt-8 max-w-3xl">
+        <div className="mt-6 max-w-3xl">
           <StatRow stats={project.stats} compact />
         </div>
       )}
 
-      <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
         {project.technologies.map((tech) => (
           <span
             key={tech}
@@ -56,7 +56,26 @@ export default function ProjectFeature({ project }: { project: Project }) {
         ))}
       </div>
 
-      <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
+      {project.images.length > 0 && (
+        <div className={`mt-6 grid gap-5 ${imageColumns(project.images.length)}`}>
+          {project.images.map((src, i) => (
+            <div
+              key={src}
+              className="border border-[var(--tan)]/35 bg-white p-1.5"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={`${project.title} screenshot ${i + 1}`}
+                className="w-full"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Links close the entry, under the screenshots. */}
+      <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
         <Link
           href={`/project/${encodeURIComponent(slugify(project.title))}`}
           className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
@@ -84,24 +103,6 @@ export default function ProjectFeature({ project }: { project: Project }) {
           </a>
         )}
       </div>
-
-      {project.images.length > 0 && (
-        <div className={`mt-9 grid gap-5 ${imageColumns(project.images.length)}`}>
-          {project.images.map((src, i) => (
-            <div
-              key={src}
-              className="border border-[var(--tan)]/35 bg-white p-1.5"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
-                alt={`${project.title} screenshot ${i + 1}`}
-                className="w-full"
-              />
-            </div>
-          ))}
-        </div>
-      )}
     </article>
   );
 }
