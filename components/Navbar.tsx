@@ -18,11 +18,13 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-40 border-b border-[var(--tan)]/30 bg-[var(--cream)]/90 backdrop-blur-md">
       {/* Full width rather than the 1180px content measure, so the wordmark
-          sits at the edge of the page instead of indented with the copy. */}
-      <div className="flex flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-10 md:py-5">
+          sits near the page edge instead of indented with the copy. */}
+      <div className="flex flex-col gap-3 px-6 py-4 md:flex-row md:items-center md:justify-between md:gap-8 md:px-16 md:py-5">
+        {/* Lulo Clean, the reference face, is caps-only and licensed; Poppins
+            stands in, set in caps to read the same way. */}
         <Link
           href="/"
-          className="font-display shrink-0 text-2xl text-[var(--ink)] transition-colors hover:text-[var(--burgundy)] md:text-[2rem]"
+          className="shrink-0 font-[family-name:var(--font-poppins)] text-xl font-bold uppercase leading-[1.29] tracking-[0.02em] text-[var(--ink)] transition-colors hover:text-[var(--burgundy)] md:text-[1.6rem]"
         >
           Yan Xu
         </Link>

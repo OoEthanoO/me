@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fraunces, Jost } from "next/font/google";
+import { Fraunces, Jost, Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -18,6 +18,16 @@ const jost = Jost({
   variable: "--font-jost",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+// Stands in for Lulo Clean, the licensed caps-only face used by the wordmark
+// this design references. Poppins is the nearest free geometric equivalent:
+// circular bowls, even stroke, and it holds up set in all caps.
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["600", "700"],
   display: "swap",
 });
 
@@ -40,7 +50,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body
-        className={`${fraunces.variable} ${jost.variable} antialiased flex min-h-screen flex-col bg-[var(--cream)] text-[var(--ink)]`}
+        className={`${fraunces.variable} ${jost.variable} ${poppins.variable} antialiased flex min-h-screen flex-col bg-[var(--cream)] text-[var(--ink)]`}
       >
         <Navbar />
         <main className="flex-grow">{children}</main>
