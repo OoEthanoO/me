@@ -98,16 +98,22 @@ export default function ProjectFeature({ project }: { project: Project }) {
             Visit Site &#8594;
           </a>
         )}
-        {project.github && (
+        {/* Work split across repositories lists each; otherwise one Source link. */}
+        {(project.repositories ??
+          (project.github
+            ? [{ label: "Source", url: project.github }]
+            : [])
+        ).map((repo) => (
           <a
-            href={project.github}
+            key={repo.url}
+            href={repo.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
           >
-            Source &#8594;
+            {repo.label} &#8594;
           </a>
-        )}
+        ))}
       </div>
     </article>
   );

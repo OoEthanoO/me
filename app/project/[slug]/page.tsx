@@ -81,20 +81,36 @@ export default function ProjectDetail({
                 Visit Site
               </a>
             )}
-            {project.github ? (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-outline text-[var(--cream)]"
-              >
-                View on GitHub
-              </a>
-            ) : (
-              <span className="eyebrow text-[var(--cream)]/50">
-                Closed Source
-              </span>
-            )}
+            {/* Work split across repositories lists each; a single repo keeps
+                the original button. Only genuinely unpublished work is marked
+                closed source. */}
+            {(() => {
+              const repos =
+                project.repositories ??
+                (project.github
+                  ? [{ label: "View on GitHub", url: project.github }]
+                  : []);
+
+              if (repos.length === 0) {
+                return (
+                  <span className="eyebrow text-[var(--cream)]/50">
+                    Closed Source
+                  </span>
+                );
+              }
+
+              return repos.map((repo) => (
+                <a
+                  key={repo.url}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline text-[var(--cream)]"
+                >
+                  {repo.label}
+                </a>
+              ));
+            })()}
           </div>
         </div>
       </section>
