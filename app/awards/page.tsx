@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { timeline } from "@/data/achievements";
+import { MONTH_NAMES, timeline } from "@/data/achievements";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
@@ -9,18 +9,16 @@ export const metadata: Metadata = {
 };
 
 /**
- * One column per calendar year, newest first. Entries labelled with a span
- * ("2025–26") sit in the column of the year they finished in and carry the
- * span alongside their kind, so the columns stay one year wide.
+ * One column per calendar year, newest first. Entries carry the month where it
+ * is on record; the rest print under the year alone.
  */
 const columns = timeline.reduce<
   { year: string; items: typeof timeline }[]
 >((acc, item) => {
-  const year = String(Math.floor(item.sortYear));
   const last = acc[acc.length - 1];
 
-  if (last && last.year === year) last.items.push(item);
-  else acc.push({ year, items: [item] });
+  if (last && last.year === item.year) last.items.push(item);
+  else acc.push({ year: item.year, items: [item] });
 
   return acc;
 }, []);
@@ -54,12 +52,11 @@ export default function AwardsPage() {
                     <li key={`${item.title}-${item.year}`}>
                       <Reveal delay={columnIdx * 0.05 + 0.05}>
                         <div className="py-4">
-                          <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--tan)]">
-                            {item.kind === "award" ? "Award" : "Certificate"}
-                            {item.year !== column.year && (
-                              <span> &middot; {item.year}</span>
-                            )}
-                          </p>
+                          {item.month && (
+                            <p className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--tan)]">
+                              {MONTH_NAMES[item.month - 1]}
+                            </p>
+                          )}
 
                           <h2 className="font-display mt-1.5 text-[clamp(1.05rem,1.6vw,1.25rem)] leading-tight text-[var(--ink)]">
                             {item.title}

@@ -1,14 +1,11 @@
 export interface Achievement {
-  /** Label printed at the timeline marker. */
+  /** Calendar year, and the column the entry is filed under. */
   year: string;
   /**
-   * Ordering key, newest first. Where the month is known it is carried as
-   * `year + month / 12`, so entries sit in date order inside their column;
-   * the awards page floors this back to the calendar year to group them.
-   * Entries with no recorded month use the bare year and fall to the bottom
-   * of their column.
+   * 1–12, where the month is on record. Entries without one sort to the bottom
+   * of their year and print the year alone.
    */
-  sortYear: number;
+  month?: number;
   title: string;
   detail?: string;
   kind: "award" | "certificate";
@@ -19,13 +16,13 @@ export interface Achievement {
 export const achievements: Achievement[] = [
   {
     year: "2026",
-    sortYear: 2026 + 6 / 12,
+    month: 6,
     kind: "award",
     title: "The York Catholic District School Board Recognizes",
   },
   {
     year: "2026",
-    sortYear: 2026 + 5 / 12,
+    month: 5,
     kind: "award",
     title: "Avogadro Chemistry Contest",
     detail:
@@ -33,7 +30,7 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2026",
-    sortYear: 2026 + 4 / 12,
+    month: 4,
     kind: "award",
     title: "York Region Sci-Tech Fair",
     detail:
@@ -42,7 +39,7 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2026",
-    sortYear: 2026 + 4 / 12,
+    month: 4,
     kind: "award",
     title: "Columbia Junior Science Journal 2025–2026 volume",
     detail:
@@ -51,21 +48,21 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2026",
-    sortYear: 2026 + 2 / 12,
+    month: 2,
     kind: "award",
     title: "USA Computing Olympiad (USACO)",
     detail: "Gold Division competitor.",
   },
   {
     year: "2026",
-    sortYear: 2026 + 2 / 12,
+    month: 2,
     kind: "award",
     title: "Canadian Computing Competition",
     detail: "Senior, Honour Roll.",
   },
   {
     year: "2026",
-    sortYear: 2026 + 1 / 12,
+    month: 1,
     kind: "award",
     title: "Columbia Junior Science Journal",
     detail:
@@ -73,7 +70,7 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2025",
-    sortYear: 2025 + 9 / 12,
+    month: 9,
     kind: "award",
     title: "Ignite CS Expo — Senior Division",
     detail:
@@ -82,7 +79,7 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2025",
-    sortYear: 2025 + 9 / 12,
+    month: 9,
     kind: "award",
     title: "Hack the North 2025",
     detail:
@@ -90,28 +87,26 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2025",
-    sortYear: 2025 + 5 / 12,
+    month: 5,
     kind: "award",
     title: "American Computer Science League",
     detail: "Senior Finals, Bronze Medalist.",
   },
   {
     year: "2025",
-    sortYear: 2025,
     kind: "certificate",
     title: "Canadian Senior Mathematics Contest",
     detail: "Top twenty-five percent of contestants.",
   },
   {
     year: "2025",
-    sortYear: 2025,
     kind: "certificate",
     title: "Euclid Contest",
     detail: "Top twenty-five percent of contestants.",
   },
   {
     year: "2024",
-    sortYear: 2024 + 9 / 12,
+    month: 9,
     kind: "award",
     title: "Hack the North 2024",
     detail:
@@ -119,35 +114,31 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2024",
-    sortYear: 2024 + 2 / 12,
+    month: 2,
     kind: "award",
     title: "Canadian Computing Competition — Senior",
     detail: "Honour Roll.",
   },
   {
     year: "2024",
-    sortYear: 2024,
     kind: "certificate",
     title: "Inspirit AI Scholars",
     detail: "Best Presentation certificate.",
   },
   {
     year: "2023",
-    sortYear: 2023,
     kind: "award",
     title: "Canadian Computing Competition — Junior",
     detail: "75/75, Honour Roll.",
   },
   {
     year: "2023",
-    sortYear: 2023,
     kind: "certificate",
     title: "Royal Canadian Air Cadet Band & Drill Competition",
     detail: "1st place in both the Compulsory and Supplementary categories.",
   },
   {
     year: "2023",
-    sortYear: 2023,
     kind: "certificate",
     title: "Royal Conservatory of Music",
     detail:
@@ -155,12 +146,28 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2023",
-    sortYear: 2023,
     kind: "certificate",
     title: "Canada Open Mathematics Challenge",
     detail: "Performance with Distinction.",
   },
 ];
 
-/** Newest first, for the timeline. */
-export const timeline = [...achievements].sort((a, b) => b.sortYear - a.sortYear);
+export const MONTH_NAMES = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+/** Newest first: by year, then by month where one is recorded. */
+const sortKey = (a: Achievement) => Number(a.year) + (a.month ?? 0) / 12;
+
+export const timeline = [...achievements].sort((a, b) => sortKey(b) - sortKey(a));
