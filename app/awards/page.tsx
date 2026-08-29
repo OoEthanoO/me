@@ -66,7 +66,7 @@ export default function AwardsPage() {
                           </h2>
 
                           {item.detail && (
-                            <p className="mt-1.5 text-[0.88rem] font-light leading-relaxed text-[var(--ink)]/75">
+                            <p className="mt-1.5 text-[0.88rem] font-light leading-relaxed text-[var(--ink-deep)]">
                               {item.detail}
                             </p>
                           )}

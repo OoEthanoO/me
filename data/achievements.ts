@@ -1,7 +1,13 @@
 export interface Achievement {
   /** Label printed at the timeline marker. */
   year: string;
-  /** Ordering key; spans use the later year minus a fraction so they sit just below it. */
+  /**
+   * Ordering key, newest first. Where the month is known it is carried as
+   * `year + month / 12`, so entries sit in date order inside their column;
+   * the awards page floors this back to the calendar year to group them.
+   * Entries with no recorded month use the bare year and fall to the bottom
+   * of their column.
+   */
   sortYear: number;
   title: string;
   detail?: string;
@@ -13,14 +19,21 @@ export interface Achievement {
 export const achievements: Achievement[] = [
   {
     year: "2026",
-    sortYear: 2026,
+    sortYear: 2026 + 6 / 12,
     kind: "award",
-    title: "USA Computing Olympiad (USACO)",
-    detail: "Gold Division competitor, February contest.",
+    title: "The York Catholic District School Board Recognizes",
   },
   {
     year: "2026",
-    sortYear: 2026,
+    sortYear: 2026 + 5 / 12,
+    kind: "award",
+    title: "Avogadro Chemistry Contest",
+    detail:
+      "29th in Canada, out of 3045 participants. 158th in the world, out of 4252 participants.",
+  },
+  {
+    year: "2026",
+    sortYear: 2026 + 4 / 12,
     kind: "award",
     title: "York Region Sci-Tech Fair",
     detail:
@@ -29,31 +42,38 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2026",
-    sortYear: 2026,
+    sortYear: 2026 + 4 / 12,
     kind: "award",
-    title: "Avogadro Chemistry Contest",
+    title: "Columbia Junior Science Journal 2025–2026 volume",
     detail:
-      "29th in Canada out of 3,045 participants, and 158th worldwide out of 4,252.",
+      "Published for “A Machine Learning Approach for Water Level Residual Correction Using Geospatial Terrain Features.”",
+    href: "https://columbiajuniorsciencejournal.org/20252026-cjsj",
   },
   {
     year: "2026",
-    sortYear: 2026,
+    sortYear: 2026 + 2 / 12,
     kind: "award",
-    title: "Canadian Computing Competition — Senior",
-    detail: "39/75, Honour Roll.",
+    title: "USA Computing Olympiad (USACO)",
+    detail: "Gold Division competitor.",
   },
   {
-    year: "2025–26",
-    sortYear: 2025.9,
+    year: "2026",
+    sortYear: 2026 + 2 / 12,
+    kind: "award",
+    title: "Canadian Computing Competition",
+    detail: "Senior, Honour Roll.",
+  },
+  {
+    year: "2026",
+    sortYear: 2026 + 1 / 12,
     kind: "award",
     title: "Columbia Junior Science Journal",
     detail:
-      "Finalist, and published in the 2025–2026 volume, for “A Machine Learning Approach for Water Level Residual Correction Using Geospatial Terrain Features.”",
-    href: "https://tides.ethanyanxu.com/",
+      "Selected as a finalist for the CJSJ 2025–2026 volume application cycle.",
   },
   {
     year: "2025",
-    sortYear: 2025,
+    sortYear: 2025 + 9 / 12,
     kind: "award",
     title: "Ignite CS Expo — Senior Division",
     detail:
@@ -62,10 +82,18 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2025",
-    sortYear: 2025,
+    sortYear: 2025 + 9 / 12,
     kind: "award",
-    title: "Hack the North",
-    detail: "Participant, University of Waterloo.",
+    title: "Hack the North 2025",
+    detail:
+      "Accepted to attend Hack the North 2025, Canada’s premier hackathon at the University of Waterloo.",
+  },
+  {
+    year: "2025",
+    sortYear: 2025 + 5 / 12,
+    kind: "award",
+    title: "American Computer Science League",
+    detail: "Senior Finals, Bronze Medalist.",
   },
   {
     year: "2025",
@@ -82,25 +110,19 @@ export const achievements: Achievement[] = [
     detail: "Top twenty-five percent of contestants.",
   },
   {
-    year: "2024–25",
-    sortYear: 2024.9,
+    year: "2024",
+    sortYear: 2024 + 9 / 12,
     kind: "award",
-    title: "American Computer Science League",
-    detail: "Senior Finals, Bronze Medalist.",
+    title: "Hack the North 2024",
+    detail:
+      "Accepted to attend Hack the North 2024, Canada’s premier hackathon at the University of Waterloo.",
   },
   {
     year: "2024",
-    sortYear: 2024,
+    sortYear: 2024 + 2 / 12,
     kind: "award",
     title: "Canadian Computing Competition — Senior",
-    detail: "45/75, Honour Roll.",
-  },
-  {
-    year: "2024",
-    sortYear: 2024,
-    kind: "award",
-    title: "Hack the North",
-    detail: "Participant, University of Waterloo.",
+    detail: "Honour Roll.",
   },
   {
     year: "2024",
