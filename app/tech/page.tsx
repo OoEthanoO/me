@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { projects, categoryOrder } from "@/data/projects";
+import { projects, categoryOrder, ROBOTICS_SECTION } from "@/data/projects";
 import ProjectCard, { slugify } from "@/components/ProjectCard";
 import ProjectFeature from "@/components/ProjectFeature";
 import RoboticsSection from "@/components/RoboticsSection";
@@ -17,14 +17,19 @@ export default function TechPage() {
   const flagship = projects.find((p) => p.featured);
   const rest = projects.filter((p) => p !== flagship);
 
-  // Named categories render as their own sections, in the declared order;
-  // anything without one stays in the Selected Work list below them.
-  const grouped = categoryOrder
-    .map((category) => ({
-      category,
-      items: rest.filter((p) => p.category === category),
-    }))
-    .filter(({ items }) => items.length > 0);
+  // Named categories render as their own sections, in the declared order, with
+  // the Robotics section taking its place among them; anything without a
+  // category stays in the Selected Work list below them all.
+  const sections = categoryOrder
+    .map((category) =>
+      category === ROBOTICS_SECTION
+        ? { category, items: [] }
+        : { category, items: rest.filter((p) => p.category === category) },
+    )
+    .filter(
+      ({ category, items }) =>
+        category === ROBOTICS_SECTION || items.length > 0,
+    );
   const ungrouped = rest.filter((p) => !p.category);
 
   return (
@@ -78,32 +83,34 @@ export default function TechPage() {
       {/* ---- Grouped categories, then everything not yet grouped ---- */}
       <section className="bg-[var(--cream)] px-6 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-[1180px]">
-          {grouped.map(({ category, items }) => (
-            <div key={category} className="mb-16 md:mb-20">
-              {/* A real heading: it sits above the h3 of each entry, and the
-                  eyebrow treatment was too faint to read as a divider. */}
-              <Reveal>
-                <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
-                  {category}
-                </h2>
+          {sections.map(({ category, items }) =>
+            category === ROBOTICS_SECTION ? (
+              <Reveal key={category}>
+                <RoboticsSection />
               </Reveal>
+            ) : (
+              <div key={category} className="mb-16 md:mb-20">
+                {/* A real heading: it sits above the h3 of each entry, and the
+                    eyebrow treatment was too faint to read as a divider. */}
+                <Reveal>
+                  <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
+                    {category}
+                  </h2>
+                </Reveal>
 
-              {/* The heading already draws a rule, so the first entry drops its
-                  own border and the top padding that spaces stacked entries. */}
-              <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5">
-                {items.map((project) => (
-                  <Reveal key={project.title}>
-                    <ProjectFeature project={project} />
-                  </Reveal>
-                ))}
+                {/* The heading already draws a rule, so the first entry drops
+                    its own border and the top padding that spaces stacked
+                    entries. */}
+                <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5">
+                  {items.map((project) => (
+                    <Reveal key={project.title}>
+                      <ProjectFeature project={project} />
+                    </Reveal>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-
-          {/* Robotics follows the categories: same heading, its own layout. */}
-          <Reveal>
-            <RoboticsSection />
-          </Reveal>
+            ),
+          )}
 
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Selected Work</p>

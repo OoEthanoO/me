@@ -31,8 +31,15 @@ export interface Project {
   repositories?: { label: string; url: string }[];
 }
 
+/**
+ * Marks where the Robotics section is interleaved among the project
+ * categories on /tech. It is not a project category — it has its own data and
+ * layout — but it has a place in the running order, so the order records it.
+ */
+export const ROBOTICS_SECTION = "__robotics__";
+
 /** Order the grouped sections appear in on /tech. */
-export const categoryOrder = ["Environment"];
+export const categoryOrder = ["Environment", ROBOTICS_SECTION, "Used by Peers"];
 
 export const projects: Project[] = [
   {
@@ -210,6 +217,9 @@ export const projects: Project[] = [
   },
   {
     title: "Stroj",
+    category: "Used by Peers",
+    overview:
+      "A self-hosted online judge, built so the coding club had somewhere to put its own problems rather than sending members off to someone else's site. A submission arrives against a problem's test data; the judge compiles it, runs it test by test under time, memory and output limits, compares what came out, and returns a verdict. Contests sit on top: a timed window, a problem set sealed until the clock starts, and either an ICPC or an IOI scoreboard.\n\nSubtasks are what make a hard problem approachable. Tests grouped into weighted directories each become all-or-nothing, so a beginner who solves only the small cases still earns something toward the leaderboard rather than nothing. A hidden test belonging to no subtask is rejected at upload instead of sitting there silently unscored.\n\nThe sandbox is the half worth reading, and it is honest about the gap. Each submission runs in a throwaway directory as its own process group under rlimits, with a wall-clock watchdog that kills the whole group so nothing outlives its timeout by forking, and an active RSS sampler because macOS accepts RLIMIT_AS and then quietly ignores it. The judge reports the isolation actually in force rather than the one that was asked for, and says plainly that this suits a classroom or a team practice server, not hostile submissions off the open internet.",
     description:
       "A self-hosted online judge. Users submit code against a problem's test data; it compiles, runs it under time and memory limits, and returns a verdict.",
     longDescription:
@@ -284,6 +294,27 @@ export const projects: Project[] = [
       "/yanfarkle3.png",
       "/yanfarkle4.png",
     ],
+  },
+  {
+    title: "orgchem",
+    category: "Used by Peers",
+    description:
+      "Type anything that names or describes an organic compound — a condensed formula, an IUPAC name, a trade name, SMILES — and see its structure, with a practice mode that drills naming in both directions.",
+    overview:
+      "Type anything that names or describes an organic compound and see its structure. IUPAC names, common and trade names, SMILES and molecular formulas all resolve, but the part no other service handles is condensed structural formulas — the notation people actually write by hand — so that parser is the heart of it.\n\nIt is valence driven, which is what lets it settle the notation's ambiguities without guessing. Whether the bracket in CH₃CH(CH₃)CH₃ is a branch and the one in CH₃(CH₂)₃CH₃ a repeat unit falls out of which atoms have valence spare; whether an OH continues a chain or hangs off it falls out of the fact that OH cannot carry what follows. A formula written with no hydrogens at all is read as SMILES first, because CCO is ethanol one way and acetaldehyde the other and both draw perfectly well — which reading is asked for first is the whole answer.\n\nAmbiguity is shown rather than resolved silently. A molecular formula does not name a structure, so C₅H₁₂ lists its isomers instead of picking one. Where a structure has exactly one stereogenic element both isomers are built, given 3D coordinates and drawn as ball-and-stick models that turn independently; orientation is held as a rotation matrix rather than a pair of angles, so the models turn freely instead of jamming at the poles.\n\nThe practice mode drills 283 structures in both directions, filtered by topic and level. Typed answers are marked by resolving them back into a structure and comparing it with the one shown rather than by matching a string, so 2-propanol, isopropyl alcohol and propan-2-ol all pass, and naming the right skeleton with the wrong configuration is reported as that rather than simply marked wrong. The answer stays on the server: an option is identified only by its position, and the server rebuilds the list from the question and a nonce, so nothing in what is sent distinguishes the right drawing from the other three.",
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "OpenChemLib",
+      "Tailwind CSS 4",
+      "OPSIN",
+      "PubChem",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/orgchem",
+    website: "https://orgchem.ethanyanxu.com/",
+    images: [],
   },
   {
     title: "Portfolio",
