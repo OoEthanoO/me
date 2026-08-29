@@ -16,8 +16,9 @@
   --navy: #253b52;
   --navy-deep: #143454;
   --tan: #b09785;
-  /* Deeper cut of --tan, for the citation line on the navy strip. */
-  --tan-deep: #856b54;
+  /* Light gold for the citation line, which sits on the navy strip and has to
+     carry against it. Clears AA at 5.88:1. */
+  --gold: #d9b382;
   --mist: #c9cacd;
 
   --background: var(--cream);
@@ -35,7 +36,7 @@
   --color-navy: var(--navy);
   --color-navy-deep: var(--navy-deep);
   --color-tan: var(--tan);
-  --color-tan-deep: var(--tan-deep);
+  --color-gold: var(--gold);
   --color-mist: var(--mist);
   --font-serif: var(--font-source-serif);
   --font-sans: var(--font-inter);
@@ -68,16 +69,17 @@ body {
   text-transform: uppercase;
 }
 
-/* Section labels in the research write-up. They run in the display face rather
-   than as tracked-out caps, so they read as small headings in the page's own
-   voice: burgundy, title case, no transform. Pairs with .font-display, which
-   supplies the family and weight; this only overrides size, track and colour.
+/* Section labels in the research write-up. They run in the display face, set in
+   caps at the size of the method step labels (text-xl) they head, in burgundy.
+   Pairs with .font-display, which supplies the family and weight; this only
+   overrides size, track, case and colour. Caps need a little air that the
+   display face's negative track takes away, hence the positive letter-spacing.
    Declared after `.font-display` so it wins the tie. */
 .section-label {
-  font-size: 1.0625rem;
-  letter-spacing: 0.005em;
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
   color: var(--burgundy);
-  text-transform: none;
+  text-transform: uppercase;
 }
 
 /* Stat labels in the results grid, set in the display face to match the figure

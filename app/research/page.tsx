@@ -23,7 +23,7 @@ export default function ResearchPage() {
                 <h2 className="font-display max-w-4xl text-[clamp(1.9rem,4.4vw,3.4rem)] leading-tight">
                   {paper.title}
                 </h2>
-                <p className="mt-8 text-sm font-medium tracking-wide text-[var(--tan-deep)]">
+                <p className="mt-8 text-base font-medium tracking-wide text-[var(--gold)]">
                   {paper.citation}
                 </p>
                 <p className="mt-9 max-w-2xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
