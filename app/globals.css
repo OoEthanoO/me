@@ -10,10 +10,14 @@
   --cream-deep: #f8e2db;
   --ink: #282936;
   --ink-soft: #5c5d69;
+  /* Near-black, for the running prose in the research write-up. */
+  --ink-deep: #17181e;
   --burgundy: #8a1f37;
   --navy: #253b52;
   --navy-deep: #143454;
   --tan: #b09785;
+  /* Deeper cut of --tan, for the citation line on the navy strip. */
+  --tan-deep: #9a8069;
   --mist: #c9cacd;
 
   --background: var(--cream);
@@ -26,10 +30,12 @@
   --color-cream: var(--cream);
   --color-cream-deep: var(--cream-deep);
   --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
   --color-burgundy: var(--burgundy);
   --color-navy: var(--navy);
   --color-navy-deep: var(--navy-deep);
   --color-tan: var(--tan);
+  --color-tan-deep: var(--tan-deep);
   --color-mist: var(--mist);
   --font-serif: var(--font-fraunces);
   --font-sans: var(--font-jost);
@@ -77,6 +83,15 @@ body {
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
+}
+
+/* The section labels in the research write-up carry the page's structure, so
+   they read stronger than a plain tan eyebrow: burgundy, and a step up in size.
+   The track loosens less than the size grows, or the caps drift apart. */
+.eyebrow-lead {
+  font-size: 0.8125rem;
+  letter-spacing: 0.26em;
+  color: var(--burgundy);
 }
 
 /* Sharp-cornered, solid-fill CTA — the reference uses no rounding at all. */
