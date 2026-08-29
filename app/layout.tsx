@@ -1,23 +1,20 @@
 import type { Metadata } from "next";
-import { Fraunces, Jost, Poppins } from "next/font/google";
+import { Inter, Poppins, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 
-// Fraunces carries every display line; Jost stands in for the geometric sans
-// used for body copy and labels.
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+// The site runs the typography of tides.ethanyanxu.com, where the paper lives:
+// Source Serif 4 carries every display line, Inter the body copy and labels.
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "900"],
-  style: ["normal", "italic"],
   display: "swap",
 });
 
-const jost = Jost({
-  variable: "--font-jost",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -50,7 +47,7 @@ export default function RootLayout({
         </noscript>
       </head>
       <body
-        className={`${fraunces.variable} ${jost.variable} ${poppins.variable} antialiased flex min-h-screen flex-col bg-[var(--cream)] text-[var(--ink)]`}
+        className={`${sourceSerif.variable} ${inter.variable} ${poppins.variable} antialiased flex min-h-screen flex-col bg-[var(--cream)] text-[var(--ink)]`}
       >
         <Navbar />
         <main className="flex-grow">{children}</main>

@@ -1,23 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
 import { papers, figures, paperPdf } from "@/data/research";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-
-// This page borrows the typography from the paper's own site, tides.ethanyanxu.com:
-// Source Serif 4 on the display lines, Inter on everything else. Both are loaded
-// here rather than in the root layout so the rest of the site keeps Fraunces/Jost.
-const sourceSerif = Source_Serif_4({
-  variable: "--font-source-serif",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Research — Yan Xu",
@@ -27,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ResearchPage() {
   return (
-    <div className={`${sourceSerif.variable} ${inter.variable} research-type`}>
+    <div>
       <PageHeader title="Research" />
 
       {papers.map((paper, idx) => (
@@ -39,7 +23,7 @@ export default function ResearchPage() {
                 <h2 className="font-display max-w-4xl text-[clamp(1.9rem,4.4vw,3.4rem)] leading-tight">
                   {paper.title}
                 </h2>
-                <p className="mt-8 text-sm font-light tracking-wide text-[var(--tan-deep)]">
+                <p className="mt-8 text-sm font-medium tracking-wide text-[var(--tan-deep)]">
                   {paper.citation}
                 </p>
                 <p className="mt-9 max-w-2xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
@@ -71,7 +55,7 @@ export default function ResearchPage() {
           <section className="bg-[var(--cream-deep)] px-6 py-10 md:px-10 md:py-12">
             <div className="mx-auto max-w-[1180px]">
               <Reveal>
-                <p className="eyebrow text-[var(--tan)]">Results</p>
+                <p className="font-display section-label">Results</p>
               </Reveal>
               <div className="mt-7 grid gap-px border border-[var(--tan)]/35 bg-[var(--tan)]/35 md:grid-cols-3">
                 {paper.results.map((stat, i) => (
@@ -80,10 +64,10 @@ export default function ResearchPage() {
                       <p className="font-display text-[clamp(1.6rem,2.8vw,2.1rem)] text-[var(--burgundy)]">
                         {stat.value}
                       </p>
-                      <p className="eyebrow mt-2.5 text-[var(--ink)]">
+                      <p className="eyebrow stat-label mt-2.5 text-[var(--ink)]">
                         {stat.label}
                       </p>
-                      <p className="mt-3 text-[0.875rem] font-light leading-relaxed text-[var(--ink)]/75">
+                      <p className="mt-3 text-[0.875rem] font-light leading-relaxed text-[var(--ink-deep)]">
                         {stat.detail}
                       </p>
                     </div>
@@ -97,12 +81,12 @@ export default function ResearchPage() {
           <section className="bg-[var(--cream)] px-6 py-14 md:px-10 md:py-18">
             <div className="mx-auto grid max-w-[1180px] gap-16 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
               <Reveal>
-                <p className="eyebrow eyebrow-lead">Abstract</p>
+                <p className="font-display section-label">Abstract</p>
                 <p className="mt-7 text-lg font-light leading-relaxed text-[var(--ink-deep)]">
                   {paper.abstract}
                 </p>
 
-                <p className="eyebrow eyebrow-lead mt-14">What It Found</p>
+                <p className="font-display section-label mt-14">What It Found</p>
                 <p className="mt-7 text-lg font-light leading-relaxed text-[var(--ink-deep)]">
                   {paper.finding}
                 </p>
@@ -120,7 +104,7 @@ export default function ResearchPage() {
               </Reveal>
 
               <Reveal delay={0.12}>
-                <p className="eyebrow eyebrow-lead">Method</p>
+                <p className="font-display section-label">Method</p>
                 <dl className="mt-7 border-t border-[var(--tan)]/35">
                   {paper.method.map((step) => (
                     <div
@@ -150,7 +134,7 @@ export default function ResearchPage() {
       <section className="bg-[var(--cream)] px-6 pb-16 md:px-10 md:pb-20">
         <div className="mx-auto max-w-[1180px]">
           <Reveal>
-            <p className="eyebrow text-[var(--tan)]">Figures</p>
+            <p className="font-display section-label">Figures</p>
           </Reveal>
 
           <div className="mt-14 grid gap-12 md:grid-cols-2 md:gap-x-10 md:gap-y-16">

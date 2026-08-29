@@ -17,7 +17,7 @@
   --navy-deep: #143454;
   --tan: #b09785;
   /* Deeper cut of --tan, for the citation line on the navy strip. */
-  --tan-deep: #9a8069;
+  --tan-deep: #856b54;
   --mist: #c9cacd;
 
   --background: var(--cream);
@@ -37,8 +37,8 @@
   --color-tan: var(--tan);
   --color-tan-deep: var(--tan-deep);
   --color-mist: var(--mist);
-  --font-serif: var(--font-fraunces);
-  --font-sans: var(--font-jost);
+  --font-serif: var(--font-source-serif);
+  --font-sans: var(--font-inter);
 }
 
 html,
@@ -48,32 +48,15 @@ body {
 }
 
 body {
-  font-family: var(--font-jost), "Avenir Next", Avenir, "Segoe UI", sans-serif;
-}
-
-/* Fraunces is the voice of the page: every display line is set in it. */
-.font-display {
-  font-family: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.015em;
-}
-
-/* ---------------------------------------------------------------------------
-   /research runs the typography of the paper's own site, tides.ethanyanxu.com:
-   Source Serif 4 on the display lines, Inter on body copy and labels. The two
-   families are loaded in app/research/page.tsx and only bind inside this scope,
-   so the rest of the site stays on Fraunces and Jost.
-   --------------------------------------------------------------------------- */
-.research-type {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-.research-type .font-display {
-  font-family: var(--font-source-serif), Georgia, serif;
-  /* Source Serif reads heavier than Fraunces at the same weight; 600 with a
-     tighter track is what tides sets its headings at. */
+/* Source Serif 4 is the voice of the page: every display line is set in it,
+   at the weight and track tides.ethanyanxu.com sets its own headings at. */
+.font-display {
+  font-family: var(--font-source-serif), "Iowan Old Style", Georgia, serif;
   font-weight: 600;
+  line-height: 1.02;
   letter-spacing: -0.025em;
 }
 
@@ -85,13 +68,22 @@ body {
   text-transform: uppercase;
 }
 
-/* The section labels in the research write-up carry the page's structure, so
-   they read stronger than a plain tan eyebrow: burgundy, and a step up in size.
-   The track loosens less than the size grows, or the caps drift apart. */
-.eyebrow-lead {
-  font-size: 0.8125rem;
-  letter-spacing: 0.26em;
+/* Section labels in the research write-up. They run in the display face rather
+   than as tracked-out caps, so they read as small headings in the page's own
+   voice: burgundy, title case, no transform. Pairs with .font-display, which
+   supplies the family and weight; this only overrides size, track and colour.
+   Declared after `.font-display` so it wins the tie. */
+.section-label {
+  font-size: 1.0625rem;
+  letter-spacing: 0.005em;
   color: var(--burgundy);
+  text-transform: none;
+}
+
+/* Stat labels in the results grid, set in the display face to match the figure
+   they sit under. Only the family changes; .eyebrow keeps the caps and track. */
+.stat-label {
+  font-family: var(--font-source-serif), Georgia, serif;
 }
 
 /* Sharp-cornered, solid-fill CTA — the reference uses no rounding at all. */
