@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import { papers, figures, paperPdf } from "@/data/research";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
+
+// This page borrows the typography from the paper's own site, tides.ethanyanxu.com:
+// Source Serif 4 on the display lines, Inter on everything else. Both are loaded
+// here rather than in the root layout so the rest of the site keeps Fraunces/Jost.
+const sourceSerif = Source_Serif_4({
+  variable: "--font-source-serif",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Research — Yan Xu",
@@ -11,7 +27,7 @@ export const metadata: Metadata = {
 
 export default function ResearchPage() {
   return (
-    <div>
+    <div className={`${sourceSerif.variable} ${inter.variable} research-type`}>
       <PageHeader title="Research" />
 
       {papers.map((paper, idx) => (

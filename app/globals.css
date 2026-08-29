@@ -53,6 +53,24 @@ body {
   letter-spacing: -0.015em;
 }
 
+/* ---------------------------------------------------------------------------
+   /research runs the typography of the paper's own site, tides.ethanyanxu.com:
+   Source Serif 4 on the display lines, Inter on body copy and labels. The two
+   families are loaded in app/research/page.tsx and only bind inside this scope,
+   so the rest of the site stays on Fraunces and Jost.
+   --------------------------------------------------------------------------- */
+.research-type {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.research-type .font-display {
+  font-family: var(--font-source-serif), Georgia, serif;
+  /* Source Serif reads heavier than Fraunces at the same weight; 600 with a
+     tighter track is what tides sets its headings at. */
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
 /* Small uppercase labels that sit above each section heading. */
 .eyebrow {
   font-size: 0.6875rem;
