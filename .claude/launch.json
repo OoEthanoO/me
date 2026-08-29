@@ -3,14 +3,10 @@
   "configurations": [
     {
       "name": "portfolio",
-      "runtimeExecutable": "wsl.exe",
+      "runtimeExecutable": "C:\\Users\\ethan\\.node\\node-v24.20.0-win-x64\\npmw.cmd",
       "runtimeArgs": [
-        "-d",
-        "Ubuntu",
-        "--",
-        "bash",
-        "-lc",
-        "cd ~/me && npm run dev"
+        "run",
+        "dev"
       ],
       "port": 3000
     }
