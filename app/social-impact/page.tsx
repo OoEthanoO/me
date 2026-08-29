@@ -20,37 +20,92 @@ export default function SocialImpactPage() {
           {serviceStrands.map((strand, idx) => (
             <Reveal key={strand.title} delay={idx * 0.08}>
               <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
-                <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-                  <div>
-                    <p className="eyebrow text-[var(--tan)]">
-                      {strand.eyebrow}
-                    </p>
-                    <h2 className="font-display mt-5 text-[clamp(2rem,4.5vw,3.2rem)] text-[var(--ink)]">
+                {strand.heroImages ? (
+                  /* Wide layout, matching the category sections on /tech: the
+                     title runs across the entry, screenshots stack to the left
+                     of the write-up, and the link closes the right column. */
+                  <>
+                    <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
                       {strand.title}
                     </h2>
-                    {strand.href && (
-                      <a
-                        href={strand.href}
-                        target={strand.external ? "_blank" : undefined}
-                        rel={strand.external ? "noopener noreferrer" : undefined}
-                        className="eyebrow mt-7 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
-                      >
-                        {strand.ctaLabel ?? "Visit"}
-                        <span aria-hidden="true">&#8594;</span>
-                      </a>
-                    )}
-                  </div>
 
-                  <div>
-                    <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
-                      {strand.description}
-                    </p>
+                    <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+                      <div className="space-y-8">
+                        {strand.heroImages.map((image) => (
+                          <figure key={image.src}>
+                            <div className="border border-[var(--tan)]/35 bg-white p-2">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={image.src}
+                                alt={image.alt}
+                                className="w-full"
+                              />
+                            </div>
+                            <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--ink)]/70">
+                              {image.caption}
+                            </figcaption>
+                          </figure>
+                        ))}
+                      </div>
 
-                    <div className="mt-10">
-                      <StatRow stats={strand.stats} />
+                      <div>
+                        <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
+                          {strand.description}
+                        </p>
+
+                        {strand.href && (
+                          <a
+                            href={strand.href}
+                            target={strand.external ? "_blank" : undefined}
+                            rel={
+                              strand.external ? "noopener noreferrer" : undefined
+                            }
+                            className="eyebrow mt-9 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                          >
+                            {strand.ctaLabel ?? "Visit"}
+                            <span aria-hidden="true">&#8594;</span>
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
+                    <div>
+                      {strand.eyebrow && (
+                        <p className="eyebrow text-[var(--tan)]">
+                          {strand.eyebrow}
+                        </p>
+                      )}
+                      <h2 className="font-display mt-5 text-[clamp(2rem,4.5vw,3.2rem)] text-[var(--ink)]">
+                        {strand.title}
+                      </h2>
+                      {strand.href && (
+                        <a
+                          href={strand.href}
+                          target={strand.external ? "_blank" : undefined}
+                          rel={
+                            strand.external ? "noopener noreferrer" : undefined
+                          }
+                          className="eyebrow mt-7 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                        >
+                          {strand.ctaLabel ?? "Visit"}
+                          <span aria-hidden="true">&#8594;</span>
+                        </a>
+                      )}
+                    </div>
+
+                    <div>
+                      <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
+                        {strand.description}
+                      </p>
+
+                      <div className="mt-10">
+                        <StatRow stats={strand.stats} />
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
 
                 {strand.code && (
                   <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-8">

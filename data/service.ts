@@ -20,10 +20,17 @@ export interface CodeSample {
 
 export interface ServiceStrand {
   title: string;
-  /** Small label printed above the title. */
-  eyebrow: string;
+  /** Small label printed above the title. Omitted by strands that lead with a
+   *  wide section heading instead. */
+  eyebrow?: string;
   description: string;
   stats: ServiceStat[];
+  /**
+   * Presence of this switches the strand to the wide layout: the title runs
+   * across the entry as a section heading, these sit stacked to the left of
+   * the write-up, and the call to action closes the right-hand column.
+   */
+  heroImages?: ServiceImage[];
   images?: ServiceImage[];
   code?: CodeSample[];
   href?: string;
@@ -34,15 +41,32 @@ export interface ServiceStrand {
 
 export const serviceStrands: ServiceStrand[] = [
   {
-    eyebrow: "Free Tutoring",
     title: "YanLearn",
     description:
-      "A free online tutoring platform for students in grades 6–12, taught by a team of high school volunteers. It handles accounts and roles, course catalogues, enrollment, scheduling, volunteer hour tracking, and the admin tooling the team runs day to day — so the volunteers can spend their time teaching rather than coordinating. The figures below come from the platform's own impact page, which recomputes them hourly.",
+      "A free online tutoring platform for students in grades 6–12, taught by a team of high school volunteers. It handles accounts and roles, course catalogues, enrollment, scheduling, volunteer hour tracking, and the admin tooling the team runs day to day — so the volunteers can spend their time teaching rather than coordinating.",
+    // Still rendered on the home page; the Social Impact entry leads with the
+    // screenshots instead.
     stats: [
       { value: "514", label: "Hours of free tutoring" },
       { value: "508", label: "Classes taught" },
       { value: "26", label: "Volunteer tutors" },
       { value: "126", label: "Students on the platform" },
+    ],
+    heroImages: [
+      {
+        src: "/yanlearn-analytics.png",
+        alt: "YanLearn analytics: weekly signups and enrollments, hours taught per week, cumulative donations over time, and attendance rate broken down by course.",
+        caption:
+          "The analytics view — signups, enrollments and hours taught by week, donations cumulatively, and attendance per course.",
+        kind: "screenshot",
+      },
+      {
+        src: "/yanlearn-courses.png",
+        alt: "The YanLearn course catalogue: a grid of available courses from Python and Java to IB Biology, French and Grade 7 Math, each showing its tutor and current enrollment.",
+        caption:
+          "The course catalogue, with the tutor and live seat count on every class.",
+        kind: "screenshot",
+      },
     ],
     images: [
       {
