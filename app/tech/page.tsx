@@ -3,6 +3,7 @@ import Link from "next/link";
 import { projects, categoryOrder } from "@/data/projects";
 import ProjectCard, { slugify } from "@/components/ProjectCard";
 import ProjectFeature from "@/components/ProjectFeature";
+import RoboticsSection from "@/components/RoboticsSection";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
@@ -98,6 +99,11 @@ export default function TechPage() {
               </div>
             </div>
           ))}
+
+          {/* Robotics follows the categories: same heading, its own layout. */}
+          <Reveal>
+            <RoboticsSection />
+          </Reveal>
 
           <Reveal>
             <p className="eyebrow text-[var(--tan)]">Selected Work</p>
