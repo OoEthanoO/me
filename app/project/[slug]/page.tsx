@@ -130,7 +130,10 @@ export default function ProjectDetail({
       <section className="bg-[var(--cream)] px-6 py-14 md:px-10 md:py-18">
         <div className="mx-auto grid max-w-[1180px] gap-16 lg:grid-cols-[minmax(0,1.75fr)_minmax(0,1fr)] lg:gap-24">
           <div className="flex flex-col gap-6">
-            {(project.longDescription ?? project.description)
+            {/* Where a project has no write-up of its own, the prose from its
+                /tech entry stands in — it is the fuller of the two, and a
+                one-line blurb reads as a stub on a page this wide. */}
+            {(project.longDescription ?? project.overview ?? project.description)
               .split("\n\n")
               .map((paragraph, idx) => (
                 <p

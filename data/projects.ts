@@ -9,7 +9,8 @@ export interface Project {
   title: string;
   /** Short blurb shown on the project card. Keep it to a sentence or two. */
   description: string;
-  /** Full write-up shown on the project's own page. Falls back to `description`. */
+  /** Full write-up shown on the project's own page. Falls back to `overview`,
+   *  and to `description` where there is no overview either. */
   longDescription?: string;
   technologies: string[];
   collaborators: Collaborator[];
