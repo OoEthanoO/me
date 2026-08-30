@@ -185,6 +185,7 @@ export default function ProjectDetail({
                 <div
                   key={idx}
                   className="image-container w-full cursor-pointer overflow-hidden border border-[var(--tan)]/40 bg-[var(--cream)]"
+                  data-lightbox-skip=""
                   onClick={() => {
                     setExpandedImage(img);
                     setIsClosing(false);

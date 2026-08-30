@@ -3,6 +3,7 @@ import { Inter, Poppins, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import ImageLightbox from "@/components/ImageLightbox";
 
 // The site runs the typography of tides.ethanyanxu.com, where the paper lives:
 // Source Serif 4 carries every display line, Inter the body copy and labels.
@@ -52,6 +53,8 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-grow">{children}</main>
         <Footer />
+        {/* One delegated listener enlarges any image on the site. */}
+        <ImageLightbox />
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 /** Order follows the sketch: wordmark left, these right. */
 const navLinks = [
@@ -12,8 +13,44 @@ const navLinks = [
   { label: "Awards", href: "/awards" },
 ];
 
+/**
+ * The sections of /tech, in the order they appear on the page. The first entry
+ * is the page itself, so opening the menu never costs you the plain link.
+ */
+const techSections = [
+  { label: "All Projects", href: "/tech" },
+  { label: "Environment", href: "/tech#environment" },
+  { label: "Robotics", href: "/tech#robotics" },
+  { label: "Used by Peers", href: "/tech#used-by-peers" },
+  { label: "Other", href: "/tech#other" },
+];
+
 const Navbar = () => {
   const pathname = usePathname();
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // A click anywhere else, or Escape, puts the menu away.
+  useEffect(() => {
+    if (!openMenu) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      if (!menuRef.current?.contains(event.target as Node)) setOpenMenu(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpenMenu(false);
+    };
+
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [openMenu]);
+
+  // Jumping to a section does not change the path, so close on any navigation.
+  useEffect(() => setOpenMenu(false), [pathname]);
 
   return (
     <nav className="sticky top-0 z-40 border-b border-[var(--tan)]/30 bg-[var(--cream)]/90 backdrop-blur-md">
@@ -41,16 +78,64 @@ const Navbar = () => {
                   ? pathname === "/"
                   : pathname.startsWith(link.href);
 
+              const underline = `border-b-2 pb-1 transition-colors ${
+                isActive
+                  ? "border-[var(--burgundy)] text-[var(--burgundy)]"
+                  : "border-transparent hover:text-[var(--burgundy)]"
+              }`;
+
+              // Tech/Project opens its sections rather than navigating; the
+              // first item in the menu is the page itself.
+              if (link.href === "/tech") {
+                return (
+                  <div key={link.href} ref={menuRef} className="relative">
+                    <button
+                      type="button"
+                      aria-haspopup="menu"
+                      aria-expanded={openMenu}
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => setOpenMenu((open) => !open)}
+                      className={`${underline} inline-flex items-center gap-1.5`}
+                    >
+                      {link.label}
+                      <span
+                        aria-hidden="true"
+                        className={`text-[0.7em] transition-transform ${
+                          openMenu ? "rotate-180" : ""
+                        }`}
+                      >
+                        &#9662;
+                      </span>
+                    </button>
+
+                    {openMenu && (
+                      <div
+                        role="menu"
+                        className="absolute left-0 top-full z-50 mt-3 min-w-[13rem] border border-[var(--tan)]/45 bg-[var(--cream)] py-1.5 shadow-[0_18px_40px_rgba(40,41,54,0.14)]"
+                      >
+                        {techSections.map((section) => (
+                          <Link
+                            key={section.href}
+                            role="menuitem"
+                            href={section.href}
+                            onClick={() => setOpenMenu(false)}
+                            className="block px-5 py-2.5 text-[0.9rem] font-normal text-[var(--ink)]/80 transition-colors hover:bg-[var(--cream-deep)] hover:text-[var(--burgundy)]"
+                          >
+                            {section.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   aria-current={isActive ? "page" : undefined}
-                  className={`border-b-2 pb-1 transition-colors ${
-                    isActive
-                      ? "border-[var(--burgundy)] text-[var(--burgundy)]"
-                      : "border-transparent hover:text-[var(--burgundy)]"
-                  }`}
+                  className={underline}
                 >
                   {link.label}
                 </Link>
