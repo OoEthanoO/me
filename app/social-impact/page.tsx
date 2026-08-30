@@ -128,9 +128,11 @@ export default async function SocialImpactPage() {
                                 className="w-full"
                               />
                             </div>
-                            <figcaption className="mt-4 text-[0.92rem] leading-relaxed text-[var(--entry-muted)]">
-                              {image.caption}
-                            </figcaption>
+                            {image.caption && (
+                              <figcaption className="mt-4 text-[0.92rem] leading-relaxed text-[var(--entry-muted)]">
+                                {image.caption}
+                              </figcaption>
+                            )}
                           </figure>
                         ))}
                       </div>
