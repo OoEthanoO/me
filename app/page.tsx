@@ -191,9 +191,19 @@ export default function Home() {
             >
               Ethan Yan Xu
             </h1>
+            {/* Who, before what: the name, then the standing, then the work.
+                Set in the same face as the name at a little under half its
+                size, so it reads as a line of the heading rather than as the
+                start of the copy underneath. */}
+            <p
+              className="font-display font-book rise mt-3 text-[clamp(0.95rem,1.6vw,1.15rem)] leading-snug text-[var(--accent)]"
+              style={{ animationDelay: "0.16s" }}
+            >
+              High School Toronto Student
+            </p>
             <p
               className="rise mt-6 max-w-xl text-[clamp(1.05rem,2.1vw,1.5rem)] leading-snug text-[var(--ink)]"
-              style={{ animationDelay: "0.22s" }}
+              style={{ animationDelay: "0.28s" }}
             >
               A technologist who is obsessed with programming, focuses on the
               development of environment-based software tools, and is

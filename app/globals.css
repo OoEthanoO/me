@@ -92,6 +92,11 @@ body {
   --entry-accent-hover: var(--ink);
   --entry-on-accent: var(--cream);
   --entry-gold: #96670a;
+  /* Stat tiles are the ground itself, with the hairline dividers showing
+     through 1px gaps, so both have to follow whatever the row is painted on.
+     On cream these are the values the row has always used. */
+  --entry-tile: var(--cream);
+  --entry-stat-label: rgba(40, 41, 54, 0.55);
 }
 
 .on-dark {
@@ -102,6 +107,8 @@ body {
   --entry-accent-hover: var(--tan);
   --entry-on-accent: var(--navy);
   --entry-gold: var(--gold);
+  --entry-tile: var(--navy);
+  --entry-stat-label: rgba(255, 240, 236, 0.55);
 }
 
 /* Small uppercase labels that sit above each section heading. */

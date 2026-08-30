@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { projects } from "../../../data/projects";
+import { pageName } from "@/data/nav";
 import { use, useEffect, useState } from "react";
 
 function markOrientation(img: HTMLImageElement) {
@@ -48,6 +49,10 @@ export default function ProjectDetail({
 
   if (!project) return notFound();
 
+  // A back link says where it goes, named the way the header names it.
+  const backHref = "/tech";
+  const backLabel = pageName(backHref);
+
   return (
     <div>
       {/* ---- Title band, coloured by whether the project is the flagship ---- */}
@@ -58,10 +63,10 @@ export default function ProjectDetail({
       >
         <div className="mx-auto max-w-[1180px]">
           <Link
-            href="/tech"
+            href={backHref}
             className="eyebrow text-[var(--tan)] transition-colors hover:text-[var(--cream)]"
           >
-            &#8592; All Work
+            &#8592; {backLabel}
           </Link>
           <p className="eyebrow mt-10 text-[var(--tan)]">
             {project.featured ? "Flagship Project" : "Project"}
@@ -212,8 +217,8 @@ export default function ProjectDetail({
 
       <section className="bg-[var(--burgundy)] px-6 py-20 text-[var(--cream)] md:px-10">
         <div className="mx-auto max-w-[1180px]">
-          <Link href="/tech" className="btn btn-cream">
-            &#8592; Back to All Work
+          <Link href={backHref} className="btn btn-cream">
+            &#8592; {backLabel}
           </Link>
         </div>
       </section>

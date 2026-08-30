@@ -6,6 +6,7 @@ import type { ServiceStat } from "@/data/service";
 const DARK_STRANDS = new Set(["YanLearn", "St. Robert Coding Club"]);
 import { fetchAmountRaised } from "@/lib/fundraiser";
 import { fetchSchoolhouseStats } from "@/lib/schoolhouse";
+import { fetchYanLearnStats } from "@/lib/yanlearn";
 import PageHeader from "@/components/PageHeader";
 import StatRow from "@/components/StatRow";
 import Reveal from "@/components/Reveal";
@@ -17,12 +18,13 @@ export const metadata: Metadata = {
 };
 
 export default async function SocialImpactPage() {
-  // Both reads happen once for the page, in parallel. Each strand that asks
+  // Every read happens once for the page, in parallel. Each strand that asks
   // for live figures falls back to the ones recorded in the data when the
   // source cannot be read.
-  const [raised, schoolhouse] = await Promise.all([
+  const [raised, schoolhouse, yanlearn] = await Promise.all([
     fetchAmountRaised(),
     fetchSchoolhouseStats(),
+    fetchYanLearnStats(),
   ]);
 
   /**
@@ -53,6 +55,15 @@ export default async function SocialImpactPage() {
     // Trailing zeros read as false precision on a number that is a sum.
     return found ? String(Number(sum.toFixed(1))) : null;
   };
+
+  /** The same, for the figures read off the YanLearn analytics board. */
+  const liveFigures = (stats: ServiceStat[]) =>
+    yanlearn
+      ? stats.map((stat) => ({
+          ...stat,
+          value: yanlearn[stat.label] ?? stat.value,
+        }))
+      : stats;
 
   /** Live values by label where they were found, the recorded ones otherwise. */
   const liveStats = (stats: ServiceStat[], live?: boolean) =>
@@ -156,6 +167,14 @@ export default async function SocialImpactPage() {
                               raised
                             </span>
                           </p>
+                        )}
+
+                        {/* Figures off the platform's own analytics board,
+                            between the write-up and the link to it. */}
+                        {strand.liveFigures && (
+                          <div className="mt-8">
+                            <StatRow stats={liveFigures(strand.liveFigures)} />
+                          </div>
                         )}
 
                         {strand.href && (

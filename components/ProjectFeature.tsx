@@ -40,6 +40,8 @@ export default function ProjectFeature({ project }: { project: Project }) {
    * it, so there the room is under the writing.
    */
   const linksBesideProse = !beside;
+  // …except where the screenshots themselves end short, and the entry says so.
+  const linksUnderImages = Boolean(beside && project.featureLinksUnderImages);
 
   const links = (
     <div className="flex flex-wrap items-center gap-3">
@@ -129,7 +131,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
           <div>
             {prose}
             {recognitions}
-            <div className="mt-7">{links}</div>
+            {!linksUnderImages && <div className="mt-7">{links}</div>}
           </div>
           <div className="space-y-5">
             {beside.map((src, i) => (
@@ -142,6 +144,9 @@ export default function ProjectFeature({ project }: { project: Project }) {
                 />
               </div>
             ))}
+            {/* pt-2 on top of the stack's own gap matches the mt-7 the links
+                carry when they sit under the write-up instead. */}
+            {linksUnderImages && <div className="pt-2">{links}</div>}
           </div>
         </div>
       ) : (

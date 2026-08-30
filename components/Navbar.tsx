@@ -3,15 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { navLinks } from "@/data/nav";
 
-/** Order follows the sketch: wordmark left, these right. */
-const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Tech/Project", href: "/tech" },
-  { label: "Social Impact", href: "/social-impact" },
-  { label: "Research", href: "/research" },
-  { label: "Awards", href: "/awards" },
-];
 
 /**
  * The sections of /tech, in the order they appear on the page. The first entry

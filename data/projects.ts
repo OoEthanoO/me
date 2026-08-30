@@ -37,6 +37,13 @@ export interface Project {
    * own page still shows in full.
    */
   featureImages?: string[];
+  /**
+   * Puts the entry's links under those screenshots rather than under the
+   * write-up. Worth setting only where the pictures run short of the prose and
+   * leave room beneath them; where they outrun it the room is under the
+   * writing, which is where the links go by default.
+   */
+  featureLinksUnderImages?: boolean;
   /** For work split across more than one repository. Takes the place of
    *  `github`, which only carries a single link. */
   repositories?: { label: string; url: string }[];
@@ -115,9 +122,9 @@ export const projects: Project[] = [
       "A web app that uses audio processing and machine learning to determine the species and type of a whale call.",
     // Printed in full on /tech, as supplied for the site.
     overview:
-      "Currently, I am working with a peer on Finprint, a web app that uses audio processing and machine learning to determine the species and type of a whale call. The identification of whale calls is important to understand whale social behavior, track where whales are, and how populations change. An AI-assisted approach will significantly improve the accuracy and even achieve previously impossible tasks such as classifying killer-whale acoustic signals.",
+      "I worked with a peer on Finprint, a web app that uses audio processing and machine learning to determine the species and type of a whale call. The identification of whale calls is important to understand whale social behavior, track where whales are, and how populations change. An AI-assisted approach will significantly improve the accuracy and even achieve previously impossible tasks such as classifying killer-whale acoustic signals.",
     longDescription:
-      "Currently, I am working with a peer on Finprint, a web app that uses audio processing and machine learning to determine the species and type of a whale call. The identification of whale calls is important to understand whale social behavior, track where whales are, and how populations change. An AI-assisted approach will significantly improve the accuracy and even achieve previously impossible tasks such as classifying killer-whale acoustic signals.\n\nUpload or record a clip and a CNN over log-mel spectrograms names one of 32 marine mammals from the Watkins Marine Mammal Sound Database. Alongside it sits a separate, untrained layer: call type — click, burst-pulse, whistle, song-moan, broadband — decided by rules over measured acoustic features, and the features themselves, dominant frequency, bandwidth, f0 contour, pulse rate and signal-to-noise, read straight off the waveform with librosa. Every call-type prediction ships with the numbers behind it and the reason it was chosen.\n\nThe app leads with the animal group rather than the species, because that is where the model is trustworthy: its mistakes stay inside the family, confusing one dolphin for another rather than a dolphin for a seal, so the group is right about 98% of the time even when the species beneath it is wrong.\n\nTwo pieces of restraint matter more than the headline accuracy. Below a confidence of 0.5 — the point where held-out accuracy falls from 0.97 to 0.49 — a prediction is labelled low confidence instead of being presented as certain. And silence and noise are rejected on the audio itself rather than on confidence, because a closed-set softmax is more certain on garbage than on a quiet real call: pure silence scores 0.72 and white noise 0.95, both comfortably above that line.\n\nThe honest limitation is stated rather than hidden. The original aim was to predict behavioural context — mating, hunting — and after surveying the data that isn't possible: the Watkins database, like essentially every at-scale multi-species marine mammal dataset, carries no behavioural or call-type labels. Rather than fabricate a behaviour model, Finprint classifies by acoustic structure, which is measurable and is how bioacousticians actually categorise calls.",
+      "I worked with a peer on Finprint, a web app that uses audio processing and machine learning to determine the species and type of a whale call. The identification of whale calls is important to understand whale social behavior, track where whales are, and how populations change. An AI-assisted approach will significantly improve the accuracy and even achieve previously impossible tasks such as classifying killer-whale acoustic signals.\n\nUpload or record a clip and a CNN over log-mel spectrograms names one of 32 marine mammals from the Watkins Marine Mammal Sound Database. Alongside it sits a separate, untrained layer: call type — click, burst-pulse, whistle, song-moan, broadband — decided by rules over measured acoustic features, and the features themselves, dominant frequency, bandwidth, f0 contour, pulse rate and signal-to-noise, read straight off the waveform with librosa. Every call-type prediction ships with the numbers behind it and the reason it was chosen.\n\nThe app leads with the animal group rather than the species, because that is where the model is trustworthy: its mistakes stay inside the family, confusing one dolphin for another rather than a dolphin for a seal, so the group is right about 98% of the time even when the species beneath it is wrong.\n\nTwo pieces of restraint matter more than the headline accuracy. Below a confidence of 0.5 — the point where held-out accuracy falls from 0.97 to 0.49 — a prediction is labelled low confidence instead of being presented as certain. And silence and noise are rejected on the audio itself rather than on confidence, because a closed-set softmax is more certain on garbage than on a quiet real call: pure silence scores 0.72 and white noise 0.95, both comfortably above that line.\n\nThe honest limitation is stated rather than hidden. The original aim was to predict behavioural context — mating, hunting — and after surveying the data that isn't possible: the Watkins database, like essentially every at-scale multi-species marine mammal dataset, carries no behavioural or call-type labels. Rather than fabricate a behaviour model, Finprint classifies by acoustic structure, which is measurable and is how bioacousticians actually categorise calls.",
     stats: [
       { value: "0.979", label: "Group accuracy" },
       { value: "0.906", label: "Species accuracy" },
@@ -359,6 +366,7 @@ export const projects: Project[] = [
     github: "https://github.com/OoEthanoO/orgchem",
     website: "https://orgchem.ethanyanxu.com/",
     featureImages: ["/orgchem-stereoisomers.jpg", "/orgchem-resolve.png"],
+    featureLinksUnderImages: true,
     images: ["/orgchem-stereoisomers.jpg", "/orgchem-resolve.png"],
   },
   {
