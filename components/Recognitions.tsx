@@ -27,7 +27,7 @@ export default function Recognitions({ items }: { items: Recognition[] }) {
                 aria-expanded={isOpen}
                 onClick={() => setOpenIndex(isOpen ? null : i)}
                 title={item.event}
-                className={`inline-flex items-center gap-2 border px-3 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition-colors ${
+                className={`inline-flex cursor-pointer items-center gap-2 border px-3 py-2 text-[0.68rem] font-medium uppercase tracking-[0.16em] transition-colors ${
                   isOpen
                     ? "border-[var(--entry-accent)] bg-[var(--entry-accent)] text-[var(--entry-on-accent)]"
                     : "border-[var(--entry-rule)] text-[var(--entry-accent)] hover:border-[var(--entry-accent)]"

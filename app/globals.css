@@ -287,6 +287,20 @@ body {
   transition: color 0.35s ease, transform 0.35s ease;
 }
 
+/* Any image the site-wide lightbox will open reads as clickable. The two
+   exceptions mirror the escapes that listener makes: an image inside a link
+   belongs to the link, and one under [data-lightbox-skip] belongs to whatever
+   viewer that page brought instead — both inherit the cursor of whatever
+   wraps them. */
+img {
+  cursor: pointer;
+}
+
+a img,
+[data-lightbox-skip] img {
+  cursor: inherit;
+}
+
 /* ---------------------------------------------------------------------------
    Project detail: image grid + lightbox.
    --------------------------------------------------------------------------- */
