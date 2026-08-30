@@ -68,10 +68,16 @@ export default function ProjectDetail({
           >
             &#8592; {backLabel}
           </Link>
-          <p className="eyebrow mt-10 text-[var(--tan)]">
-            {project.featured ? "Flagship Project" : "Project"}
-          </p>
-          <h1 className="font-display mt-5 text-[clamp(2.8rem,8vw,3.4rem)]">
+          {/* The back link overhead already says these are projects, so only
+              the flagship badge earns a line of its own. */}
+          {project.featured && (
+            <p className="eyebrow mt-10 text-[var(--tan)]">Flagship Project</p>
+          )}
+          <h1
+            className={`font-display text-[clamp(2.8rem,8vw,3.4rem)] ${
+              project.featured ? "mt-5" : "mt-10"
+            }`}
+          >
             {project.title}
           </h1>
 
