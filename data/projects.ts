@@ -26,6 +26,8 @@ export interface Project {
   overview?: string;
   /** Headline measurements shown on the wide entry. */
   stats?: { value: string; label: string }[];
+  /** Competitions the work has been judged at, shown on the wide entry. */
+  recognitions?: { award: string; event: string }[];
   /**
    * Screenshots to stack beside the write-up on the wide entry, in place of
    * the row underneath it. A chosen subset of `images`, which the project's
@@ -79,6 +81,20 @@ export const projects: Project[] = [
       "ReportLab",
     ],
     collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    recognitions: [
+      {
+        award: "First Place",
+        event: "Canadian Meteorological and Oceanographic Society Award",
+      },
+      {
+        award: "Silver Medal",
+        event: "York Region Science and Technology Fair",
+      },
+      {
+        award: "Silver Medal",
+        event: "IgniteCS Expo — Senior Division, Data Science",
+      },
+    ],
     github: "https://github.com/OoEthanoO/cora_project",
     website: "https://cora.ethanyanxu.com/",
     images: ["/cora5.png", "/cora3.png", "/cora1.png"],

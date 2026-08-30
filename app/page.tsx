@@ -150,16 +150,16 @@ const sections: HomeSection[] = [
         drop: "1rem",
       },
       {
-        src: "/hobby-cadet-band.jpg",
-        alt: "The Royal Canadian Air Cadet band in uniform, playing in formation.",
-        width: "27%",
+        src: "/hobby-golf.jpg",
+        alt: "Carrying a bag out to the range.",
+        width: "17.5%",
         drop: "0rem",
       },
       {
         src: "/hobby-cadet-band-poster.jpg",
         video: "/hobby-cadet-band.mp4",
         alt: "The cadet band performing, with the drum major out front.",
-        width: "30%",
+        width: "31%",
         drop: "2.5rem",
       },
       {
@@ -169,10 +169,10 @@ const sections: HomeSection[] = [
         drop: "0.5rem",
       },
       {
-        src: "/hobby-golf.jpg",
-        alt: "Carrying a bag out to the range.",
-        width: "18%",
-        drop: "3.5rem",
+        src: "/hobby-cadet-band.jpg",
+        alt: "The Royal Canadian Air Cadet band in uniform, playing in formation.",
+        width: "27%",
+        drop: "3rem",
       },
     ],
   },
@@ -303,30 +303,25 @@ export default function Home() {
               // column and the document takes the width that frees up.
               return (
                 <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:gap-8">
-                  <div className="space-y-6 [&>div]:!w-full [&>div]:!mt-0">
+                  <div className="flex flex-col gap-6 [&>div]:!w-full [&>div]:!mt-0">
                     {pictures}
                     {section.href && (
-                      <Reveal delay={0.32}>
-                        <Link
-                          href={section.href}
-                          className={`${section.button} mt-2`}
-                        >
+                      <Reveal delay={0.32} className="mt-auto">
+                        <Link href={section.href} className={section.button}>
                           Learn More
                         </Link>
                       </Reveal>
                     )}
                   </div>
 
-                  <Reveal delay={0.3}>
-                    <figure>
-                      <div className="border border-[var(--tan)]/35 bg-white">
-                        <iframe
-                          src={`${section.document.src}#view=FitH`}
-                          title={section.document.title}
-                          className="block h-[min(85vh,900px)] min-h-[32rem] w-full"
-                        />
-                      </div>
-                      <figcaption className="mt-3">
+                  {/* The frame grows to the row rather than to a fixed
+                      height, so the document ends level with the button that
+                      closes the column beside it. The link sits above it for
+                      the same reason: below, it would push the frame short of
+                      that line by its own height. */}
+                  <Reveal delay={0.3} className="flex">
+                    <figure className="flex w-full flex-col">
+                      <figcaption className="mb-3">
                         <a
                           href={section.document.src}
                           target="_blank"
@@ -336,6 +331,13 @@ export default function Home() {
                           {section.document.label} &#8594;
                         </a>
                       </figcaption>
+                      <div className="min-h-[32rem] flex-1 border border-[var(--tan)]/35 bg-white">
+                        <iframe
+                          src={`${section.document.src}#view=FitH`}
+                          title={section.document.title}
+                          className="block h-full w-full"
+                        />
+                      </div>
                     </figure>
                   </Reveal>
                 </div>

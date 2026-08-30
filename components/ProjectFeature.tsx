@@ -79,6 +79,24 @@ export default function ProjectFeature({ project }: { project: Project }) {
     </div>
   );
 
+  const recognitions = project.recognitions?.length ? (
+    <div className="mt-8 grid gap-3 sm:grid-cols-3">
+      {project.recognitions.map((r) => (
+        <div
+          key={r.event}
+          className="border border-[var(--entry-rule)] px-4 py-3.5"
+        >
+          <p className="text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[var(--entry-accent)]">
+            {r.award}
+          </p>
+          <p className="mt-1.5 text-[0.9rem] leading-snug text-[var(--entry-ink)]">
+            {r.event}
+          </p>
+        </div>
+      ))}
+    </div>
+  ) : null;
+
   const prose = (
     <>
       <div className="space-y-4">
@@ -123,6 +141,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
         <div className="mt-5 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
           <div>
             {prose}
+            {recognitions}
             <div className="mt-7">{links}</div>
           </div>
           <div className="space-y-5">
@@ -146,6 +165,8 @@ export default function ProjectFeature({ project }: { project: Project }) {
             <div className="max-w-3xl">{prose}</div>
             {linksBesideProse && <div className="lg:pt-1">{links}</div>}
           </div>
+
+          {recognitions}
 
           {below.length > 0 && (
             <div className={`mt-8 grid items-start gap-5 ${imageColumns(below.length)}`}>
