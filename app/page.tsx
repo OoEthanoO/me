@@ -179,7 +179,7 @@ export default function Home() {
               /* The aspect is pinned square alongside the radius so the crop
                  stays a circle if the portrait is ever replaced by one that
                  is not already square. */
-              className="aspect-square w-full max-w-[19rem] rounded-full border border-[var(--tan)]/35 object-cover lg:max-w-[21rem]"
+              className="aspect-square w-full max-w-[13rem] rounded-full border border-[var(--tan)]/35 object-cover lg:max-w-[14.5rem]"
             />
           </div>
         </div>
