@@ -11,6 +11,8 @@ export interface ResearchPaper {
   venue: string;
   /** Full citation line as it should be printed. */
   citation: string;
+  /** The volume's page at the journal, which the citation line links to. */
+  citationUrl?: string;
   year: string;
   url: string;
   /** Why the problem is worth solving. */
@@ -28,6 +30,7 @@ export const papers: ResearchPaper[] = [
       "A Machine Learning Approach for Water Level Residual Correction Using Geospatial Terrain Features",
     venue: "The Columbia Junior Science Journal",
     citation: "The Columbia Junior Science Journal, Volume 11, 2025–2026",
+    citationUrl: "https://cjsjournal.squarespace.com/20252026-cjsj",
     year: "2025",
     url: "https://tides.ethanyanxu.com/",
     motivation:

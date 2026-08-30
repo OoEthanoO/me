@@ -24,7 +24,18 @@ export default function ResearchPage() {
                   {paper.title}
                 </h2>
                 <p className="mt-8 text-base font-medium tracking-wide text-[var(--gold)]">
-                  {paper.citation}
+                  {paper.citationUrl ? (
+                    <a
+                      href={paper.citationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-4 transition-colors hover:text-[var(--cream)]"
+                    >
+                      {paper.citation}
+                    </a>
+                  ) : (
+                    paper.citation
+                  )}
                 </p>
                 <p className="mt-9 max-w-2xl text-lg leading-relaxed text-[var(--cream)]/80">
                   {paper.motivation}
