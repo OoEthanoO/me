@@ -93,7 +93,10 @@ export default function TechPage() {
           <section
             key={category}
             id={category === ROBOTICS_SECTION ? "robotics" : sectionId(category)}
-            className={`scroll-mt-28 px-6 py-16 md:px-10 md:py-20 ${
+            /* Half the bottom padding: a section's trailing air was reading
+               as a gap rather than as the end of the section, and the entry
+               above it gives up half of its own padding to match. */
+            className={`scroll-mt-28 px-6 py-16 pb-8 md:px-10 md:py-20 md:pb-10 ${
               dark
                 ? "on-dark bg-[var(--navy)] text-[var(--cream)]"
                 : "bg-[var(--cream)] text-[var(--ink)]"
@@ -118,7 +121,7 @@ export default function TechPage() {
                   {/* The heading already draws a rule, so the first entry
                       drops its own border and the top padding that spaces
                       stacked entries. */}
-                  <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5">
+                  <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5 [&>*:last-child_article]:pb-5 md:[&>*:last-child_article]:pb-7">
                     {items.map((project) => (
                       <Reveal key={project.title}>
                         <ProjectFeature project={project} />
