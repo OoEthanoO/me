@@ -233,16 +233,24 @@ export default async function SocialImpactPage() {
                             </div>
 
                             {/* The totals sit under the first group, in the
-                                room its shorter list leaves. */}
+                                room its shorter list leaves. A single one has
+                                that room to itself, so it centres there rather
+                                than sitting in the first of two columns. */}
                             {index === 0 && strand.totals && (
-                              <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                              <div
+                                className={`mt-10 grid gap-8 ${
+                                  strand.totals.length > 1
+                                    ? "sm:grid-cols-2"
+                                    : "justify-items-center text-center"
+                                }`}
+                              >
                                 {strand.totals.map((total) => {
                                   const value = totalValue(strand, total);
                                   if (!value) return null;
 
                                   return (
                                     <div key={total.label}>
-                                      <p className="font-display text-[clamp(2.4rem,5vw,3.4rem)] leading-none text-[var(--entry-accent)]">
+                                      <p className="font-display text-[clamp(2.4rem,5vw,3.4rem)] leading-none text-[var(--entry-gold)]">
                                         {value}
                                       </p>
                                       <p className="mt-3 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--entry-muted)]">
