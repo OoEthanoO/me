@@ -166,56 +166,6 @@ export default async function SocialImpactPage() {
                   </>
                 )}
 
-                {strand.code && (
-                  <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:gap-8">
-                    {/* Each figure is min-w-0 so the code's intrinsic width
-                        cannot widen its grid track and push the page sideways. */}
-                    {strand.code.map((sample) => (
-                      <figure key={sample.path} className="min-w-0">
-                        <div className="min-w-0 overflow-hidden border border-[var(--navy)]/25 bg-[var(--navy)]">
-                          <p className="border-b border-[var(--cream)]/15 px-5 py-3 font-mono text-[0.72rem] tracking-wide text-[var(--tan)]">
-                            {sample.path}
-                          </p>
-                          {/* Long lines scroll inside the panel, never the page. */}
-                          <pre className="overflow-x-auto px-5 py-5">
-                            <code className="font-mono text-[0.72rem] leading-relaxed text-[var(--cream)]/85">
-                              {sample.code}
-                            </code>
-                          </pre>
-                        </div>
-                        <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--ink)]/70">
-                          {sample.caption}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                )}
-
-                {strand.images && (
-                  <div className="mt-14 grid gap-10 md:grid-cols-2 md:gap-x-8 md:gap-y-12">
-                    {strand.images.map((image) => (
-                      <figure key={image.src}>
-                        <div
-                          className={
-                            image.kind === "screenshot"
-                              ? "border border-[var(--tan)]/35 bg-white p-2"
-                              : "border border-[var(--tan)]/35"
-                          }
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={image.src}
-                            alt={image.alt}
-                            className="w-full object-cover"
-                          />
-                        </div>
-                        <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--ink)]/70">
-                          {image.caption}
-                        </figcaption>
-                      </figure>
-                    ))}
-                  </div>
-                )}
               </article>
             </Reveal>
           ))}

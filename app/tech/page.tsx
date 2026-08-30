@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { projects, categoryOrder, ROBOTICS_SECTION } from "@/data/projects";
-import ProjectCard, { slugify } from "@/components/ProjectCard";
+import { slugify } from "@/components/ProjectCard";
 import ProjectFeature from "@/components/ProjectFeature";
 import RoboticsSection from "@/components/RoboticsSection";
 import { sectionId } from "@/data/projects";
@@ -19,8 +19,8 @@ export default function TechPage() {
   const rest = projects.filter((p) => p !== flagship);
 
   // Named categories render as their own sections, in the declared order, with
-  // the Robotics section taking its place among them; anything without a
-  // category stays in the Selected Work list below them all.
+  // the Robotics section taking its place among them. A project without a
+  // category no longer appears on this page; its own page still exists.
   const sections = categoryOrder
     .map((category) =>
       category === ROBOTICS_SECTION
@@ -31,7 +31,6 @@ export default function TechPage() {
       ({ category, items }) =>
         category === ROBOTICS_SECTION || items.length > 0,
     );
-  const ungrouped = rest.filter((p) => !p.category);
 
   return (
     <div>
@@ -81,7 +80,7 @@ export default function TechPage() {
         </section>
       )}
 
-      {/* ---- Grouped categories, then everything not yet grouped ---- */}
+      {/* ---- The grouped categories ---- */}
       <section className="bg-[var(--cream)] px-6 py-16 md:px-10 md:py-20">
         <div className="mx-auto max-w-[1180px]">
           {sections.map(({ category, items }) =>
@@ -118,18 +117,6 @@ export default function TechPage() {
               </div>
             ),
           )}
-
-          <Reveal>
-            <p className="eyebrow text-[var(--tan)]">Selected Work</p>
-          </Reveal>
-
-          <div className="mt-10 grid border-l border-t border-[var(--tan)]/35 md:grid-cols-2 lg:grid-cols-3">
-            {ungrouped.map((project, idx) => (
-              <Reveal key={project.title} delay={(idx % 3) * 0.08} className="h-full">
-                <ProjectCard project={project} index={idx} />
-              </Reveal>
-            ))}
-          </div>
 
           <Reveal>
             <p className="eyebrow mt-16 text-[var(--tan)]">More coming soon</p>

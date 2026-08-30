@@ -133,7 +133,10 @@ export default function Home() {
             <img
               src="/portrait.jpg"
               alt="Ethan Yan Xu"
-              className="w-full max-w-[19rem] border border-[var(--tan)]/35 object-cover lg:max-w-[21rem]"
+              /* The aspect is pinned square alongside the radius so the crop
+                 stays a circle if the portrait is ever replaced by one that
+                 is not already square. */
+              className="aspect-square w-full max-w-[19rem] rounded-full border border-[var(--tan)]/35 object-cover lg:max-w-[21rem]"
             />
           </div>
         </div>
@@ -152,13 +155,20 @@ export default function Home() {
               </h2>
             </Reveal>
 
+            {/* Columns rather than a grid: each image keeps the proportions it
+                was captured at, and the rows stagger instead of every picture
+                being cropped to one height. */}
             <div
-              className={`mt-10 grid gap-6 sm:grid-cols-2 ${
-                section.images.length > 2 ? "lg:grid-cols-3" : ""
+              className={`mt-10 gap-6 [column-fill:_balance] columns-1 sm:columns-2 ${
+                section.images.length > 2 ? "lg:columns-3" : ""
               }`}
             >
               {section.images.map((image, i) => (
-                <Reveal key={image.src} delay={0.08 + i * 0.08}>
+                <Reveal
+                  key={image.src}
+                  delay={0.08 + i * 0.08}
+                  className="mb-6 block break-inside-avoid"
+                >
                   <div
                     className={
                       image.kind === "photo"
@@ -167,11 +177,7 @@ export default function Home() {
                     }
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="h-56 w-full object-cover object-top"
-                    />
+                    <img src={image.src} alt={image.alt} className="w-full" />
                   </div>
                 </Reveal>
               ))}

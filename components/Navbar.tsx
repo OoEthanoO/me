@@ -30,23 +30,15 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  // A click anywhere else, or Escape, puts the menu away.
+  // Escape puts the menu away; hovering out is handled on the wrapper itself.
   useEffect(() => {
     if (!openMenu) return;
 
-    const onPointerDown = (event: MouseEvent) => {
-      if (!menuRef.current?.contains(event.target as Node)) setOpenMenu(false);
-    };
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpenMenu(false);
     };
-
-    document.addEventListener("mousedown", onPointerDown);
     document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKey);
-    };
+    return () => document.removeEventListener("keydown", onKey);
   }, [openMenu]);
 
   // Jumping to a section does not change the path, so close on any navigation.
@@ -84,17 +76,30 @@ const Navbar = () => {
                   : "border-transparent hover:text-[var(--burgundy)]"
               }`;
 
-              // Tech/Project opens its sections rather than navigating; the
-              // first item in the menu is the page itself.
+              // Tech/Project still navigates on click; hovering it reveals
+              // the sections of that page underneath.
               if (link.href === "/tech") {
                 return (
-                  <div key={link.href} ref={menuRef} className="relative">
-                    <button
-                      type="button"
+                  <div
+                    key={link.href}
+                    ref={menuRef}
+                    className="relative"
+                    onMouseEnter={() => setOpenMenu(true)}
+                    onMouseLeave={() => setOpenMenu(false)}
+                    // Keyboard users get the same menu on focus; blur only
+                    // closes it once focus has left the group entirely.
+                    onFocus={() => setOpenMenu(true)}
+                    onBlur={(event) => {
+                      if (!event.currentTarget.contains(event.relatedTarget)) {
+                        setOpenMenu(false);
+                      }
+                    }}
+                  >
+                    <Link
+                      href={link.href}
                       aria-haspopup="menu"
                       aria-expanded={openMenu}
                       aria-current={isActive ? "page" : undefined}
-                      onClick={() => setOpenMenu((open) => !open)}
                       className={`${underline} inline-flex items-center gap-1.5`}
                     >
                       {link.label}
@@ -106,24 +111,29 @@ const Navbar = () => {
                       >
                         &#9662;
                       </span>
-                    </button>
+                    </Link>
 
                     {openMenu && (
-                      <div
-                        role="menu"
-                        className="absolute left-0 top-full z-50 mt-3 min-w-[13rem] border border-[var(--tan)]/45 bg-[var(--cream)] py-1.5 shadow-[0_18px_40px_rgba(40,41,54,0.14)]"
-                      >
-                        {techSections.map((section) => (
-                          <Link
-                            key={section.href}
-                            role="menuitem"
-                            href={section.href}
-                            onClick={() => setOpenMenu(false)}
-                            className="block px-5 py-2.5 text-[0.9rem] font-normal text-[var(--ink)]/80 transition-colors hover:bg-[var(--cream-deep)] hover:text-[var(--burgundy)]"
-                          >
-                            {section.label}
-                          </Link>
-                        ))}
+                      /* The gap between the trigger and the panel is padding
+                         on this wrapper rather than a margin, so the pointer
+                         never crosses dead space on its way down. */
+                      <div className="absolute left-0 top-full z-50 pt-3">
+                        <div
+                          role="menu"
+                          className="min-w-[13rem] border border-[var(--tan)]/45 bg-[var(--cream)] py-1.5 shadow-[0_18px_40px_rgba(40,41,54,0.14)]"
+                        >
+                          {techSections.map((section) => (
+                            <Link
+                              key={section.href}
+                              role="menuitem"
+                              href={section.href}
+                              onClick={() => setOpenMenu(false)}
+                              className="block px-5 py-2.5 text-[0.9rem] font-normal text-[var(--ink)]/80 transition-colors hover:bg-[var(--cream-deep)] hover:text-[var(--burgundy)]"
+                            >
+                              {section.label}
+                            </Link>
+                          ))}
+                        </div>
                       </div>
                     )}
                   </div>
