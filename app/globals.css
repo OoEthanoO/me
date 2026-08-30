@@ -91,6 +91,7 @@ body {
   --entry-accent: var(--accent);
   --entry-accent-hover: var(--ink);
   --entry-on-accent: var(--cream);
+  --entry-gold: #96670a;
 }
 
 .on-dark {
@@ -100,6 +101,7 @@ body {
   --entry-accent: var(--cream);
   --entry-accent-hover: var(--tan);
   --entry-on-accent: var(--navy);
+  --entry-gold: var(--gold);
 }
 
 /* Small uppercase labels that sit above each section heading. */

@@ -144,11 +144,13 @@ export default async function SocialImpactPage() {
                             riding on the heading, where it read as a caption
                             to the title instead of the result of the story. */}
                         {strand.liveFundraiser && (
-                          <p className="mt-8 text-[0.95rem] text-[var(--entry-muted)]">
+                          <p className="mt-8 flex items-baseline gap-2.5">
                             <span className="font-display text-[1.6rem] text-[var(--entry-accent)]">
                               {raised ?? strand.stats[0]?.value}
-                            </span>{" "}
-                            raised
+                            </span>
+                            <span className="text-[1.05rem] font-semibold text-[var(--entry-gold)]">
+                              raised
+                            </span>
                           </p>
                         )}
 

@@ -284,7 +284,7 @@ export default function Home() {
                 return (
                   <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
                     <div>{lead}</div>
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col items-end gap-6">
                       {rest}
                       {section.href && (
                         <Reveal delay={0.32} className="mt-auto">
