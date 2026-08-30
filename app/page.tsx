@@ -192,17 +192,16 @@ export default function Home() {
               Ethan Yan Xu
             </h1>
             {/* Who, before what: the name, then the standing, then the work.
-                Set in the same face as the name at a little under half its
-                size, so it reads as a line of the heading rather than as the
-                start of the copy underneath. */}
+                Set as the eyebrow that heads a project write-up. */}
             <p
-              className="font-display font-book rise mt-3 text-[clamp(0.95rem,1.6vw,1.15rem)] leading-snug text-[var(--accent)]"
+              className="eyebrow rise mt-4 text-[var(--tan)]"
               style={{ animationDelay: "0.16s" }}
             >
-              High School Toronto Student
+              Toronto High School Student
             </p>
+            {/* Indented off the name and its eyebrow, which start the block. */}
             <p
-              className="rise mt-6 max-w-xl text-[clamp(1.05rem,2.1vw,1.5rem)] leading-snug text-[var(--ink)]"
+              className="rise mt-6 max-w-xl pl-4 text-[clamp(1.05rem,2.1vw,1.5rem)] leading-snug text-[var(--ink)]"
               style={{ animationDelay: "0.28s" }}
             >
               A technologist who is obsessed with programming, focuses on the
