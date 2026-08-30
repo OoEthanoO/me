@@ -30,8 +30,6 @@ export default function ProjectFeature({ project }: { project: Project }) {
   const MAX_IMAGES = 3;
   const beside = project.featureImages;
   const below = beside ? [] : project.images.slice(0, MAX_IMAGES);
-  const remaining =
-    project.images.length - (beside ? beside.length : below.length);
 
   /**
    * The links go wherever the entry has room left over. Pictures under the
@@ -50,7 +48,6 @@ export default function ProjectFeature({ project }: { project: Project }) {
         className="btn-entry"
       >
         Full Write-up
-        {remaining > 0 && ` (+${remaining})`}
         <span aria-hidden="true">&#8594;</span>
       </Link>
       {project.website && (
