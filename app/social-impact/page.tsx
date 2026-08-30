@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { serviceStrands } from "@/data/service";
+import { fetchAmountRaised } from "@/lib/fundraiser";
+import { fetchSchoolhouseStats } from "@/lib/schoolhouse";
 import PageHeader from "@/components/PageHeader";
 import StatRow from "@/components/StatRow";
 import Reveal from "@/components/Reveal";
@@ -10,7 +12,24 @@ export const metadata: Metadata = {
     "Free tutoring, fundraising for SickKids, and community volunteering.",
 };
 
-export default function SocialImpactPage() {
+export default async function SocialImpactPage() {
+  // Both reads happen once for the page, in parallel. Each strand that asks
+  // for live figures falls back to the ones recorded in the data when the
+  // source cannot be read.
+  const [raised, schoolhouse] = await Promise.all([
+    fetchAmountRaised(),
+    fetchSchoolhouseStats(),
+  ]);
+
+  /** Live values by label where they were found, the recorded ones otherwise. */
+  const statsFor = (strand: (typeof serviceStrands)[number]) =>
+    strand.liveSchoolhouse && schoolhouse
+      ? strand.stats.map((stat) => ({
+          ...stat,
+          value: schoolhouse[stat.label] ?? stat.value,
+        }))
+      : strand.stats;
+
   return (
     <div>
       <PageHeader title="Social Impact" />
@@ -20,20 +39,45 @@ export default function SocialImpactPage() {
           {serviceStrands.map((strand, idx) => (
             <Reveal key={strand.title} delay={idx * 0.08}>
               <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
+                <h2 className="font-display flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
+                      <span>{strand.title}</span>
+                      {strand.liveFundraiser && (
+                        <span className="text-[0.95rem] font-normal text-[var(--ink)]/70">
+                          <span className="font-display text-[1.15rem] text-[var(--burgundy)]">
+                            {raised ?? strand.stats[0]?.value}
+                          </span>{" "}
+                          raised
+                        </span>
+                      )}
+                </h2>
+
                 {strand.heroImages ? (
                   /* Wide layout, matching the category sections on /tech: the
-                     title runs across the entry, screenshots stack to the left
-                     of the write-up, and the link closes the right column. */
-                  <>
-                    <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
-                      {strand.title}
-                    </h2>
-
-                    <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-                      <div className="space-y-8">
+                     write-up runs beside the screenshots, on whichever side
+                     the strand asks for. */
+                  <div
+                    className={`mt-8 grid gap-10 lg:gap-20 ${
+                      strand.heroSide === "right"
+                        ? "lg:grid-cols-[1.5fr_1fr]"
+                        : "lg:grid-cols-[1fr_1.1fr]"
+                    }`}
+                  >
+                    <div
+                        className={`space-y-8 ${
+                          strand.heroSide === "right"
+                            ? "order-2 lg:order-2"
+                            : "order-2 lg:order-1"
+                        }`}
+                      >
                         {strand.heroImages.map((image) => (
                           <figure key={image.src}>
-                            <div className="border border-[var(--tan)]/35 bg-white p-2">
+                            <div
+                              className={
+                                image.kind === "screenshot"
+                                  ? "border border-[var(--tan)]/35 bg-white p-2"
+                                  : "border border-[var(--tan)]/35"
+                              }
+                            >
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
                                 src={image.src}
@@ -48,10 +92,25 @@ export default function SocialImpactPage() {
                         ))}
                       </div>
 
-                      <div>
-                        <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
-                          {strand.description}
-                        </p>
+                      <div
+                        className={
+                          strand.heroSide === "right"
+                            ? "order-1 lg:order-1"
+                            : "order-1 lg:order-2"
+                        }
+                      >
+                        <div className="space-y-5">
+                          {(strand.overview ?? strand.description)
+                            .split("\n\n")
+                            .map((para) => (
+                              <p
+                                key={para.slice(0, 32)}
+                                className="text-lg font-light leading-relaxed text-[var(--ink)]/80"
+                              >
+                                {para}
+                              </p>
+                            ))}
+                        </div>
 
                         {strand.href && (
                           <a
@@ -67,44 +126,44 @@ export default function SocialImpactPage() {
                           </a>
                         )}
                       </div>
-                    </div>
-                  </>
-                ) : (
-                  <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-                    <div>
-                      {strand.eyebrow && (
-                        <p className="eyebrow text-[var(--tan)]">
-                          {strand.eyebrow}
-                        </p>
-                      )}
-                      <h2 className="font-display mt-5 text-[clamp(2rem,4.5vw,3.2rem)] text-[var(--ink)]">
-                        {strand.title}
-                      </h2>
-                      {strand.href && (
-                        <a
-                          href={strand.href}
-                          target={strand.external ? "_blank" : undefined}
-                          rel={
-                            strand.external ? "noopener noreferrer" : undefined
-                          }
-                          className="eyebrow mt-7 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
-                        >
-                          {strand.ctaLabel ?? "Visit"}
-                          <span aria-hidden="true">&#8594;</span>
-                        </a>
-                      )}
-                    </div>
-
-                    <div>
-                      <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
-                        {strand.description}
-                      </p>
-
-                      <div className="mt-10">
-                        <StatRow stats={strand.stats} />
-                      </div>
-                    </div>
                   </div>
+                ) : (
+                  /* Nothing to show beside it, so the write-up runs the full
+                     width of the entry. */
+                  <>
+                    {(strand.overview ?? strand.description).trim() && (
+                      <div className="mt-7 space-y-5">
+                        {(strand.overview ?? strand.description)
+                          .split("\n\n")
+                          .map((para) => (
+                            <p
+                              key={para.slice(0, 32)}
+                              className="text-lg font-light leading-relaxed text-[var(--ink)]/80"
+                            >
+                              {para}
+                            </p>
+                          ))}
+                      </div>
+                    )}
+
+                    {strand.stats.length > 0 && (
+                      <div className="mt-8">
+                        <StatRow stats={statsFor(strand)} />
+                      </div>
+                    )}
+
+                    {strand.href && (
+                      <a
+                        href={strand.href}
+                        target={strand.external ? "_blank" : undefined}
+                        rel={strand.external ? "noopener noreferrer" : undefined}
+                        className="eyebrow mt-9 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                      >
+                        {strand.ctaLabel ?? "Visit"}
+                        <span aria-hidden="true">&#8594;</span>
+                      </a>
+                    )}
+                  </>
                 )}
 
                 {strand.code && (

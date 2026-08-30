@@ -5,6 +5,9 @@ const columnsFor = (count: number) => {
   if (count <= 1) return "grid-cols-1";
   if (count === 2) return "grid-cols-2";
   if (count === 3) return "grid-cols-2 sm:grid-cols-3";
+  // Six in a four-column grid leaves two empty tracks in the second row, which
+  // the tint renders as bare tan blocks; three columns divide it evenly.
+  if (count === 6) return "grid-cols-2 sm:grid-cols-3";
   return "grid-cols-2 sm:grid-cols-4";
 };
 
