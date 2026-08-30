@@ -111,7 +111,7 @@ export const achievements: Achievement[] = [
     year: "2023",
     kind: "award",
     title: "Canadian Computing Competition — Junior",
-    detail: "75/75, Honour Roll.",
+    detail: "Honour Roll.",
   },
   {
     year: "2023",

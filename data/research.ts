@@ -27,7 +27,7 @@ export const papers: ResearchPaper[] = [
     title:
       "A Machine Learning Approach for Water Level Residual Correction Using Geospatial Terrain Features",
     venue: "The Columbia Junior Science Journal",
-    citation: "The Columbia Junior Science Journal, Volume 11, 2025–2026, pp. 1–6",
+    citation: "The Columbia Junior Science Journal, Volume 11, 2025–2026",
     year: "2025",
     url: "https://tides.ethanyanxu.com/",
     motivation:
