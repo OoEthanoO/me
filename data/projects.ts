@@ -333,8 +333,8 @@ export const projects: Project[] = [
     collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
     github: "https://github.com/OoEthanoO/orgchem",
     website: "https://orgchem.ethanyanxu.com/",
-    featureImages: ["/orgchem-stereoisomers.jpg"],
-    images: ["/orgchem-stereoisomers.jpg"],
+    featureImages: ["/orgchem-stereoisomers.jpg", "/orgchem-resolve.png"],
+    images: ["/orgchem-stereoisomers.jpg", "/orgchem-resolve.png"],
   },
   {
     title: "gate-to-glass",
