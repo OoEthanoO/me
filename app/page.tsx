@@ -201,8 +201,9 @@ export default function Home() {
               className="rise mt-6 max-w-xl text-[clamp(1.05rem,2.1vw,1.5rem)] font-light leading-snug text-[var(--ink)]"
               style={{ animationDelay: "0.22s" }}
             >
-              A Toronto 11th grader writing CUDA kernels, shipping products, and
-              teaching students for free.
+              A technologist who is obsessed with programming, focuses on the
+              development of environment-based software tools, and is
+              passionate about spreading programming education.
             </p>
           </div>
 
