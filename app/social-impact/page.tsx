@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { serviceStrands } from "@/data/service";
+import type { ServiceStat } from "@/data/service";
 
 /** Strands painted on the navy ground rather than the cream one. */
 const DARK_STRANDS = new Set(["YanLearn", "St. Robert Coding Club"]);
@@ -25,13 +26,13 @@ export default async function SocialImpactPage() {
   ]);
 
   /** Live values by label where they were found, the recorded ones otherwise. */
-  const statsFor = (strand: (typeof serviceStrands)[number]) =>
-    strand.liveSchoolhouse && schoolhouse
-      ? strand.stats.map((stat) => ({
+  const liveStats = (stats: ServiceStat[], live?: boolean) =>
+    live && schoolhouse
+      ? stats.map((stat) => ({
           ...stat,
           value: schoolhouse[stat.label] ?? stat.value,
         }))
-      : strand.stats;
+      : stats;
 
   return (
     <div>
@@ -162,7 +163,38 @@ export default async function SocialImpactPage() {
 
                     {strand.stats.length > 0 && (
                       <div className="mt-8">
-                        <StatRow stats={statsFor(strand)} />
+                        <StatRow stats={liveStats(strand.stats)} />
+                      </div>
+                    )}
+
+                    {/* Two halves, each with its own name and figures. */}
+                    {strand.groups && (
+                      <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-14">
+                        {strand.groups.map((group) => (
+                          <div key={group.title}>
+                            <h3 className="font-display text-[clamp(1.05rem,1.9vw,1.35rem)] leading-tight text-[var(--entry-ink)]">
+                              {group.title}
+                            </h3>
+
+                            <div className="mt-6">
+                              <StatRow
+                                stats={liveStats(group.stats, group.live)}
+                              />
+                            </div>
+
+                            {group.href && (
+                              <a
+                                href={group.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="btn-entry mt-7"
+                              >
+                                {group.ctaLabel ?? "Visit"}
+                                <span aria-hidden="true">&#8594;</span>
+                              </a>
+                            )}
+                          </div>
+                        ))}
                       </div>
                     )}
 

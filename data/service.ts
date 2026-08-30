@@ -37,11 +37,18 @@ export interface ServiceStrand {
    */
   liveFundraiser?: boolean;
   /**
-   * Refreshes each stat from the Schoolhouse portfolio page, matched on label.
-   * The values in `stats` are the fallback, and the labels are the lookup key,
-   * so they have to stay spelled as Schoolhouse spells them.
+   * Splits the strand into named halves, each with its own figures. A group
+   * marked `live` is refreshed from the Schoolhouse portfolio page, matched on
+   * label, so those labels have to stay spelled as Schoolhouse spells them;
+   * the values recorded here are the fallback.
    */
-  liveSchoolhouse?: boolean;
+  groups?: {
+    title: string;
+    stats: ServiceStat[];
+    live?: boolean;
+    href?: string;
+    ctaLabel?: string;
+  }[];
   href?: string;
   ctaLabel?: string;
   /** External links open in a new tab; internal project links do not. */
@@ -119,20 +126,34 @@ export const serviceStrands: ServiceStrand[] = [
   },
   {
     title: "Community Service",
-    // Stats only — every figure is read live from the portfolio page, and the
-    // labels below are the keys it is matched on. Values are the last seen.
+    // Figures only, in two halves.
     description: "",
-    liveSchoolhouse: true,
-    stats: [
-      { value: "214", label: "Tutoring Hours" },
-      { value: "186", label: "Sessions Hosted" },
-      { value: "150", label: "Learners Impacted" },
-      { value: "14", label: "Countries Reached" },
-      { value: "1021", label: "Positive Ratings" },
-      { value: "561", label: "Super Helpful" },
-    ],
-    href: "https://schoolhouse.world/portfolio/419d56dd-a211-4ca0-98e8-429f51fc4c76",
-    ctaLabel: "Open the Portfolio",
+    stats: [],
     external: true,
+    groups: [
+      {
+        title: "Waterloo Youth Accompanying Learning Community Group",
+        stats: [
+          { value: "196.5", label: "Tutoring Hours" },
+          { value: "131", label: "Sessions Hosted" },
+          { value: "167", label: "Learners Impacted" },
+        ],
+      },
+      {
+        title: "Schoolhouse",
+        // Read live from the portfolio page; the values here are the last seen.
+        live: true,
+        stats: [
+          { value: "214", label: "Tutoring Hours" },
+          { value: "186", label: "Sessions Hosted" },
+          { value: "150", label: "Learners Impacted" },
+          { value: "14", label: "Countries Reached" },
+          { value: "1021", label: "Positive Ratings" },
+          { value: "561", label: "Super Helpful" },
+        ],
+        href: "https://schoolhouse.world/portfolio/419d56dd-a211-4ca0-98e8-429f51fc4c76",
+        ctaLabel: "Open the Portfolio",
+      },
+    ],
   },
 ];

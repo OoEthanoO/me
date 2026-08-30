@@ -42,6 +42,12 @@ interface HomeSection {
    * Everything else scatters.
    */
   layout?: "feature";
+  /**
+   * Which end of the band the button closes. Left by default; right suits a
+   * band whose leading picture is narrow, where a left button would sit under
+   * a wide gap.
+   */
+  buttonAlign?: "right";
 }
 
 /**
@@ -60,13 +66,13 @@ const sections: HomeSection[] = [
         src: "/bard1.png",
         alt: "Bare Metal Bard, the hand-written CUDA SGEMM.",
         width: "38%",
-        drop: "0rem",
+        drop: "1.9375rem",
       },
       {
         src: "/orgchem-stereoisomers.jpg",
         alt: "orgchem drawing both stereoisomers of a structure in three dimensions.",
         width: "31%",
-        drop: "3.5rem",
+        drop: "3.75rem",
       },
       {
         src: "/robotics-robot.jpg",
@@ -105,6 +111,7 @@ const sections: HomeSection[] = [
     ground: grounds.creamDeep,
     button: "btn btn-burgundy",
     layout: "feature",
+    buttonAlign: "right",
     images: [
       {
         src: "/research-paper-page1.png",
@@ -147,7 +154,7 @@ const sections: HomeSection[] = [
         video: "/hobby-badminton.mp4",
         alt: "A badminton drill, the court scattered with shuttles.",
         width: "20%",
-        drop: "1rem",
+        drop: "0rem",
       },
       {
         src: "/hobby-golf.jpg",
@@ -172,7 +179,7 @@ const sections: HomeSection[] = [
         src: "/hobby-cadet-band.jpg",
         alt: "The Royal Canadian Air Cadet band in uniform, playing in formation.",
         width: "27%",
-        drop: "3rem",
+        drop: "1.8125rem",
       },
     ],
   },
@@ -223,7 +230,7 @@ export default function Home() {
         >
           <div className="mx-auto max-w-[1180px]">
             <Reveal>
-              <h2 className="font-display text-[clamp(2.2rem,5vw,3.2rem)]">
+              <h2 className="font-display text-center text-[clamp(2.2rem,5vw,3.2rem)]">
                 {section.title}
               </h2>
             </Reveal>
@@ -348,8 +355,13 @@ export default function Home() {
                 does, so the button closes their column instead of the whole
                 section, where it sat under a tall gap. */}
             {section.href && !section.document && (
-              <Reveal delay={0.32}>
-                <Link href={section.href} className={`${section.button} mt-11`}>
+              <Reveal
+                delay={0.32}
+                className={`mt-11 flex ${
+                  section.buttonAlign === "right" ? "justify-end" : ""
+                }`}
+              >
+                <Link href={section.href} className={section.button}>
                   Learn More
                 </Link>
               </Reveal>
