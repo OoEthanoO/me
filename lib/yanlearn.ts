@@ -1,5 +1,22 @@
 export const YANLEARN_URL = "https://learn.ethanyanxu.com/";
 const ANALYTICS_API = "https://learn.ethanyanxu.com/api/analytics";
+const TEAM_COUNT_API = "https://learn.ethanyanxu.com/api/team/count";
+
+/** One read, hourly, that answers null rather than throwing. */
+async function read(url: string) {
+  try {
+    const res = await fetch(url, {
+      next: { revalidate: 3600 },
+      headers: {
+        "user-agent": "ethanyanxu.com (+https://www.ethanyanxu.com)",
+      },
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Figures from the YanLearn analytics board, the one at
@@ -17,6 +34,12 @@ const ANALYTICS_API = "https://learn.ethanyanxu.com/api/analytics";
  * active, so all three figures are lifetime numbers and read consistently
  * beside each other.
  *
+ * The size of the team is not on that board: the board counts every
+ * executive-tier account, while the roster the platform publishes leaves out
+ * juniors who have not taken a course yet and includes the non-teaching
+ * roles. That roster count is its own endpoint, shaped like `{ count }`, and
+ * is the number the platform itself prints on its home page.
+ *
  * Returned keyed by label, matching how the Schoolhouse reader works: the
  * caller asks for the labels it wants, and any it does not find keep the
  * fallback recorded in the data. A network error, a non-200 or a response
@@ -29,16 +52,10 @@ export async function fetchYanLearnStats(): Promise<Record<
   string
 > | null> {
   try {
-    const res = await fetch(ANALYTICS_API, {
-      next: { revalidate: 3600 },
-      headers: {
-        "user-agent": "ethanyanxu.com (+https://www.ethanyanxu.com)",
-      },
-    });
-    if (!res.ok) return null;
-
-    const data = await res.json();
-    const totals = data?.totals;
+    const [totals, team] = await Promise.all([
+      read(ANALYTICS_API).then((data) => data?.totals),
+      read(TEAM_COUNT_API),
+    ]);
 
     const figures: Record<string, string> = {};
     const put = (label: string, value: unknown) => {
@@ -47,6 +64,7 @@ export async function fetchYanLearnStats(): Promise<Record<
       }
     };
 
+    put("Team Members", team?.count);
     put("Courses", totals?.courses?.total);
     put("Hours Taught", totals?.hours?.taught);
     put("Total Enrollments", totals?.enrollments?.total);

@@ -95,6 +95,7 @@ export const serviceStrands: ServiceStrand[] = [
       },
     ],
     liveFigures: [
+      { value: "24", label: "Team Members" },
       { value: "61", label: "Courses" },
       { value: "566.7", label: "Hours Taught" },
       { value: "421", label: "Total Enrollments" },
