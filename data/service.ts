@@ -108,7 +108,7 @@ export const serviceStrands: ServiceStrand[] = [
       },
       {
         src: "/sickkids-team.jpg",
-        alt: "Five members of the YanLearn team in branded shirts, seen from behind, looking up at the Hospital for Sick Children.",
+        alt: "Five members of the YanLearn team in branded shirts, seen from behind, in front of the Hospital for Sick Children.",
         caption: "The YanLearn team at the hospital on presentation day.",
         kind: "photo",
       },

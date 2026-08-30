@@ -132,13 +132,6 @@ export default function TechPage() {
         );
       })}
 
-      <section className="bg-[var(--cream)] px-6 pb-16 md:px-10 md:pb-20">
-        <div className="mx-auto max-w-[1180px]">
-          <Reveal>
-            <p className="eyebrow text-[var(--tan)]">More coming soon</p>
-          </Reveal>
-        </div>
-      </section>
     </div>
   );
 }

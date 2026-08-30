@@ -33,18 +33,12 @@ export default function ProjectFeature({ project }: { project: Project }) {
     project.images.length - (beside ? beside.length : below.length);
 
   /**
-   * The links go wherever the entry has room left over, which depends on how
-   * its pictures are arranged:
-   *
-   * - pictures under the write-up, or none at all, leave the space next to the
-   *   prose, which is capped well short of the full measure;
-   * - a single tall picture beside the write-up outruns it, so the room is
-   *   under the prose;
-   * - two or more stacked beside a long write-up run out before it does, so
-   *   the room is under the pictures.
+   * The links go wherever the entry has room left over. Pictures under the
+   * write-up, or none at all, leave the space beside the prose, which is
+   * capped well short of the full measure. Pictures stacked beside it outrun
+   * it, so there the room is under the writing.
    */
-  const linksUnderPictures = !!beside && beside.length > 1;
-  const linksUnderProse = !!beside && beside.length === 1;
+  const linksBesideProse = !beside;
 
   const links = (
     <div className="flex flex-wrap items-center gap-3">
@@ -129,22 +123,19 @@ export default function ProjectFeature({ project }: { project: Project }) {
         <div className="mt-5 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
           <div>
             {prose}
-            {linksUnderProse && <div className="mt-7">{links}</div>}
+            <div className="mt-7">{links}</div>
           </div>
-          <div>
-            <div className="space-y-5">
-              {beside.map((src, i) => (
-                <div key={src} className={frame}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt={`${project.title} screenshot ${i + 1}`}
-                    className="w-full"
-                  />
-                </div>
-              ))}
-            </div>
-            {linksUnderPictures && <div className="mt-6">{links}</div>}
+          <div className="space-y-5">
+            {beside.map((src, i) => (
+              <div key={src} className={frame}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt={`${project.title} screenshot ${i + 1}`}
+                  className="w-full"
+                />
+              </div>
+            ))}
           </div>
         </div>
       ) : (
@@ -153,7 +144,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
               column it leaves rather than sitting under everything. */}
           <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,48rem)_auto] lg:gap-12">
             <div className="max-w-3xl">{prose}</div>
-            <div className="lg:pt-1">{links}</div>
+            {linksBesideProse && <div className="lg:pt-1">{links}</div>}
           </div>
 
           {below.length > 0 && (

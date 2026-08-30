@@ -185,37 +185,6 @@ export default async function SocialImpactPage() {
           </div>
         </section>
       ))}
-
-      {/* ---- Closing strip ---- */}
-      <section className="bg-[var(--burgundy)] px-6 py-14 text-[var(--cream)] md:px-10 md:py-18">
-        <div className="mx-auto max-w-[1180px]">
-          <Reveal>
-            <h2 className="font-display text-[clamp(2.2rem,6vw,3.4rem)]">
-              Want to tutor, or be tutored?
-            </h2>
-            <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
-              The platform is open to both. Volunteers get their hours tracked
-              automatically; students pay nothing.
-            </p>
-            <div className="mt-11 flex flex-wrap items-center gap-5">
-              <a
-                href="https://learn.ethanyanxu.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-cream"
-              >
-                Go to YanLearn
-              </a>
-              <a
-                href="mailto:ethanxucoder@gmail.com"
-                className="btn btn-outline text-[var(--cream)]"
-              >
-                Email Me
-              </a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </div>
   );
 }

@@ -83,7 +83,9 @@ body {
    swaps them for the cream the flagship strip already uses.
    --------------------------------------------------------------------------- */
 :root {
-  --entry-ink: var(--ink);
+  /* Navy rather than near-black: an entry's writing reads as part of the
+     section its heading names, instead of as unrelated body copy. */
+  --entry-ink: var(--accent);
   --entry-muted: rgba(40, 41, 54, 0.5);
   --entry-rule: rgba(176, 151, 133, 0.35);
   --entry-accent: var(--accent);

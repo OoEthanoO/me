@@ -36,6 +36,12 @@ interface HomeSection {
    * Safari renders only the first page inside a frame and will not scroll it.
    */
   document?: { src: string; title: string; label: string };
+  /**
+   * "feature" gives the first picture a column of its own and stacks the rest
+   * beside it, which suits a band holding one tall image and two wide ones.
+   * Everything else scatters.
+   */
+  layout?: "feature";
 }
 
 /**
@@ -98,27 +104,22 @@ const sections: HomeSection[] = [
     href: "/research",
     ground: grounds.creamDeep,
     button: "btn btn-burgundy",
+    layout: "feature",
     images: [
+      {
+        src: "/research-paper-page1.png",
+        alt: "The first page of the paper as published in the Columbia Junior Science Journal, volume 11.",
+        kind: "photo",
+      },
       {
         src: "/research-at-a-glance.png",
         alt: "At a Glance: 84.38% RMSE improvement, 0.0763 m autoregressive RMSE, 15+1 NOAA stations, four years of verified records, a 30 m DEM, and 22 engineered features.",
         kind: "photo",
-        width: "38%",
-        drop: "2rem",
       },
       {
         src: "/research-regimes.png",
         alt: "Performance across all three regimes: the temporal-only LightGBM against the geospatial XGBoost on the validation split, at an unseen station one step ahead, and over a two-day autoregressive forecast.",
         kind: "photo",
-        width: "34%",
-        drop: "0rem",
-      },
-      {
-        src: "/research-paper-page1.png",
-        alt: "The first page of the paper as published in the Columbia Junior Science Journal, volume 11.",
-        kind: "photo",
-        width: "22%",
-        drop: "4.5rem",
       },
     ],
   },
@@ -131,7 +132,6 @@ const sections: HomeSection[] = [
       {
         src: "/hobby-conducting.jpg",
         alt: "Conducting the Junior Concert Band at the Christmas concert.",
-        kind: "photo",
         width: "38%",
         drop: "0rem",
       },
@@ -139,7 +139,6 @@ const sections: HomeSection[] = [
         src: "/hobby-golf-swing-poster.jpg",
         video: "/hobby-golf-swing.mp4",
         alt: "Teeing off over water on a summer afternoon.",
-        kind: "photo",
         width: "36%",
         drop: "3rem",
       },
@@ -147,14 +146,12 @@ const sections: HomeSection[] = [
         src: "/hobby-badminton-poster.jpg",
         video: "/hobby-badminton.mp4",
         alt: "A badminton drill, the court scattered with shuttles.",
-        kind: "photo",
         width: "20%",
         drop: "1rem",
       },
       {
         src: "/hobby-cadet-band.jpg",
         alt: "The Royal Canadian Air Cadet band in uniform, playing in formation.",
-        kind: "photo",
         width: "27%",
         drop: "0rem",
       },
@@ -162,21 +159,18 @@ const sections: HomeSection[] = [
         src: "/hobby-cadet-band-poster.jpg",
         video: "/hobby-cadet-band.mp4",
         alt: "The cadet band performing, with the drum major out front.",
-        kind: "photo",
         width: "30%",
         drop: "2.5rem",
       },
       {
         src: "/hobby-badminton.jpg",
         alt: "Playing badminton at the club, mid-stroke.",
-        kind: "photo",
         width: "18%",
         drop: "0.5rem",
       },
       {
         src: "/hobby-golf.jpg",
         alt: "Carrying a bag out to the range.",
-        kind: "photo",
         width: "18%",
         drop: "3.5rem",
       },
@@ -280,6 +274,19 @@ export default function Home() {
                 </div>
               ));
 
+              if (section.layout === "feature") {
+                // One tall picture takes a column of its own; the rest stack
+                // beside it, which reads better than scattering a portrait
+                // among landscapes.
+                const [lead, ...rest] = pictures;
+                return (
+                  <div className="mt-10 grid items-start gap-6 lg:grid-cols-2 [&_div[style]]:!mt-0 [&_div[style]]:!w-full">
+                    <div>{lead}</div>
+                    <div className="space-y-6">{rest}</div>
+                  </div>
+                );
+              }
+
               if (!section.document) {
                 // Scattered rather than gridded: the pictures keep the
                 // proportions they were captured at, take different shares of
@@ -298,6 +305,16 @@ export default function Home() {
                 <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.6fr] lg:gap-8">
                   <div className="space-y-6 [&>div]:!w-full [&>div]:!mt-0">
                     {pictures}
+                    {section.href && (
+                      <Reveal delay={0.32}>
+                        <Link
+                          href={section.href}
+                          className={`${section.button} mt-2`}
+                        >
+                          Learn More
+                        </Link>
+                      </Reveal>
+                    )}
                   </div>
 
                   <Reveal delay={0.3}>
@@ -325,7 +342,10 @@ export default function Home() {
               );
             })()}
 
-            {section.href && (
+            {/* With a document beside them the pictures run out well before it
+                does, so the button closes their column instead of the whole
+                section, where it sat under a tall gap. */}
+            {section.href && !section.document && (
               <Reveal delay={0.32}>
                 <Link href={section.href} className={`${section.button} mt-11`}>
                   Learn More
