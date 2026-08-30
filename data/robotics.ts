@@ -25,8 +25,8 @@ export interface Robotics {
 export const robotics: Robotics = {
   title: "Robotics",
   paragraphs: [
-    "I joined my high school’s robotics team in grade 9. Lead Programmer responsible for solving complex technical challenges. Developed autonomous routines that consistently scored points in competition, contributing to our 1st Place Inspire Award in Dec 2025. Mentored junior members in advanced programming techniques.",
-    "In June 2026, I created a new robotics team with my friends because the school team was too restrictive for our goals, where administrative tasks took way too long and business decisions were rigid. It involved recruiting members, purchasing parts, creating budgets, finding sponsors, organizing workspaces, and establishing team hierarchies. It is meaningful to me because it is a collaboration that I have started. There is no greater organization upholding the team and it depends entirely on us to keep the structure.",
+    "I joined my high school’s robotics team in grade 9 as a programmer responsible for solving complex technical challenges, developing autonomous routines that consistently scored points in competition, contributing to our 1st Place Inspire Award in Dec 2025, and mentoring junior members in advanced programming techniques.",
+    "In June 2026, my friends and I created a new robotics team because the school team was too restrictive for our goals, where administrative tasks took way too long and business decisions were rigid. It involved recruiting members, purchasing parts, creating budgets, finding sponsors, organizing workspaces, and establishing team hierarchies. It is meaningful to me because it is a collaboration that started partly because of me. There is no greater organization upholding the team and it depends entirely on us to keep the structure.",
   ],
   // Remuxed from the supplied .mov: the stream was already H.264/AAC, so this
   // is a container change rather than a re-encode. Chrome does not reliably
