@@ -26,6 +26,12 @@ export interface Project {
   overview?: string;
   /** Headline measurements shown on the wide entry. */
   stats?: { value: string; label: string }[];
+  /**
+   * Screenshots to stack beside the write-up on the wide entry, in place of
+   * the row underneath it. A chosen subset of `images`, which the project's
+   * own page still shows in full.
+   */
+  featureImages?: string[];
   /** For work split across more than one repository. Takes the place of
    *  `github`, which only carries a single link. */
   repositories?: { label: string; url: string }[];
@@ -38,8 +44,17 @@ export interface Project {
  */
 export const ROBOTICS_SECTION = "__robotics__";
 
+/** Anchor id for a section heading, used by the nav's jump menu. */
+export const sectionId = (category: string) =>
+  category.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 /** Order the grouped sections appear in on /tech. */
-export const categoryOrder = ["Environment", ROBOTICS_SECTION, "Used by Peers"];
+export const categoryOrder = [
+  "Environment",
+  ROBOTICS_SECTION,
+  "Used by Peers",
+  "Other",
+];
 
 export const projects: Project[] = [
   {
@@ -135,7 +150,8 @@ export const projects: Project[] = [
         url: "https://github.com/OoEthanoO/garbage-classification",
       },
     ],
-    images: [],
+    featureImages: ["/ecovision-confusion-matrix.jpg"],
+    images: ["/ecovision-confusion-matrix.jpg"],
   },
   {
     title: "Bare Metal Bard",
@@ -238,6 +254,9 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/OoEthanoO/stroj-v2",
     website: "https://stroj.ethanyanxu.com/",
+    // A problem with its submit box, and a judged submission with its per-test
+    // verdicts and subtask scores — the two halves the write-up describes.
+    featureImages: ["/stroj1.png", "/stroj2.png"],
     images: [
       "/stroj1.png",
       "/stroj2.png",
@@ -314,6 +333,88 @@ export const projects: Project[] = [
     collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
     github: "https://github.com/OoEthanoO/orgchem",
     website: "https://orgchem.ethanyanxu.com/",
+    featureImages: ["/orgchem-stereoisomers.jpg"],
+    images: ["/orgchem-stereoisomers.jpg"],
+  },
+  {
+    title: "gate-to-glass",
+    category: "Other",
+    description:
+      "A handheld instrument where every layer is mine: a RISC-V processor written in Verilog on an $8 FPGA, its graphics stack, its audio path, and the sequencer firmware running on top.",
+    overview:
+      "A handheld device where every layer is mine. The processor is an RV32I core written in Verilog, running on a Lattice iCE40UP5K — an eight-dollar FPGA — with the graphics stack, the display controller and the sigma-delta audio DAC all built alongside it. Gates at the bottom, glass at the top.\n\nIt keeps time. Eight pads transpose one sample across a major scale through a phase accumulator in hardware, and an 8-track, 16-step sequencer holds a pattern while you play over it. A note lands 1.0 ms after the press, a millisecond of which is debounce; a pixel lands in 8.6 ms, most of that the SPI blit. The core runs at 12 MHz for about 7.9 MIPS at a measured CPI of 1.51, and fills 73% of the logic cells, 83% of the block RAM and all four SPRAMs.\n\nNone of it has been near a soldering iron — no PCB exists yet. The screenshot in the repository was reconstructed from the SPI wire by a model of the panel that decodes CASET, RASET and RAMWR the way a real ST7789 does, so it is what the display would show rather than a dump of memory. The audio is checked the same way: the testbench counts bit density on the output pin and reconstructs the waveform exactly as the RC filter on the board will.\n\nVerification is what makes those numbers trustworthy. Eight test programs run under two simulators, then again with the data bus randomly withheld, alongside three peripheral testbenches, the whole machine against models of the panel and the filter, and random programs fuzzed differentially against a reference RV32I model. Bring-up happens on an iCEBreaker board so a board failure and an RTL failure can never be mistaken for one another, and the toolchain is open throughout — yosys, nextpnr, icestorm — with no vendor licence anywhere in it.",
+    technologies: [
+      "Verilog",
+      "RISC-V",
+      "iCE40 FPGA",
+      "yosys",
+      "nextpnr",
+      "Verilator",
+      "C",
+      "SPI",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/gate-to-glass",
+    images: [],
+  },
+  {
+    title: "YanAIEngine",
+    category: "Other",
+    description:
+      "A multimodal LLM inference engine written natively for Apple Silicon, driving the GPU through Swift and Metal rather than a framework, on 28 hand-written shader kernels.",
+    overview:
+      "An inference engine built directly on Apple Silicon, bypassing the high-level frameworks to drive the GPU through Swift and the Metal Shading Language. Modern models are bound by memory bandwidth rather than arithmetic, so the work sits at the silicon layer: tensors are backed by shared-storage Metal buffers, which gives zero-copy handoff between CPU and GPU across the unified memory architecture.\n\nTwenty-eight kernels are hand-written, among them GEMM, RoPE, RMSNorm, patch embedding and a fused paged-attention kernel. On top of them sit the architectures they serve — Llama 3 with grouped-query attention, RMSNorm and a SwiGLU feed-forward network, and Gemma 2 with logit soft-capping, GeGLU and alternating sliding-window attention — handled polymorphically rather than as separate engines.\n\nThe serving path holds the interesting decisions. FlashAttention fuses attention with online softmax and tiling so the score matrix never reaches VRAM; PagedAttention virtualizes the KV cache behind a hand-written block allocator and page table, which ends fragmentation; and ORCA-style continuous batching interleaves prefill and decode so concurrent requests do not queue behind one another. Speculative decoding adds a draft-verify loop with rejection sampling that multiplies generation speed against the same bandwidth ceiling.\n\nBeyond text, a SigLIP vision encoder and a projector align image embeddings into the model's dimensional space for PaliGemma-style reasoning, and a sparse Mixture-of-Experts router dispatches tokens to expert-partitioned feed-forward networks. The whole thing serves behind a Hummingbird microservice implementing the Google Gemini API contract, streaming over server-sent events.",
+    technologies: [
+      "Swift",
+      "Metal (MSL)",
+      "Apple Silicon",
+      "Hummingbird",
+      "Llama 3",
+      "Gemma 2",
+      "SigLIP",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/yanaiengine",
+    images: [],
+  },
+  {
+    title: "yanvpn",
+    category: "Other",
+    description:
+      "A personal VPN for a network that filters DNS, firewalls outbound traffic and blocks WireGuard outright — three transports with automatic fallback, and a doctor that reports what is actually blocked.",
+    overview:
+      "A personal VPN — one always-on server at home, an iPhone and a Linux laptop as clients — built for a network that filters DNS, firewalls outbound traffic, and blocks WireGuard outright.\n\nWireGuard alone does not survive that, and the reason is worth stating precisely: every handshake initiation opens with the byte 0x01 followed by three zero bytes, in a packet that is always exactly 148 bytes long. One deep-packet-inspection rule catches that on any port, which is why moving it to 443 changes nothing — the giveaway is the content, not the port.\n\nSo three transports are installed, and it falls back between them. WireGuard itself is fastest and hides nothing. AmneziaWG keeps the same cryptography and the same speed while randomising those four fixed header bytes per deployment and padding the handshake with junk, so the size signature dies too. VLESS with REALITY proxies a genuine TLS handshake to a real public site, so a middlebox sees that site's real certificate with a valid chain and an active probe is handed the real site — at the cost of TCP's lower throughput and head-of-line blocking on lossy links.\n\nBringing it up tries them fastest-first and remembers what worked, and a doctor command probes all three and reports what the network is actually blocking rather than what it was assumed to block. DNS filtering is handled by construction instead of by rule: clients resolve through an address that exists only inside the tunnel, answered by dnsmasq at the house, so the local resolver never sees a query.",
+    technologies: [
+      "Shell",
+      "WireGuard",
+      "AmneziaWG",
+      "VLESS / REALITY",
+      "dnsmasq",
+      "Linux",
+      "iOS",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/yanvpn",
+    images: [],
+  },
+  {
+    title: "Sprout",
+    category: "Other",
+    description:
+      "A soil-moisture sensor for a houseplant and the iPhone app it talks to, both written here and designed against each other — including what the app should say when the sensor is lying.",
+    overview:
+      "A soil-moisture sensor for a houseplant, and the iPhone app it talks to. Both halves are written here, designed against each other rather than one after the other.\n\nThe sensor is an ESP32 with a capacitive probe. It samples the soil, decides whether what it just measured is believable, and sends the reading over Bluetooth LE as sixteen bytes — including a flag saying how much to trust it. The app decodes those bytes, decides what a human should be told, and is willing to say it does not know.\n\nThat last part is the actual project. An app that draws a number is a weekend; an app that behaves well when your own sensor lies to you is the part that transfers to everything else. The firmware's fault logic runs natively on a development machine as well as on the board, so that behaviour is tested rather than hoped for, and the protocol between the two halves is written down as a contract instead of living in whichever side was edited last.",
+    technologies: [
+      "ESP32",
+      "C++",
+      "Arduino",
+      "NimBLE",
+      "Swift 6",
+      "SwiftUI",
+      "CoreBluetooth",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/sensor-to-screen",
     images: [],
   },
   {

@@ -5,8 +5,9 @@ import StatRow from "@/components/StatRow";
 
 /**
  * Wide entry for projects that sit inside a named category: the write-up is
- * printed in full rather than trimmed to a card blurb, with the screenshots
- * underneath it. The compact ProjectCard still handles the ungrouped grid.
+ * printed in full rather than trimmed to a card blurb. Screenshots sit beneath
+ * it by default, or stacked beside it where the project names `featureImages`.
+ * The compact ProjectCard still handles the ungrouped grid.
  */
 /**
  * Columns follow the number of screenshots. A lone wide screenshot dropped into
@@ -19,20 +20,21 @@ const imageColumns = (count: number) => {
   return "sm:grid-cols-2 lg:grid-cols-3";
 };
 
+const frame = "border border-[var(--tan)]/35 bg-white p-1.5";
+
 export default function ProjectFeature({ project }: { project: Project }) {
   const paragraphs = (project.overview ?? project.description).split("\n\n");
-  // This listing shows at most three; the rest live on the project's own page.
+  // Projects naming featureImages put those beside the write-up; the rest show
+  // at most three underneath it. Either way the full set is on the project page.
   const MAX_IMAGES = 3;
-  const shown = project.images.slice(0, MAX_IMAGES);
-  const remaining = project.images.length - shown.length;
+  const beside = project.featureImages;
+  const below = beside ? [] : project.images.slice(0, MAX_IMAGES);
+  const remaining =
+    project.images.length - (beside ? beside.length : below.length);
 
-  return (
-    <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
-      <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] leading-tight text-[var(--ink)]">
-        {project.title}
-      </h3>
-
-      <div className="mt-5 max-w-3xl space-y-4">
+  const prose = (
+    <>
+      <div className="space-y-4">
         {paragraphs.map((para) => (
           <p
             key={para.slice(0, 32)}
@@ -44,7 +46,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
       </div>
 
       {project.stats && project.stats.length > 0 && (
-        <div className="mt-6 max-w-3xl">
+        <div className="mt-6">
           <StatRow stats={project.stats} compact />
         </div>
       )}
@@ -59,23 +61,52 @@ export default function ProjectFeature({ project }: { project: Project }) {
           </span>
         ))}
       </div>
+    </>
+  );
 
-      {shown.length > 0 && (
-        <div className={`mt-6 grid gap-5 ${imageColumns(shown.length)}`}>
-          {shown.map((src, i) => (
-            <div
-              key={src}
-              className="border border-[var(--tan)]/35 bg-white p-1.5"
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={src}
-                alt={`${project.title} screenshot ${i + 1}`}
-                className="w-full"
-              />
-            </div>
-          ))}
+  return (
+    <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
+      <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] leading-tight text-[var(--ink)]">
+        {project.title}
+      </h3>
+
+      {beside ? (
+        /* The write-up keeps the larger share; the screenshots stack down the
+           right-hand column, and both fall into one column below lg. */
+        <div className="mt-5 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+          <div>{prose}</div>
+          <div className="space-y-5">
+            {beside.map((src, i) => (
+              <div key={src} className={frame}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={src}
+                  alt={`${project.title} screenshot ${i + 1}`}
+                  className="w-full"
+                />
+              </div>
+            ))}
+          </div>
         </div>
+      ) : (
+        <>
+          <div className="mt-5 max-w-3xl">{prose}</div>
+
+          {below.length > 0 && (
+            <div className={`mt-6 grid gap-5 ${imageColumns(below.length)}`}>
+              {below.map((src, i) => (
+                <div key={src} className={frame}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt={`${project.title} screenshot ${i + 1}`}
+                    className="w-full"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       {/* Links close the entry, under the screenshots. */}

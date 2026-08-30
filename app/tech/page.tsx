@@ -4,6 +4,7 @@ import { projects, categoryOrder, ROBOTICS_SECTION } from "@/data/projects";
 import ProjectCard, { slugify } from "@/components/ProjectCard";
 import ProjectFeature from "@/components/ProjectFeature";
 import RoboticsSection from "@/components/RoboticsSection";
+import { sectionId } from "@/data/projects";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 
@@ -85,11 +86,17 @@ export default function TechPage() {
         <div className="mx-auto max-w-[1180px]">
           {sections.map(({ category, items }) =>
             category === ROBOTICS_SECTION ? (
-              <Reveal key={category}>
-                <RoboticsSection />
-              </Reveal>
+              <div key={category} id="robotics" className="scroll-mt-28">
+                <Reveal>
+                  <RoboticsSection />
+                </Reveal>
+              </div>
             ) : (
-              <div key={category} className="mb-16 md:mb-20">
+              <div
+                key={category}
+                id={sectionId(category)}
+                className="mb-16 md:mb-20 scroll-mt-28"
+              >
                 {/* A real heading: it sits above the h3 of each entry, and the
                     eyebrow treatment was too faint to read as a divider. */}
                 <Reveal>
