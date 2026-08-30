@@ -66,13 +66,6 @@ export const serviceStrands: ServiceStrand[] = [
     ],
     heroImages: [
       {
-        src: "/yanlearn-analytics.png",
-        alt: "YanLearn analytics: weekly signups and enrollments, hours taught per week, cumulative donations over time, and attendance rate broken down by course.",
-        caption:
-          "The analytics view — signups, enrollments and hours taught by week, donations cumulatively, and attendance per course.",
-        kind: "screenshot",
-      },
-      {
         src: "/yanlearn-courses.png",
         alt: "The YanLearn course catalogue: a grid of available courses from Python and Java to IB Biology, French and Grade 7 Math, each showing its tutor and current enrollment.",
         caption:
