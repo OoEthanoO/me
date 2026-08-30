@@ -3,7 +3,11 @@ import type { ServiceStat } from "@/data/service";
 /** Written out in full so Tailwind can see each class name literally. */
 const columnsFor = (count: number) => {
   if (count <= 1) return "grid-cols-1";
-  if (count === 2) return "grid-cols-2";
+  // Two stats keep the track width they would have in a three-up row rather
+  // than taking half the width each, so the second figure sits where it sat
+  // beside a third. The last cell absorbs the spare track, which keeps every
+  // track covered and the rule from showing through as a bare block.
+  if (count === 2) return "grid-cols-2 sm:grid-cols-[1fr_2fr]";
   if (count === 3) return "grid-cols-2 sm:grid-cols-3";
   // Six in a four-column grid leaves two empty tracks in the second row, which
   // the tint renders as bare tan blocks; three columns divide it evenly.
