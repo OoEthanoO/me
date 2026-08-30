@@ -45,7 +45,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         ))}
       </div>
 
-      <span className="eyebrow mt-6 inline-flex items-center gap-2 text-[var(--burgundy)]">
+      <span className="eyebrow mt-6 inline-flex items-center gap-2 text-[var(--accent)]">
         View Project
         <span className="card-arrow inline-block">&#8594;</span>
       </span>

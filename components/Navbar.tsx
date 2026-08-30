@@ -53,7 +53,7 @@ const Navbar = () => {
             stands in, set in caps to read the same way. */}
         <Link
           href="/"
-          className="shrink-0 font-[family-name:var(--font-poppins)] text-xl font-bold uppercase leading-[1.29] tracking-[0.02em] [word-spacing:0.35em] text-[var(--ink)] transition-colors hover:text-[var(--burgundy)] md:text-[1.6rem]"
+          className="shrink-0 font-[family-name:var(--font-poppins)] text-xl font-bold uppercase leading-[1.29] tracking-[0.02em] [word-spacing:0.35em] text-[var(--ink)] transition-colors hover:text-[var(--accent)] md:text-[1.6rem]"
         >
           Yan Xu
         </Link>
@@ -72,8 +72,8 @@ const Navbar = () => {
 
               const underline = `border-b-2 pb-1 transition-colors ${
                 isActive
-                  ? "border-[var(--burgundy)] text-[var(--burgundy)]"
-                  : "border-transparent hover:text-[var(--burgundy)]"
+                  ? "border-[var(--accent)] text-[var(--accent)]"
+                  : "border-transparent hover:text-[var(--accent)]"
               }`;
 
               // Tech/Project still navigates on click; hovering it reveals
@@ -128,7 +128,7 @@ const Navbar = () => {
                               role="menuitem"
                               href={section.href}
                               onClick={() => setOpenMenu(false)}
-                              className="block px-5 py-2.5 text-[0.9rem] font-normal text-[var(--ink)]/80 transition-colors hover:bg-[var(--cream-deep)] hover:text-[var(--burgundy)]"
+                              className="block px-5 py-2.5 text-[0.9rem] font-normal text-[var(--ink)]/80 transition-colors hover:bg-[var(--cream-deep)] hover:text-[var(--accent)]"
                             >
                               {section.label}
                             </Link>

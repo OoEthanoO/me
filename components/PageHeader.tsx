@@ -14,7 +14,7 @@ export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
             pixels smaller than it at every viewport, rather than pinned to one
             number that only holds at a single width. */}
         <h1
-          className={`font-display rise mx-auto max-w-4xl text-center text-[calc(clamp(2.6rem,6vw,3.4rem)-2px)] text-[var(--burgundy)] ${
+          className={`font-display rise mx-auto max-w-4xl text-center text-[calc(clamp(2.6rem,6vw,3.4rem)-2px)] text-[var(--accent)] ${
             eyebrow ? "mt-6" : ""
           }`}
           style={{ animationDelay: "0.1s" }}

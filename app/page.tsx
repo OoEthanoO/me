@@ -53,20 +53,20 @@ const sections: HomeSection[] = [
       {
         src: "/bard1.png",
         alt: "Bare Metal Bard, the hand-written CUDA SGEMM.",
-        width: "40%",
+        width: "38%",
         drop: "0rem",
       },
       {
         src: "/orgchem-stereoisomers.jpg",
         alt: "orgchem drawing both stereoisomers of a structure in three dimensions.",
-        width: "33%",
+        width: "31%",
         drop: "3.5rem",
       },
       {
         src: "/robotics-robot.jpg",
         alt: "The FTC robot, with its vision camera above the control hub.",
         kind: "photo",
-        width: "21%",
+        width: "25%",
         drop: "1.25rem",
       },
     ],
@@ -192,7 +192,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-[1180px] items-center gap-12 lg:grid-cols-[minmax(0,50rem)_auto] lg:justify-start lg:gap-16">
           <div>
             <h1
-              className="font-display rise text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.06] text-[var(--burgundy)]"
+              className="font-display rise text-[clamp(1.7rem,3.6vw,2.6rem)] leading-[1.06] text-[var(--accent)]"
               style={{ animationDelay: "0.1s" }}
             >
               Ethan Yan Xu
@@ -313,7 +313,7 @@ export default function Home() {
                           href={section.document.src}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                          className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--accent)] transition-colors hover:text-[var(--ink)]"
                         >
                           {section.document.label} &#8594;
                         </a>

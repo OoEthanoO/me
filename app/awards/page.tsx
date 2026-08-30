@@ -38,7 +38,7 @@ export default function AwardsPage() {
                   <div className="relative border-t border-[var(--tan)]/45 pt-5">
                     <span
                       aria-hidden="true"
-                      className="absolute left-0 top-0 h-2 w-2 -translate-y-1/2 rounded-full bg-[var(--burgundy)]"
+                      className="absolute left-0 top-0 h-2 w-2 -translate-y-1/2 rounded-full bg-[var(--accent)]"
                     />
 
                     <p className="font-display text-[clamp(1.3rem,2.4vw,1.7rem)] text-[var(--tan)]">
@@ -73,7 +73,7 @@ export default function AwardsPage() {
                               href={item.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="mt-2.5 inline-flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                              className="mt-2.5 inline-flex items-center gap-2 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--accent)] transition-colors hover:text-[var(--ink)]"
                             >
                               View
                               <span aria-hidden="true">&#8594;</span>

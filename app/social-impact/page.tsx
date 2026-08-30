@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { serviceStrands } from "@/data/service";
+
+/** Strands painted on the navy ground rather than the cream one. */
+const DARK_STRANDS = new Set(["YanLearn", "St. Robert Coding Club"]);
 import { fetchAmountRaised } from "@/lib/fundraiser";
 import { fetchSchoolhouseStats } from "@/lib/schoolhouse";
 import PageHeader from "@/components/PageHeader";
@@ -34,21 +37,20 @@ export default async function SocialImpactPage() {
     <div>
       <PageHeader title="Social Impact" />
 
-      <section className="bg-[var(--cream)] px-6 pb-16 md:px-10 md:pb-20">
-        <div className="mx-auto max-w-[1180px]">
-          {serviceStrands.map((strand, idx) => (
-            <Reveal key={strand.title} delay={idx * 0.08}>
-              <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
-                <h2 className="font-display flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
-                      <span>{strand.title}</span>
-                      {strand.liveFundraiser && (
-                        <span className="text-[0.95rem] font-normal text-[var(--ink)]/70">
-                          <span className="font-display text-[1.15rem] text-[var(--burgundy)]">
-                            {raised ?? strand.stats[0]?.value}
-                          </span>{" "}
-                          raised
-                        </span>
-                      )}
+      {serviceStrands.map((strand, idx) => (
+        <section
+          key={strand.title}
+          className={`px-6 py-12 md:px-10 md:py-16 ${
+            DARK_STRANDS.has(strand.title)
+              ? "on-dark bg-[var(--navy)] text-[var(--cream)]"
+              : "bg-[var(--cream)] text-[var(--ink)]"
+          }`}
+        >
+          <div className="mx-auto max-w-[1180px]">
+            <Reveal delay={idx * 0.08}>
+              <article>
+                <h2 className="font-display border-b-2 border-[var(--entry-accent)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--entry-accent)]">
+                  {strand.title}
                 </h2>
 
                 {strand.heroImages ? (
@@ -74,8 +76,8 @@ export default async function SocialImpactPage() {
                             <div
                               className={
                                 image.kind === "screenshot"
-                                  ? "border border-[var(--tan)]/35 bg-white p-2"
-                                  : "border border-[var(--tan)]/35"
+                                  ? "border border-[var(--entry-rule)] bg-white p-2"
+                                  : "border border-[var(--entry-rule)]"
                               }
                             >
                               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -85,7 +87,7 @@ export default async function SocialImpactPage() {
                                 className="w-full"
                               />
                             </div>
-                            <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--ink)]/70">
+                            <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--entry-muted)]">
                               {image.caption}
                             </figcaption>
                           </figure>
@@ -105,12 +107,24 @@ export default async function SocialImpactPage() {
                             .map((para) => (
                               <p
                                 key={para.slice(0, 32)}
-                                className="text-lg font-light leading-relaxed text-[var(--ink)]/80"
+                                className="text-lg font-light leading-relaxed text-[var(--entry-ink)]"
                               >
                                 {para}
                               </p>
                             ))}
                         </div>
+
+                        {/* The running total closes the write-up rather than
+                            riding on the heading, where it read as a caption
+                            to the title instead of the result of the story. */}
+                        {strand.liveFundraiser && (
+                          <p className="mt-8 text-[0.95rem] text-[var(--entry-muted)]">
+                            <span className="font-display text-[1.6rem] text-[var(--entry-accent)]">
+                              {raised ?? strand.stats[0]?.value}
+                            </span>{" "}
+                            raised
+                          </p>
+                        )}
 
                         {strand.href && (
                           <a
@@ -119,7 +133,7 @@ export default async function SocialImpactPage() {
                             rel={
                               strand.external ? "noopener noreferrer" : undefined
                             }
-                            className="eyebrow mt-9 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                            className="btn-entry mt-9"
                           >
                             {strand.ctaLabel ?? "Visit"}
                             <span aria-hidden="true">&#8594;</span>
@@ -138,7 +152,7 @@ export default async function SocialImpactPage() {
                           .map((para) => (
                             <p
                               key={para.slice(0, 32)}
-                              className="text-lg font-light leading-relaxed text-[var(--ink)]/80"
+                              className="text-lg font-light leading-relaxed text-[var(--entry-ink)]"
                             >
                               {para}
                             </p>
@@ -157,7 +171,7 @@ export default async function SocialImpactPage() {
                         href={strand.href}
                         target={strand.external ? "_blank" : undefined}
                         rel={strand.external ? "noopener noreferrer" : undefined}
-                        className="eyebrow mt-9 inline-flex items-center gap-2 text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
+                        className="btn-entry mt-9"
                       >
                         {strand.ctaLabel ?? "Visit"}
                         <span aria-hidden="true">&#8594;</span>
@@ -168,9 +182,9 @@ export default async function SocialImpactPage() {
 
               </article>
             </Reveal>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
+      ))}
 
       {/* ---- Closing strip ---- */}
       <section className="bg-[var(--burgundy)] px-6 py-14 text-[var(--cream)] md:px-10 md:py-18">

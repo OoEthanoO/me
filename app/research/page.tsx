@@ -61,7 +61,7 @@ export default function ResearchPage() {
                 {paper.results.map((stat, i) => (
                   <Reveal key={stat.label} delay={i * 0.08} className="h-full">
                     <div className="flex h-full flex-col bg-[var(--cream-deep)] p-6 md:p-7">
-                      <p className="font-display text-[clamp(1.6rem,2.8vw,2.1rem)] text-[var(--burgundy)]">
+                      <p className="font-display text-[clamp(1.6rem,2.8vw,2.1rem)] text-[var(--accent)]">
                         {stat.value}
                       </p>
                       <p className="eyebrow stat-label mt-2.5 text-[var(--ink)]">

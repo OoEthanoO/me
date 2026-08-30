@@ -157,7 +157,7 @@ export default function ProjectDetail({
                           href={collab.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm font-medium text-[var(--ink)]/80 underline decoration-[var(--tan)] underline-offset-4 transition-colors hover:text-[var(--burgundy)]"
+                          className="text-sm font-medium text-[var(--ink)]/80 underline decoration-[var(--tan)] underline-offset-4 transition-colors hover:text-[var(--accent)]"
                         >
                           {collab.name}
                         </a>

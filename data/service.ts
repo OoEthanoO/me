@@ -108,7 +108,7 @@ export const serviceStrands: ServiceStrand[] = [
       },
       {
         src: "/sickkids-team.jpg",
-        alt: "Five members of the YanLearn team in branded black shirts standing in front of the Hospital for Sick Children.",
+        alt: "Five members of the YanLearn team in branded shirts, seen from behind, looking up at the Hospital for Sick Children.",
         caption: "The YanLearn team at the hospital on presentation day.",
         kind: "photo",
       },
@@ -125,7 +125,7 @@ export const serviceStrands: ServiceStrand[] = [
     stats: [],
   },
   {
-    title: "Schoolhouse",
+    title: "Community Service",
     // Stats only — every figure is read live from the portfolio page, and the
     // labels below are the keys it is matched on. Values are the last seen.
     description: "",

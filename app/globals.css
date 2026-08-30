@@ -13,6 +13,14 @@
   /* Near-black, for the running prose in the research write-up. */
   --ink-deep: #17181e;
   --burgundy: #8a1f37;
+  /*
+   * The accent that sits on the light grounds — headings, links, buttons,
+   * rules. Navy rather than burgundy: red on cream was the one colour on the
+   * site that fought the navy strips instead of agreeing with them. Burgundy
+   * stays for the full-bleed strips, which are cream on red rather than red
+   * on cream.
+   */
+  --accent: var(--navy);
   --navy: #253b52;
   --navy-deep: #143454;
   --tan: #b09785;
@@ -33,6 +41,7 @@
   --color-ink: var(--ink);
   --color-ink-deep: var(--ink-deep);
   --color-burgundy: var(--burgundy);
+  --color-accent: var(--accent);
   --color-navy: var(--navy);
   --color-navy-deep: var(--navy-deep);
   --color-tan: var(--tan);
@@ -77,7 +86,7 @@ body {
   --entry-ink: var(--ink);
   --entry-muted: rgba(40, 41, 54, 0.5);
   --entry-rule: rgba(176, 151, 133, 0.35);
-  --entry-accent: var(--burgundy);
+  --entry-accent: var(--accent);
   --entry-accent-hover: var(--ink);
   --entry-on-accent: var(--cream);
 }
@@ -108,7 +117,7 @@ body {
 .section-label {
   font-size: 1.25rem;
   letter-spacing: 0.03em;
-  color: var(--burgundy);
+  color: var(--accent);
   text-transform: uppercase;
 }
 
@@ -162,7 +171,7 @@ body {
 }
 
 .btn-burgundy {
-  background: var(--burgundy);
+  background: var(--accent);
   color: var(--cream);
 }
 
@@ -255,7 +264,7 @@ body {
 }
 
 .project-card:hover .card-title {
-  color: var(--burgundy);
+  color: var(--accent);
 }
 
 .project-card:hover .card-arrow {

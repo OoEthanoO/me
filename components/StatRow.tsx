@@ -36,7 +36,7 @@ export default function StatRow({
       {stats.map((stat) => (
         <div key={stat.label} className="bg-[var(--cream)] px-4 py-6">
           <p
-            className={`font-display text-[var(--burgundy)] ${
+            className={`font-display text-[var(--accent)] ${
               compact
                 ? "text-[clamp(1.2rem,2.2vw,1.55rem)]"
                 : "text-[clamp(1.8rem,3.6vw,2.6rem)]"

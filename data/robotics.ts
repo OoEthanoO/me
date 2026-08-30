@@ -43,7 +43,7 @@ export const robotics: Robotics = {
     },
     {
       src: "/robotics-awards.jpg",
-      alt: "Provincials graphic: team photographs above the Inspire Award for 16488 Rams Robotics and the Connect Award for 22101 Lambs Robotics.",
+      alt: "Provincials graphic: team photographs above the FIRST Tech Challenge Inspire Award for 16488 Rams Robotics.",
     },
   ],
 };
