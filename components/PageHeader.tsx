@@ -23,7 +23,7 @@ export default function PageHeader({ eyebrow, title, lede }: PageHeaderProps) {
         </h1>
         {lede && (
           <p
-            className="rise mt-8 max-w-3xl text-[clamp(1.1rem,2.2vw,1.5rem)] font-light leading-relaxed text-[var(--ink)]/80"
+            className="rise mt-8 max-w-3xl text-[clamp(1.1rem,2.2vw,1.5rem)] leading-relaxed text-[var(--ink)]/80"
             style={{ animationDelay: "0.2s" }}
           >
             {lede}

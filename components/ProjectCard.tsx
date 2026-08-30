@@ -30,7 +30,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         {project.title}
       </h3>
 
-      <p className="mt-4 flex-1 text-[0.95rem] font-light leading-relaxed text-[var(--ink)]/75">
+      <p className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-[var(--ink)]/75">
         {project.description}
       </p>
 

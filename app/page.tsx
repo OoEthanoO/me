@@ -42,12 +42,6 @@ interface HomeSection {
    * Everything else scatters.
    */
   layout?: "feature";
-  /**
-   * Which end of the band the button closes. Left by default; right suits a
-   * band whose leading picture is narrow, where a left button would sit under
-   * a wide gap.
-   */
-  buttonAlign?: "right";
 }
 
 /**
@@ -84,7 +78,7 @@ const sections: HomeSection[] = [
     ],
   },
   {
-    title: "Social Impact and Community",
+    title: "Social Impact & Community",
     href: "/social-impact",
     ground: grounds.cream,
     button: "btn btn-burgundy",
@@ -111,7 +105,6 @@ const sections: HomeSection[] = [
     ground: grounds.creamDeep,
     button: "btn btn-burgundy",
     layout: "feature",
-    buttonAlign: "right",
     images: [
       {
         src: "/research-paper-page1.png",
@@ -199,7 +192,7 @@ export default function Home() {
               Ethan Yan Xu
             </h1>
             <p
-              className="rise mt-6 max-w-xl text-[clamp(1.05rem,2.1vw,1.5rem)] font-light leading-snug text-[var(--ink)]"
+              className="rise mt-6 max-w-xl text-[clamp(1.05rem,2.1vw,1.5rem)] leading-snug text-[var(--ink)]"
               style={{ animationDelay: "0.22s" }}
             >
               A technologist who is obsessed with programming, focuses on the
@@ -284,12 +277,23 @@ export default function Home() {
               if (section.layout === "feature") {
                 // One tall picture takes a column of its own; the rest stack
                 // beside it, which reads better than scattering a portrait
-                // among landscapes.
+                // among landscapes. The button closes the stacked column and
+                // drops to the bottom of it, so it ends level with the tall
+                // picture rather than under the whole band.
                 const [lead, ...rest] = pictures;
                 return (
-                  <div className="mt-10 grid items-start gap-6 lg:grid-cols-2 [&_div[style]]:!mt-0 [&_div[style]]:!w-full">
+                  <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
                     <div>{lead}</div>
-                    <div className="space-y-6">{rest}</div>
+                    <div className="flex flex-col gap-6">
+                      {rest}
+                      {section.href && (
+                        <Reveal delay={0.32} className="mt-auto">
+                          <Link href={section.href} className={section.button}>
+                            Learn More
+                          </Link>
+                        </Reveal>
+                      )}
+                    </div>
                   </div>
                 );
               }
@@ -321,14 +325,20 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* The frame grows to the row rather than to a fixed
-                      height, so the document ends level with the button that
-                      closes the column beside it. The link sits above it for
-                      the same reason: below, it would push the frame short of
-                      that line by its own height. */}
+                  {/* The frame opens the column, so the document starts on the
+                      same line as the first picture beside it, and grows to the
+                      row rather than to a fixed height. Its link closes the
+                      column underneath. */}
                   <Reveal delay={0.3} className="flex">
                     <figure className="flex w-full flex-col">
-                      <figcaption className="mb-3">
+                      <div className="min-h-[32rem] flex-1 border border-[var(--tan)]/35 bg-white">
+                        <iframe
+                          src={`${section.document.src}#view=FitH`}
+                          title={section.document.title}
+                          className="block h-full w-full"
+                        />
+                      </div>
+                      <figcaption className="mt-3">
                         <a
                           href={section.document.src}
                           target="_blank"
@@ -338,13 +348,6 @@ export default function Home() {
                           {section.document.label} &#8594;
                         </a>
                       </figcaption>
-                      <div className="min-h-[32rem] flex-1 border border-[var(--tan)]/35 bg-white">
-                        <iframe
-                          src={`${section.document.src}#view=FitH`}
-                          title={section.document.title}
-                          className="block h-full w-full"
-                        />
-                      </div>
                     </figure>
                   </Reveal>
                 </div>
@@ -354,14 +357,9 @@ export default function Home() {
             {/* With a document beside them the pictures run out well before it
                 does, so the button closes their column instead of the whole
                 section, where it sat under a tall gap. */}
-            {section.href && !section.document && (
-              <Reveal
-                delay={0.32}
-                className={`mt-11 flex ${
-                  section.buttonAlign === "right" ? "justify-end" : ""
-                }`}
-              >
-                <Link href={section.href} className={section.button}>
+            {section.href && !section.document && section.layout !== "feature" && (
+              <Reveal delay={0.32}>
+                <Link href={section.href} className={`${section.button} mt-11`}>
                   Learn More
                 </Link>
               </Reveal>

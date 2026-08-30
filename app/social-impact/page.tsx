@@ -25,6 +25,31 @@ export default async function SocialImpactPage() {
     fetchSchoolhouseStats(),
   ]);
 
+  /**
+   * Adds one label across a strand's groups, reading each group's live values
+   * where it has them. Returns null if no group carries that label, so a
+   * mis-typed label prints nothing rather than a zero.
+   */
+  const combined = (strand: (typeof serviceStrands)[number]) => {
+    const from = strand.combinedTotal?.from;
+    if (!from || !strand.groups) return null;
+
+    let found = false;
+    const total = strand.groups.reduce((sum, group) => {
+      const stat = liveStats(group.stats, group.live).find(
+        (s) => s.label === from,
+      );
+      if (!stat) return sum;
+      const value = Number(stat.value.replace(/,/g, ""));
+      if (Number.isNaN(value)) return sum;
+      found = true;
+      return sum + value;
+    }, 0);
+
+    // Trailing zeros read as false precision on a number that is a sum.
+    return found ? String(Number(total.toFixed(1))) : null;
+  };
+
   /** Live values by label where they were found, the recorded ones otherwise. */
   const liveStats = (stats: ServiceStat[], live?: boolean) =>
     live && schoolhouse
@@ -88,7 +113,7 @@ export default async function SocialImpactPage() {
                                 className="w-full"
                               />
                             </div>
-                            <figcaption className="mt-4 text-[0.92rem] font-light leading-relaxed text-[var(--entry-muted)]">
+                            <figcaption className="mt-4 text-[0.92rem] leading-relaxed text-[var(--entry-muted)]">
                               {image.caption}
                             </figcaption>
                           </figure>
@@ -108,7 +133,7 @@ export default async function SocialImpactPage() {
                             .map((para) => (
                               <p
                                 key={para.slice(0, 32)}
-                                className="text-lg font-light leading-relaxed text-[var(--entry-ink)]"
+                                className="text-lg leading-relaxed text-[var(--entry-ink)]"
                               >
                                 {para}
                               </p>
@@ -153,7 +178,7 @@ export default async function SocialImpactPage() {
                           .map((para) => (
                             <p
                               key={para.slice(0, 32)}
-                              className="text-lg font-light leading-relaxed text-[var(--entry-ink)]"
+                              className="text-lg leading-relaxed text-[var(--entry-ink)]"
                             >
                               {para}
                             </p>
@@ -170,7 +195,7 @@ export default async function SocialImpactPage() {
                     {/* Two halves, each with its own name and figures. */}
                     {strand.groups && (
                       <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-14">
-                        {strand.groups.map((group) => (
+                        {strand.groups.map((group, index) => (
                           <div key={group.title}>
                             <h3 className="font-display text-[clamp(1.05rem,1.9vw,1.35rem)] leading-tight text-[var(--entry-ink)]">
                               {group.title}
@@ -181,6 +206,19 @@ export default async function SocialImpactPage() {
                                 stats={liveStats(group.stats, group.live)}
                               />
                             </div>
+
+                            {/* The sum sits under the first group, in the
+                                room its shorter list leaves. */}
+                            {index === 0 && strand.combinedTotal && combined(strand) && (
+                              <div className="mt-10">
+                                <p className="font-display text-[clamp(2.6rem,6vw,4rem)] leading-none text-[var(--entry-accent)]">
+                                  {combined(strand)}
+                                </p>
+                                <p className="mt-3 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--entry-muted)]">
+                                  {strand.combinedTotal.label}
+                                </p>
+                              </div>
+                            )}
 
                             {group.href && (
                               <a

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Project } from "@/data/projects";
 import { slugify } from "@/components/ProjectCard";
 import StatRow from "@/components/StatRow";
+import Recognitions from "@/components/Recognitions";
 
 /**
  * Wide entry for projects that sit inside a named category: the write-up is
@@ -80,21 +81,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
   );
 
   const recognitions = project.recognitions?.length ? (
-    <div className="mt-8 grid gap-3 sm:grid-cols-3">
-      {project.recognitions.map((r) => (
-        <div
-          key={r.event}
-          className="border border-[var(--entry-rule)] px-4 py-3.5"
-        >
-          <p className="text-[0.62rem] font-medium uppercase tracking-[0.18em] text-[var(--entry-accent)]">
-            {r.award}
-          </p>
-          <p className="mt-1.5 text-[0.9rem] leading-snug text-[var(--entry-ink)]">
-            {r.event}
-          </p>
-        </div>
-      ))}
-    </div>
+    <Recognitions items={project.recognitions} />
   ) : null;
 
   const prose = (

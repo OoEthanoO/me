@@ -26,8 +26,11 @@ export interface Project {
   overview?: string;
   /** Headline measurements shown on the wide entry. */
   stats?: { value: string; label: string }[];
-  /** Competitions the work has been judged at, shown on the wide entry. */
-  recognitions?: { award: string; event: string }[];
+  /**
+   * Competitions the work has been judged at. The wide entry shows each as a
+   * medal; `detail` is what opens when one is pressed.
+   */
+  recognitions?: { award: string; event: string; detail?: string }[];
   /**
    * Screenshots to stack beside the write-up on the wide entry, in place of
    * the row underneath it. A chosen subset of `images`, which the project's
@@ -85,14 +88,20 @@ export const projects: Project[] = [
       {
         award: "First Place",
         event: "Canadian Meteorological and Oceanographic Society Award",
+        detail:
+          "Given at the York Region Science and Technology Fair in April 2026, by the Canadian Meteorological and Oceanographic Society, for the entry judged strongest in its field.",
       },
       {
         award: "Silver Medal",
         event: "York Region Science and Technology Fair",
+        detail:
+          "April 2026. The regional fair judges entries in person; CORA took silver alongside the CMOS award.",
       },
       {
         award: "Silver Medal",
         event: "IgniteCS Expo — Senior Division, Data Science",
+        detail:
+          "Second place in Data Science, September 2025, for modelling environmental impact and community flood risk from real-world geospatial data.",
       },
     ],
     github: "https://github.com/OoEthanoO/cora_project",

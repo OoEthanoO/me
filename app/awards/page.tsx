@@ -35,8 +35,11 @@ export default function AwardsPage() {
               <li
                 key={column.year}
                 /* Alternating columns take the navy. Every column is padded
-                   the same, so the ones without it still line up. */
-                className={`px-5 pb-6 ${
+                   the same, so the ones without it still line up. The top
+                   padding clears the marker, which is pulled half its height
+                   above the spine and would otherwise be cut in half by the
+                   panel's edge. */
+                className={`px-5 pb-6 pt-3 ${
                   columnIdx % 2 === 1
                     ? "on-dark bg-[var(--navy)] text-[var(--cream)]"
                     : ""
@@ -72,7 +75,7 @@ export default function AwardsPage() {
                           </h2>
 
                           {item.detail && (
-                            <p className="mt-1.5 text-[0.88rem] font-light leading-relaxed text-[var(--entry-ink)]">
+                            <p className="mt-1.5 text-[0.88rem] leading-relaxed text-[var(--entry-ink)]">
                               {item.detail}
                             </p>
                           )}

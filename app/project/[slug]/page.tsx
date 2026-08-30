@@ -124,7 +124,7 @@ export default function ProjectDetail({
               .map((paragraph, idx) => (
                 <p
                   key={idx}
-                  className="text-[1.05rem] font-light leading-[1.85] text-[var(--ink)]/85"
+                  className="text-[1.05rem] leading-[1.85] text-[var(--ink)]/85"
                 >
                   {paragraph}
                 </p>

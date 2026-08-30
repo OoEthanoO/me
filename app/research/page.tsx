@@ -26,7 +26,7 @@ export default function ResearchPage() {
                 <p className="mt-8 text-base font-medium tracking-wide text-[var(--gold)]">
                   {paper.citation}
                 </p>
-                <p className="mt-9 max-w-2xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
+                <p className="mt-9 max-w-2xl text-lg leading-relaxed text-[var(--cream)]/80">
                   {paper.motivation}
                 </p>
                 <div className="mt-11 flex flex-wrap items-center gap-5">
@@ -67,7 +67,7 @@ export default function ResearchPage() {
                       <p className="eyebrow stat-label mt-2.5 text-[var(--ink)]">
                         {stat.label}
                       </p>
-                      <p className="mt-3 text-[0.875rem] font-light leading-relaxed text-[var(--ink-deep)]">
+                      <p className="mt-3 text-[0.875rem] leading-relaxed text-[var(--ink-deep)]">
                         {stat.detail}
                       </p>
                     </div>
@@ -82,12 +82,12 @@ export default function ResearchPage() {
             <div className="mx-auto grid max-w-[1180px] gap-16 lg:grid-cols-[1fr_1.15fr] lg:gap-24">
               <Reveal>
                 <p className="font-display section-label">Abstract</p>
-                <p className="mt-7 text-lg font-light leading-relaxed text-[var(--ink-deep)]">
+                <p className="mt-7 text-lg leading-relaxed text-[var(--ink-deep)]">
                   {paper.abstract}
                 </p>
 
                 <p className="font-display section-label mt-14">What It Found</p>
-                <p className="mt-7 text-lg font-light leading-relaxed text-[var(--ink-deep)]">
+                <p className="mt-7 text-lg leading-relaxed text-[var(--ink-deep)]">
                   {paper.finding}
                 </p>
 
@@ -114,7 +114,7 @@ export default function ResearchPage() {
                       <dt className="font-display text-xl text-[var(--ink)]">
                         {step.label}
                       </dt>
-                      <dd className="mt-3 text-[0.98rem] font-light leading-relaxed text-[var(--ink-deep)]">
+                      <dd className="mt-3 text-[0.98rem] leading-relaxed text-[var(--ink-deep)]">
                         {step.detail}
                       </dd>
                     </div>
@@ -159,7 +159,7 @@ export default function ResearchPage() {
                     <p className="font-display mt-3 text-xl text-[var(--ink)]">
                       {figure.title}
                     </p>
-                    <p className="mt-3 text-[0.95rem] font-light leading-relaxed text-[var(--ink)]/75">
+                    <p className="mt-3 text-[0.95rem] leading-relaxed text-[var(--ink)]/75">
                       {figure.caption}
                     </p>
                   </figcaption>

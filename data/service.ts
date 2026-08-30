@@ -49,6 +49,12 @@ export interface ServiceStrand {
     href?: string;
     ctaLabel?: string;
   }[];
+  /**
+   * One figure adding a stat across every group, printed under the first of
+   * them. `from` is the label it sums, so it has to match the label the groups
+   * use; where a group is live, the live value is what gets added.
+   */
+  combinedTotal?: { from: string; label: string };
   href?: string;
   ctaLabel?: string;
   /** External links open in a new tab; internal project links do not. */
@@ -76,7 +82,7 @@ export const serviceStrands: ServiceStrand[] = [
         src: "/yanlearn-courses.png",
         alt: "The YanLearn course catalogue: a grid of available courses from Python and Java to IB Biology, French and Grade 7 Math, each showing its tutor and current enrollment.",
         caption:
-          "The course catalogue, with the tutor and live seat count on every class.",
+          "In the summer of 2026, YanLearn hosted 20 courses.",
         kind: "screenshot",
       },
     ],
@@ -109,7 +115,8 @@ export const serviceStrands: ServiceStrand[] = [
       {
         src: "/sickkids-team.jpg",
         alt: "Five members of the YanLearn team in branded shirts, seen from behind, in front of the Hospital for Sick Children.",
-        caption: "The YanLearn team at the hospital on presentation day.",
+        caption:
+          "Part of the YanLearn team at the hospital on presentation day.",
         kind: "photo",
       },
     ],
@@ -126,10 +133,11 @@ export const serviceStrands: ServiceStrand[] = [
   },
   {
     title: "Community Service",
-    // Figures only, in two halves.
+    // Figures only, in two halves, with their hours added underneath.
     description: "",
     stats: [],
     external: true,
+    combinedTotal: { from: "Tutoring Hours", label: "Total tutoring hours" },
     groups: [
       {
         title: "Waterloo Youth Accompanying Learning Community Group",

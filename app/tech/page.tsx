@@ -48,7 +48,7 @@ export default function TechPage() {
               <h2 className="font-display mt-6 text-[clamp(2.6rem,6vw,3.4rem)]">
                 {flagship.title}
               </h2>
-              <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-[var(--cream)]/80">
                 {flagship.description}
               </p>
               <div className="mt-9 flex flex-wrap gap-x-4 gap-y-2">
