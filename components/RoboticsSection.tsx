@@ -11,8 +11,8 @@ export default function RoboticsSection() {
   const { title, paragraphs, video, images } = robotics;
 
   return (
-    <div className="mb-16 md:mb-20">
-      <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
+    <div>
+      <h2 className="font-display border-b-2 border-[var(--entry-accent)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--entry-accent)]">
         {title}
       </h2>
 
@@ -25,7 +25,7 @@ export default function RoboticsSection() {
           {paragraphs.map((para) => (
             <p
               key={para.slice(0, 32)}
-              className="text-[1.05rem] leading-relaxed text-[var(--ink)] md:text-[1.15rem]"
+              className="text-[1.05rem] leading-relaxed text-[var(--entry-ink)] md:text-[1.15rem]"
             >
               {para}
             </p>
@@ -33,7 +33,7 @@ export default function RoboticsSection() {
         </div>
 
         {video && (
-          <div className="border border-[var(--tan)]/35 bg-white p-1.5">
+          <div className="border border-[var(--entry-rule)] bg-white p-1.5">
             {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               src={video.src}
@@ -48,11 +48,11 @@ export default function RoboticsSection() {
       </div>
 
       {images.length > 0 && (
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {images.map((image) => (
             <div
               key={image.src}
-              className="border border-[var(--tan)]/35 bg-white p-1.5"
+              className="border border-[var(--entry-rule)] bg-white p-1.5"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={image.src} alt={image.alt} className="w-full" />

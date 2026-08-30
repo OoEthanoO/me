@@ -68,6 +68,29 @@ body {
   font-weight: 400;
 }
 
+/* ---------------------------------------------------------------------------
+   Entry colours. A project section paints itself from these, so the same
+   markup reads correctly on the cream ground and on the navy one. `.on-dark`
+   swaps them for the cream the flagship strip already uses.
+   --------------------------------------------------------------------------- */
+:root {
+  --entry-ink: var(--ink);
+  --entry-muted: rgba(40, 41, 54, 0.5);
+  --entry-rule: rgba(176, 151, 133, 0.35);
+  --entry-accent: var(--burgundy);
+  --entry-accent-hover: var(--ink);
+  --entry-on-accent: var(--cream);
+}
+
+.on-dark {
+  --entry-ink: var(--cream);
+  --entry-muted: rgba(255, 240, 236, 0.55);
+  --entry-rule: rgba(255, 240, 236, 0.25);
+  --entry-accent: var(--cream);
+  --entry-accent-hover: var(--tan);
+  --entry-on-accent: var(--navy);
+}
+
 /* Small uppercase labels that sit above each section heading. */
 .eyebrow {
   font-size: 0.6875rem;
@@ -93,6 +116,30 @@ body {
    they sit under. Only the family changes; .eyebrow keeps the caps and track. */
 .stat-label {
   font-family: var(--font-source-serif), Georgia, serif;
+}
+
+/* The entry links. Same shape as .btn and the same square corners, a size
+   down: these sit inside a project entry rather than closing a section, so
+   they read as buttons without competing with the one that does. Outlined
+   until hover, and painted from the entry tokens so they work on both
+   grounds. */
+.btn-entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  border: 1px solid var(--entry-accent);
+  color: var(--entry-accent);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-entry:hover {
+  background: var(--entry-accent);
+  color: var(--entry-on-accent);
 }
 
 /* Sharp-cornered, solid-fill CTA — the reference uses no rounding at all. */

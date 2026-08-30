@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { projects, categoryOrder, ROBOTICS_SECTION } from "@/data/projects";
+
+/** Categories painted on the navy ground rather than the cream one. */
+const DARK_SECTIONS = new Set(["Other"]);
 import { slugify } from "@/components/ProjectCard";
 import ProjectFeature from "@/components/ProjectFeature";
 import RoboticsSection from "@/components/RoboticsSection";
@@ -80,46 +83,59 @@ export default function TechPage() {
         </section>
       )}
 
-      {/* ---- The grouped categories ---- */}
-      <section className="bg-[var(--cream)] px-6 py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-[1180px]">
-          {sections.map(({ category, items }) =>
-            category === ROBOTICS_SECTION ? (
-              <div key={category} id="robotics" className="scroll-mt-28">
+      {/* ---- The grouped categories, each on its own ground ---- */}
+      {sections.map(({ category, items }) => {
+        // Robotics and Other take the navy the flagship strip uses; `.on-dark`
+        // repaints the entries inside them without changing their markup.
+        const dark = category === ROBOTICS_SECTION || DARK_SECTIONS.has(category);
+
+        return (
+          <section
+            key={category}
+            id={category === ROBOTICS_SECTION ? "robotics" : sectionId(category)}
+            className={`scroll-mt-28 px-6 py-16 md:px-10 md:py-20 ${
+              dark
+                ? "on-dark bg-[var(--navy)] text-[var(--cream)]"
+                : "bg-[var(--cream)] text-[var(--ink)]"
+            }`}
+          >
+            <div className="mx-auto max-w-[1180px]">
+              {category === ROBOTICS_SECTION ? (
                 <Reveal>
                   <RoboticsSection />
                 </Reveal>
-              </div>
-            ) : (
-              <div
-                key={category}
-                id={sectionId(category)}
-                className="mb-16 md:mb-20 scroll-mt-28"
-              >
-                {/* A real heading: it sits above the h3 of each entry, and the
-                    eyebrow treatment was too faint to read as a divider. */}
-                <Reveal>
-                  <h2 className="font-display border-b-2 border-[var(--burgundy)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--burgundy)]">
-                    {category}
-                  </h2>
-                </Reveal>
+              ) : (
+                <>
+                  {/* A real heading: it sits above the h3 of each entry, and
+                      the eyebrow treatment was too faint to read as a
+                      divider. */}
+                  <Reveal>
+                    <h2 className="font-display border-b-2 border-[var(--entry-accent)] pb-3 text-[clamp(1.3rem,2.6vw,1.75rem)] text-[var(--entry-accent)]">
+                      {category}
+                    </h2>
+                  </Reveal>
 
-                {/* The heading already draws a rule, so the first entry drops
-                    its own border and the top padding that spaces stacked
-                    entries. */}
-                <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5">
-                  {items.map((project) => (
-                    <Reveal key={project.title}>
-                      <ProjectFeature project={project} />
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            ),
-          )}
+                  {/* The heading already draws a rule, so the first entry
+                      drops its own border and the top padding that spaces
+                      stacked entries. */}
+                  <div className="mt-2 [&>*:first-child_article]:border-t-0 [&>*:first-child_article]:pt-4 md:[&>*:first-child_article]:pt-5">
+                    {items.map((project) => (
+                      <Reveal key={project.title}>
+                        <ProjectFeature project={project} />
+                      </Reveal>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </section>
+        );
+      })}
 
+      <section className="bg-[var(--cream)] px-6 pb-16 md:px-10 md:pb-20">
+        <div className="mx-auto max-w-[1180px]">
           <Reveal>
-            <p className="eyebrow mt-16 text-[var(--tan)]">More coming soon</p>
+            <p className="eyebrow text-[var(--tan)]">More coming soon</p>
           </Reveal>
         </div>
       </section>

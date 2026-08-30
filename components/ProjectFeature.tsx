@@ -20,7 +20,7 @@ const imageColumns = (count: number) => {
   return "sm:grid-cols-2 lg:grid-cols-3";
 };
 
-const frame = "border border-[var(--tan)]/35 bg-white p-1.5";
+const frame = "border border-[var(--entry-rule)] bg-white p-1.5";
 
 export default function ProjectFeature({ project }: { project: Project }) {
   const paragraphs = (project.overview ?? project.description).split("\n\n");
@@ -32,13 +32,66 @@ export default function ProjectFeature({ project }: { project: Project }) {
   const remaining =
     project.images.length - (beside ? beside.length : below.length);
 
+  /**
+   * The links go wherever the entry has room left over, which depends on how
+   * its pictures are arranged:
+   *
+   * - pictures under the write-up, or none at all, leave the space next to the
+   *   prose, which is capped well short of the full measure;
+   * - a single tall picture beside the write-up outruns it, so the room is
+   *   under the prose;
+   * - two or more stacked beside a long write-up run out before it does, so
+   *   the room is under the pictures.
+   */
+  const linksUnderPictures = !!beside && beside.length > 1;
+  const linksUnderProse = !!beside && beside.length === 1;
+
+  const links = (
+    <div className="flex flex-wrap items-center gap-3">
+      <Link
+        href={`/project/${encodeURIComponent(slugify(project.title))}`}
+        className="btn-entry"
+      >
+        Full Write-up
+        {remaining > 0 && ` (+${remaining})`}
+        <span aria-hidden="true">&#8594;</span>
+      </Link>
+      {project.website && (
+        <a
+          href={project.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-entry"
+        >
+          Visit Site
+          <span aria-hidden="true">&#8594;</span>
+        </a>
+      )}
+      {/* Work split across repositories lists each; otherwise one Source link. */}
+      {(project.repositories ??
+        (project.github ? [{ label: "Source", url: project.github }] : [])
+      ).map((repo) => (
+        <a
+          key={repo.url}
+          href={repo.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-entry"
+        >
+          {repo.label}
+          <span aria-hidden="true">&#8594;</span>
+        </a>
+      ))}
+    </div>
+  );
+
   const prose = (
     <>
       <div className="space-y-4">
         {paragraphs.map((para) => (
           <p
             key={para.slice(0, 32)}
-            className="text-[1.05rem] leading-relaxed text-[var(--ink)] md:text-[1.15rem]"
+            className="text-[1.05rem] leading-relaxed text-[var(--entry-ink)] md:text-[1.15rem]"
           >
             {para}
           </p>
@@ -55,7 +108,7 @@ export default function ProjectFeature({ project }: { project: Project }) {
         {project.technologies.map((tech) => (
           <span
             key={tech}
-            className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-[var(--ink)]/50"
+            className="text-[0.7rem] font-medium uppercase tracking-[0.14em] text-[var(--entry-muted)]"
           >
             {tech}
           </span>
@@ -65,8 +118,8 @@ export default function ProjectFeature({ project }: { project: Project }) {
   );
 
   return (
-    <article className="border-t border-[var(--tan)]/35 py-10 md:py-14">
-      <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] leading-tight text-[var(--ink)]">
+    <article className="border-t border-[var(--entry-rule)] py-10 md:py-14">
+      <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] leading-tight text-[var(--entry-ink)]">
         {project.title}
       </h3>
 
@@ -74,26 +127,37 @@ export default function ProjectFeature({ project }: { project: Project }) {
         /* The write-up keeps the larger share; the screenshots stack down the
            right-hand column, and both fall into one column below lg. */
         <div className="mt-5 grid gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
-          <div>{prose}</div>
-          <div className="space-y-5">
-            {beside.map((src, i) => (
-              <div key={src} className={frame}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={src}
-                  alt={`${project.title} screenshot ${i + 1}`}
-                  className="w-full"
-                />
-              </div>
-            ))}
+          <div>
+            {prose}
+            {linksUnderProse && <div className="mt-7">{links}</div>}
+          </div>
+          <div>
+            <div className="space-y-5">
+              {beside.map((src, i) => (
+                <div key={src} className={frame}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={src}
+                    alt={`${project.title} screenshot ${i + 1}`}
+                    className="w-full"
+                  />
+                </div>
+              ))}
+            </div>
+            {linksUnderPictures && <div className="mt-6">{links}</div>}
           </div>
         </div>
       ) : (
         <>
-          <div className="mt-5 max-w-3xl">{prose}</div>
+          {/* The prose is capped short of the measure, so the links take the
+              column it leaves rather than sitting under everything. */}
+          <div className="mt-5 grid gap-8 lg:grid-cols-[minmax(0,48rem)_auto] lg:gap-12">
+            <div className="max-w-3xl">{prose}</div>
+            <div className="lg:pt-1">{links}</div>
+          </div>
 
           {below.length > 0 && (
-            <div className={`mt-6 grid gap-5 ${imageColumns(below.length)}`}>
+            <div className={`mt-8 grid items-start gap-5 ${imageColumns(below.length)}`}>
               {below.map((src, i) => (
                 <div key={src} className={frame}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -108,44 +172,6 @@ export default function ProjectFeature({ project }: { project: Project }) {
           )}
         </>
       )}
-
-      {/* Links close the entry, under the screenshots. */}
-      <div className="mt-6 flex flex-wrap items-center gap-x-7 gap-y-3">
-        <Link
-          href={`/project/${encodeURIComponent(slugify(project.title))}`}
-          className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
-        >
-          Full Write-up
-          {remaining > 0 && ` (+${remaining} more image${remaining > 1 ? "s" : ""})`}
-          {" "}&#8594;
-        </Link>
-        {project.website && (
-          <a
-            href={project.website}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
-          >
-            Visit Site &#8594;
-          </a>
-        )}
-        {/* Work split across repositories lists each; otherwise one Source link. */}
-        {(project.repositories ??
-          (project.github
-            ? [{ label: "Source", url: project.github }]
-            : [])
-        ).map((repo) => (
-          <a
-            key={repo.url}
-            href={repo.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-[var(--burgundy)] transition-colors hover:text-[var(--ink)]"
-          >
-            {repo.label} &#8594;
-          </a>
-        ))}
-      </div>
     </article>
   );
 }
