@@ -142,8 +142,12 @@ export default function ProjectFeature({ project }: { project: Project }) {
               </div>
             ))}
             {/* pt-2 on top of the stack's own gap matches the mt-7 the links
-                carry when they sit under the write-up instead. */}
-            {linksUnderImages && <div className="pt-2">{links}</div>}
+                carry when they sit under the write-up instead. Ending them
+                flush right sets the last button against the same edge as the
+                frames stacked above. */}
+            {linksUnderImages && (
+              <div className="flex justify-end pt-2">{links}</div>
+            )}
           </div>
         </div>
       ) : (
