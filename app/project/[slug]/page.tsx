@@ -6,9 +6,18 @@ import { projects } from "../../../data/projects";
 import { pageName } from "@/data/nav";
 import { use, useEffect, useState } from "react";
 
+/**
+ * Portrait shots — phone screenshots, at roughly 0.46 — are set side by side
+ * in columns, and everything else keeps the full width of the grid.
+ *
+ * The test is strictly taller than wide. A squarish screenshot counted as
+ * portrait lands in one narrow column while the landscape shots around it
+ * still span the row, so it renders far smaller than its neighbours for the
+ * sake of a few percent of aspect ratio.
+ */
 function markOrientation(img: HTMLImageElement) {
   if (!img.naturalWidth || !img.naturalHeight) return;
-  if (img.naturalWidth / img.naturalHeight >= 1.2) return;
+  if (img.naturalWidth >= img.naturalHeight) return;
 
   img.closest(".image-container")?.classList.add("portrait-image");
   img.closest(".image-grid")?.classList.add("has-portrait-images");
