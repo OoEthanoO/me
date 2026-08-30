@@ -10,10 +10,11 @@ const grounds = {
 
 interface HomeSection {
   title: string;
-  href: string;
+  /** Omitted by sections that are the whole story, with no page behind them. */
+  href?: string;
   ground: (typeof grounds)[keyof typeof grounds];
   /** Cream grounds take the burgundy button; the navy ones take the cream. */
-  button: string;
+  button?: string;
   /**
    * Screenshots sit on white; photographs and charts fill their frame.
    * `width` and `drop` place the picture in the scatter: a share of the row,
@@ -26,6 +27,8 @@ interface HomeSection {
     kind?: "screenshot" | "photo";
     width?: string;
     drop?: string;
+    /** Set for a clip: `src` is then the poster the frame shows first. */
+    video?: string;
   }[];
   /**
    * A document embedded in full, scrollable in place. The browser's own PDF
@@ -120,30 +123,62 @@ const sections: HomeSection[] = [
     ],
   },
   {
-    title: "Awards",
-    href: "/awards",
+    // No page behind this one, so it carries the whole subject itself: the
+    // stills and the clips together, and no button out.
+    title: "Hobbies",
     ground: grounds.navy,
-    button: "btn btn-cream",
     images: [
       {
-        src: "/robotics-awards.jpg",
-        alt: "First place Inspire Award at the FIRST Tech Challenge provincial championship.",
+        src: "/hobby-conducting.jpg",
+        alt: "Conducting the Junior Concert Band at the Christmas concert.",
         kind: "photo",
-        width: "24%",
+        width: "38%",
         drop: "0rem",
       },
       {
-        src: "/robotics-provincials-match.jpg",
-        alt: "Rams Robotics competing at the Ontario Provincial Championship.",
+        src: "/hobby-golf-swing-poster.jpg",
+        video: "/hobby-golf-swing.mp4",
+        alt: "Teeing off over water on a summer afternoon.",
         kind: "photo",
         width: "36%",
-        drop: "3.5rem",
+        drop: "3rem",
       },
       {
-        src: "/cora1.png",
-        alt: "CORA, second place in Data Science at the Ignite CS Expo.",
-        width: "33%",
+        src: "/hobby-badminton-poster.jpg",
+        video: "/hobby-badminton.mp4",
+        alt: "A badminton drill, the court scattered with shuttles.",
+        kind: "photo",
+        width: "20%",
         drop: "1rem",
+      },
+      {
+        src: "/hobby-cadet-band.jpg",
+        alt: "The Royal Canadian Air Cadet band in uniform, playing in formation.",
+        kind: "photo",
+        width: "27%",
+        drop: "0rem",
+      },
+      {
+        src: "/hobby-cadet-band-poster.jpg",
+        video: "/hobby-cadet-band.mp4",
+        alt: "The cadet band performing, with the drum major out front.",
+        kind: "photo",
+        width: "30%",
+        drop: "2.5rem",
+      },
+      {
+        src: "/hobby-badminton.jpg",
+        alt: "Playing badminton at the club, mid-stroke.",
+        kind: "photo",
+        width: "18%",
+        drop: "0.5rem",
+      },
+      {
+        src: "/hobby-golf.jpg",
+        alt: "Carrying a bag out to the range.",
+        kind: "photo",
+        width: "18%",
+        drop: "3.5rem",
       },
     ],
   },
@@ -188,7 +223,7 @@ export default function Home() {
       {/* ---- One strip per page: name, what it looks like, and the way in ---- */}
       {sections.map((section) => (
         <section
-          key={section.href}
+          key={section.title}
           className={`${section.ground} px-6 py-16 md:px-10 md:py-20`}
         >
           <div className="mx-auto max-w-[1180px]">
@@ -220,8 +255,25 @@ export default function Home() {
                           : "border border-[var(--tan)]/35 bg-white p-1.5"
                       }
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={image.src} alt={image.alt} className="w-full" />
+                      {image.video ? (
+                        /* eslint-disable-next-line jsx-a11y/media-has-caption */
+                        <video
+                          src={image.video}
+                          poster={image.src}
+                          controls
+                          playsInline
+                          preload="none"
+                          aria-label={image.alt}
+                          className="block w-full"
+                        />
+                      ) : (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="block w-full"
+                        />
+                      )}
                     </div>
                   </Reveal>
                 </div>
@@ -272,11 +324,13 @@ export default function Home() {
               );
             })()}
 
-            <Reveal delay={0.32}>
-              <Link href={section.href} className={`${section.button} mt-11`}>
-                Learn More
-              </Link>
-            </Reveal>
+            {section.href && (
+              <Reveal delay={0.32}>
+                <Link href={section.href} className={`${section.button} mt-11`}>
+                  Learn More
+                </Link>
+              </Reveal>
+            )}
           </div>
         </section>
       ))}
