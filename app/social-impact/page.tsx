@@ -26,28 +26,32 @@ export default async function SocialImpactPage() {
   ]);
 
   /**
-   * Adds one label across a strand's groups, reading each group's live values
-   * where it has them. Returns null if no group carries that label, so a
-   * mis-typed label prints nothing rather than a zero.
+   * The figure a total prints: either one label added across the strand's
+   * groups, reading their live values where they have them, or a value given
+   * outright. A sum with no matching label returns null, so a mis-typed label
+   * prints nothing rather than a zero.
    */
-  const combined = (strand: (typeof serviceStrands)[number]) => {
-    const from = strand.combinedTotal?.from;
-    if (!from || !strand.groups) return null;
+  const totalValue = (
+    strand: (typeof serviceStrands)[number],
+    total: NonNullable<(typeof serviceStrands)[number]["totals"]>[number],
+  ) => {
+    if (!total.from) return total.value ?? null;
+    if (!strand.groups) return null;
 
     let found = false;
-    const total = strand.groups.reduce((sum, group) => {
+    const sum = strand.groups.reduce((running, group) => {
       const stat = liveStats(group.stats, group.live).find(
-        (s) => s.label === from,
+        (s) => s.label === total.from,
       );
-      if (!stat) return sum;
+      if (!stat) return running;
       const value = Number(stat.value.replace(/,/g, ""));
-      if (Number.isNaN(value)) return sum;
+      if (Number.isNaN(value)) return running;
       found = true;
-      return sum + value;
+      return running + value;
     }, 0);
 
     // Trailing zeros read as false precision on a number that is a sum.
-    return found ? String(Number(total.toFixed(1))) : null;
+    return found ? String(Number(sum.toFixed(1))) : null;
   };
 
   /** Live values by label where they were found, the recorded ones otherwise. */
@@ -209,16 +213,25 @@ export default async function SocialImpactPage() {
                               />
                             </div>
 
-                            {/* The sum sits under the first group, in the
+                            {/* The totals sit under the first group, in the
                                 room its shorter list leaves. */}
-                            {index === 0 && strand.combinedTotal && combined(strand) && (
-                              <div className="mt-10">
-                                <p className="font-display text-[clamp(2.6rem,6vw,4rem)] leading-none text-[var(--entry-accent)]">
-                                  {combined(strand)}
-                                </p>
-                                <p className="mt-3 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--entry-muted)]">
-                                  {strand.combinedTotal.label}
-                                </p>
+                            {index === 0 && strand.totals && (
+                              <div className="mt-10 grid gap-8 sm:grid-cols-2">
+                                {strand.totals.map((total) => {
+                                  const value = totalValue(strand, total);
+                                  if (!value) return null;
+
+                                  return (
+                                    <div key={total.label}>
+                                      <p className="font-display text-[clamp(2.4rem,5vw,3.4rem)] leading-none text-[var(--entry-accent)]">
+                                        {value}
+                                      </p>
+                                      <p className="mt-3 text-[0.72rem] font-medium uppercase leading-snug tracking-[0.14em] text-[var(--entry-muted)]">
+                                        {total.label}
+                                      </p>
+                                    </div>
+                                  );
+                                })}
                               </div>
                             )}
 

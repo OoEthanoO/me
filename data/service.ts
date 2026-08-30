@@ -50,11 +50,12 @@ export interface ServiceStrand {
     ctaLabel?: string;
   }[];
   /**
-   * One figure adding a stat across every group, printed under the first of
-   * them. `from` is the label it sums, so it has to match the label the groups
-   * use; where a group is live, the live value is what gets added.
+   * Headline figures printed under the first group. One with `from` adds that
+   * label across every group — so it has to match the label the groups use,
+   * and where a group is live the live value is what gets added. One with
+   * `value` prints it as given.
    */
-  combinedTotal?: { from: string; label: string };
+  totals?: { label: string; from?: string; value?: string }[];
   href?: string;
   ctaLabel?: string;
   /** External links open in a new tab; internal project links do not. */
@@ -137,7 +138,10 @@ export const serviceStrands: ServiceStrand[] = [
     description: "",
     stats: [],
     external: true,
-    combinedTotal: { from: "Tutoring Hours", label: "Total tutoring hours" },
+    totals: [
+      { from: "Tutoring Hours", label: "Total tutoring hours" },
+      { value: "580", label: "Total volunteering hours" },
+    ],
     groups: [
       {
         title: "Waterloo Youth Accompanying Learning Community Group",
