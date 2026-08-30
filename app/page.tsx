@@ -51,7 +51,7 @@ interface HomeSection {
  */
 const sections: HomeSection[] = [
   {
-    title: "Technology and Projects",
+    title: "Technology & Projects",
     href: "/tech",
     ground: grounds.navy,
     button: "btn btn-cream",
