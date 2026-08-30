@@ -93,18 +93,6 @@ export const achievements: Achievement[] = [
     detail: "Senior Finals, Bronze Medalist.",
   },
   {
-    year: "2025",
-    kind: "certificate",
-    title: "Canadian Senior Mathematics Contest",
-    detail: "Top twenty-five percent of contestants.",
-  },
-  {
-    year: "2025",
-    kind: "certificate",
-    title: "Euclid Contest",
-    detail: "Top twenty-five percent of contestants.",
-  },
-  {
     year: "2024",
     month: 9,
     kind: "award",
@@ -118,12 +106,6 @@ export const achievements: Achievement[] = [
     kind: "award",
     title: "Canadian Computing Competition — Senior",
     detail: "Honour Roll.",
-  },
-  {
-    year: "2024",
-    kind: "certificate",
-    title: "Inspirit AI Scholars",
-    detail: "Best Presentation certificate.",
   },
   {
     year: "2023",

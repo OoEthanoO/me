@@ -61,6 +61,13 @@ body {
   letter-spacing: -0.025em;
 }
 
+/* The display face at book weight, for headings that should not read as bold.
+   .font-display is unlayered CSS and so outranks a Tailwind font-normal
+   utility; this pairs with it and takes the tie on specificity. */
+.font-display.font-book {
+  font-weight: 400;
+}
+
 /* Small uppercase labels that sit above each section heading. */
 .eyebrow {
   font-size: 0.6875rem;

@@ -58,7 +58,7 @@ export default function AwardsPage() {
                             </p>
                           )}
 
-                          <h2 className="font-display mt-1.5 text-[clamp(1.05rem,1.6vw,1.25rem)] leading-tight text-[var(--ink)]">
+                          <h2 className="font-display font-book mt-1.5 text-[clamp(1.05rem,1.6vw,1.25rem)] leading-tight text-[var(--ink)]">
                             {item.title}
                           </h2>
 

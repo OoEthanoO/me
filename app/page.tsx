@@ -1,9 +1,4 @@
 import Link from "next/link";
-import { projects } from "@/data/projects";
-import { papers } from "@/data/research";
-import { serviceStrands } from "@/data/service";
-import { timeline } from "@/data/achievements";
-import StatRow from "@/components/StatRow";
 import Reveal from "@/components/Reveal";
 
 /** Ground colours alternate so the page reads as a sequence of strips. */
@@ -13,11 +8,105 @@ const grounds = {
   creamDeep: "bg-[var(--cream-deep)] text-[var(--ink)]",
 } as const;
 
-export default function Home() {
-  const flagship = projects.find((p) => p.featured);
-  const paper = papers[0];
-  const tutoring = serviceStrands[0];
+interface HomeSection {
+  title: string;
+  href: string;
+  ground: (typeof grounds)[keyof typeof grounds];
+  /** Cream grounds take the burgundy button; the navy ones take the cream. */
+  button: string;
+  /** Screenshots sit on white; photographs and charts fill their frame. */
+  images: { src: string; alt: string; kind?: "screenshot" | "photo" }[];
+}
 
+/**
+ * The home page is an index rather than a summary: each section names a page,
+ * shows what the work looks like, and hands off. The writing lives on the
+ * pages themselves.
+ */
+const sections: HomeSection[] = [
+  {
+    title: "Technology and Projects",
+    href: "/tech",
+    ground: grounds.navy,
+    button: "btn btn-cream",
+    images: [
+      { src: "/bard1.png", alt: "Bare Metal Bard, the hand-written CUDA SGEMM." },
+      {
+        src: "/robotics-robot.jpg",
+        alt: "The FTC robot, with its vision camera above the control hub.",
+        kind: "photo",
+      },
+      {
+        src: "/orgchem-stereoisomers.jpg",
+        alt: "orgchem drawing both stereoisomers of a structure in three dimensions.",
+      },
+    ],
+  },
+  {
+    title: "Social Impact and Community",
+    href: "/social-impact",
+    ground: grounds.cream,
+    button: "btn btn-burgundy",
+    images: [
+      {
+        src: "/yanlearn-analytics.png",
+        alt: "YanLearn analytics: weekly signups, enrollments, hours taught, and donations over time.",
+      },
+      {
+        src: "/sickkids-cheque.jpg",
+        alt: "Presenting a cheque to the SickKids Foundation outside the Hospital for Sick Children.",
+        kind: "photo",
+      },
+    ],
+  },
+  {
+    title: "Research",
+    href: "/research",
+    ground: grounds.creamDeep,
+    button: "btn btn-burgundy",
+    images: [
+      {
+        src: "/research-at-a-glance.png",
+        alt: "At a Glance: 84.38% RMSE improvement, 0.0763 m autoregressive RMSE, 15+1 NOAA stations, four years of verified records, a 30 m DEM, and 22 engineered features.",
+        kind: "photo",
+      },
+      {
+        src: "/research-regimes.png",
+        alt: "Performance across all three regimes: the temporal-only LightGBM against the geospatial XGBoost on the validation split, at an unseen station one step ahead, and over a two-day autoregressive forecast.",
+        kind: "photo",
+      },
+      {
+        src: "/research-paper-page1.png",
+        alt: "The first page of the paper as published in the Columbia Junior Science Journal, volume 11.",
+        kind: "photo",
+      },
+    ],
+  },
+  {
+    title: "Awards",
+    href: "/awards",
+    ground: grounds.navy,
+    button: "btn btn-cream",
+    images: [
+      {
+        src: "/robotics-awards.jpg",
+        alt: "First place Inspire Award at the FIRST Tech Challenge provincial championship.",
+        kind: "photo",
+      },
+      {
+        src: "/robotics-provincials-match.jpg",
+        alt: "Rams Robotics competing at the Ontario Provincial Championship.",
+        kind: "photo",
+      },
+      {
+        src: "/cora1.png",
+        alt: "CORA, second place in Data Science at the Ignite CS Expo.",
+      },
+    ],
+  },
+];
+
+export default function Home() {
   return (
     <div>
       {/* ---- Hero: copy left, portrait right ---- */}
@@ -44,134 +133,58 @@ export default function Home() {
             <img
               src="/portrait.jpg"
               alt="Ethan Yan Xu"
-              className="w-full max-w-[160px] rounded-full border border-[var(--tan)]/35 object-cover lg:max-w-[200px]"
-              style={{ aspectRatio: "1 / 1" }}
+              className="w-full max-w-[19rem] border border-[var(--tan)]/35 object-cover lg:max-w-[21rem]"
             />
           </div>
         </div>
       </section>
 
-      {/* ---- Tech / Project ---- */}
-      <section className={`${grounds.navy} px-6 py-16 md:px-10 md:py-20`}>
-        <div className="mx-auto grid max-w-[1180px] items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-20">
-          <Reveal>
-            <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)]">
-              Tech &amp; Projects
-            </h2>
-            {flagship && (
-              <p className="mt-7 max-w-xl text-lg font-light leading-relaxed text-[var(--cream)]/80">
-                {flagship.description}
-              </p>
-            )}
-            <p className="eyebrow mt-9 text-[var(--cream)]/55">
-              {projects.length} projects — CUDA, Next.js, Swift
-            </p>
-            <Link href="/tech" className="btn btn-cream mt-11">
-              Learn More
-            </Link>
-          </Reveal>
-
-          {flagship?.images[0] && (
-            <Reveal delay={0.15}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={flagship.images[0]}
-                alt={`${flagship.title} screenshot`}
-                className="w-full border border-[var(--cream)]/20 object-cover shadow-[0_30px_70px_rgba(0,0,0,0.35)]"
-              />
+      {/* ---- One strip per page: name, what it looks like, and the way in ---- */}
+      {sections.map((section) => (
+        <section
+          key={section.href}
+          className={`${section.ground} px-6 py-16 md:px-10 md:py-20`}
+        >
+          <div className="mx-auto max-w-[1180px]">
+            <Reveal>
+              <h2 className="font-display text-[clamp(2.2rem,5vw,3.2rem)]">
+                {section.title}
+              </h2>
             </Reveal>
-          )}
-        </div>
-      </section>
 
-      {/* ---- Social Impact ---- */}
-      <section className={`${grounds.cream} px-6 py-16 md:px-10 md:py-20`}>
-        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-          <Reveal>
-            <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)] text-[var(--ink)]">
-              Social Impact
-            </h2>
-            <Link href="/social-impact" className="btn btn-burgundy mt-11">
-              Learn More
-            </Link>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <p className="text-lg font-light leading-relaxed text-[var(--ink)]/80">
-              {tutoring.description}
-            </p>
-            <div className="mt-10">
-              <StatRow stats={tutoring.stats} />
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ---- Research ---- */}
-      <section className={`${grounds.creamDeep} px-6 py-16 md:px-10 md:py-20`}>
-        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
-          <Reveal>
-            <p className="eyebrow text-[var(--tan)]">Research</p>
-            <h2 className="font-display mt-6 max-w-2xl text-[clamp(1.8rem,3.8vw,2.9rem)] leading-tight text-[var(--ink)]">
-              {paper.title}
-            </h2>
-            <p className="mt-7 text-sm font-light tracking-wide text-[var(--ink)]/60">
-              {paper.citation}
-            </p>
-            <Link href="/research" className="btn btn-burgundy mt-11">
-              Learn More
-            </Link>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <div className="border-t border-[var(--tan)]/40">
-              {paper.results.slice(0, 2).map((stat) => (
-                <div
-                  key={stat.label}
-                  className="border-b border-[var(--tan)]/40 py-7"
-                >
-                  <p className="font-display text-[clamp(2rem,4.4vw,3rem)] text-[var(--burgundy)]">
-                    {stat.value}
-                  </p>
-                  <p className="eyebrow mt-3 text-[var(--ink)]">{stat.label}</p>
-                </div>
+            <div
+              className={`mt-10 grid gap-6 sm:grid-cols-2 ${
+                section.images.length > 2 ? "lg:grid-cols-3" : ""
+              }`}
+            >
+              {section.images.map((image, i) => (
+                <Reveal key={image.src} delay={0.08 + i * 0.08}>
+                  <div
+                    className={
+                      image.kind === "photo"
+                        ? "border border-[var(--tan)]/35"
+                        : "border border-[var(--tan)]/35 bg-white p-1.5"
+                    }
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="h-56 w-full object-cover object-top"
+                    />
+                  </div>
+                </Reveal>
               ))}
             </div>
-          </Reveal>
-        </div>
-      </section>
 
-      {/* ---- Awards ---- */}
-      <section className={`${grounds.navy} px-6 py-16 md:px-10 md:py-20`}>
-        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-          <Reveal>
-            <h2 className="font-display text-[clamp(2.4rem,5.5vw,3.4rem)]">
-              Awards &amp; Certificates
-            </h2>
-            <Link href="/awards" className="btn btn-cream mt-11">
-              Learn More
-            </Link>
-          </Reveal>
-
-          <Reveal delay={0.12}>
-            <dl className="border-t border-[var(--cream)]/25">
-              {timeline.slice(0, 4).map((item) => (
-                <div
-                  key={`${item.title}-${item.year}`}
-                  className="flex items-baseline justify-between gap-6 border-b border-[var(--cream)]/25 py-6"
-                >
-                  <dt className="text-lg font-light text-[var(--cream)]/85">
-                    {item.title}
-                  </dt>
-                  <dd className="font-display shrink-0 text-2xl text-[var(--tan)]">
-                    {item.year}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </Reveal>
-        </div>
-      </section>
+            <Reveal delay={0.32}>
+              <Link href={section.href} className={`${section.button} mt-11`}>
+                Learn More
+              </Link>
+            </Reveal>
+          </div>
+        </section>
+      ))}
     </div>
   );
 }
