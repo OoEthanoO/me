@@ -87,6 +87,13 @@ export const achievements: Achievement[] = [
   },
   {
     year: "2025",
+    month: 8,
+    kind: "certificate",
+    title: "Harvard Secondary School Program",
+    detail: "DGMD S-14: Wearable Devices and Computer Vision. Final grade: A.",
+  },
+  {
+    year: "2025",
     month: 5,
     kind: "award",
     title: "American Computer Science League",
