@@ -289,7 +289,7 @@ export const projects: Project[] = [
     website: "https://stroj.ethanyanxu.com/",
     // A problem with its submit box, and a judged submission with its per-test
     // verdicts and subtask scores — the two halves the write-up describes.
-    featureImages: ["/stroj1.png", "/stroj2.png"],
+    featureImages: ["/stroj1.png"],
     images: [
       "/stroj1.png",
       "/stroj2.png",
