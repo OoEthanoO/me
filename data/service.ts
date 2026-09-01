@@ -59,9 +59,9 @@ export interface ServiceStrand {
   totals?: { label: string; from?: string; value?: string }[];
   /**
    * Figures printed between the write-up and the call to action, refreshed
-   * from the YanLearn analytics board and matched on label — so these labels
+   * from the YanLearn impact page and matched on label — so these labels
    * have to stay spelled the way the reader spells them. The values recorded
-   * here are the fallback for when the board cannot be read.
+   * here are the fallback for when the page cannot be read.
    */
   liveFigures?: ServiceStat[];
   href?: string;
@@ -94,10 +94,10 @@ export const serviceStrands: ServiceStrand[] = [
       },
     ],
     liveFigures: [
-      { value: "24", label: "Team Members" },
+      { value: "27", label: "Volunteer Tutors" },
       { value: "61", label: "Courses" },
-      { value: "567", label: "Hours Taught" },
-      { value: "421", label: "Total Enrollments" },
+      { value: "579", label: "Hours Taught" },
+      { value: "449", label: "Total Enrollments" },
     ],
     href: "https://learn.ethanyanxu.com/",
     ctaLabel: "Visit the Platform",

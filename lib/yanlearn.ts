@@ -1,6 +1,5 @@
 export const YANLEARN_URL = "https://learn.ethanyanxu.com/";
-const ANALYTICS_API = "https://learn.ethanyanxu.com/api/analytics";
-const TEAM_COUNT_API = "https://learn.ethanyanxu.com/api/team/count";
+const IMPACT_API = "https://learn.ethanyanxu.com/api/impact";
 
 /** One read, hourly, that answers null rather than throwing. */
 async function read(url: string) {
@@ -19,26 +18,20 @@ async function read(url: string) {
 }
 
 /**
- * Figures from the YanLearn analytics board, the one at
- * learn.ethanyanxu.com/?menu=analytics.
+ * Figures from the YanLearn impact page, the one at
+ * learn.ethanyanxu.com/?menu=impact.
  *
- * That board is rendered in the browser, so there is nothing to read out of
- * the page HTML; the numbers come from the JSON the board itself fetches,
+ * That page is rendered in the browser, so there is nothing to read out of
+ * the page HTML; the numbers come from the JSON the page itself fetches,
  * which is public and shaped like:
  *
- *     { totals: { courses: { active, completed, total },
- *                 hours:   { taught, withdrawn, classesTaught },
- *                 enrollments: { total, platform, legacy } } }
+ *     { classesTaught, courses: { completed, total }, enrollments,
+ *       hoursTaught, raised, students, tutors }
  *
- * Courses reports the cumulative total rather than the count currently
- * active, so all three figures are lifetime numbers and read consistently
- * beside each other.
- *
- * The size of the team is not on that board: the board counts every
- * executive-tier account, while the roster the platform publishes leaves out
- * juniors who have not taken a course yet and includes the non-teaching
- * roles. That roster count is its own endpoint, shaped like `{ count }`, and
- * is the number the platform itself prints on its home page.
+ * The impact page is the platform's own public accounting — it folds in the
+ * programs run before the platform launched — so reading it keeps this site's
+ * figures saying exactly what the platform says, rather than reconstructing
+ * them from the analytics board and drifting when its definitions do.
  *
  * Returned keyed by label, matching how the Schoolhouse reader works: the
  * caller asks for the labels it wants, and any it does not find keep the
@@ -52,10 +45,7 @@ export async function fetchYanLearnStats(): Promise<Record<
   string
 > | null> {
   try {
-    const [totals, team] = await Promise.all([
-      read(ANALYTICS_API).then((data) => data?.totals),
-      read(TEAM_COUNT_API),
-    ]);
+    const impact = await read(IMPACT_API);
 
     const figures: Record<string, string> = {};
     const put = (label: string, value: unknown) => {
@@ -64,12 +54,12 @@ export async function fetchYanLearnStats(): Promise<Record<
       }
     };
 
-    put("Team Members", team?.count);
-    put("Courses", totals?.courses?.total);
-    // The board reports hours to one decimal place; beside three whole-number
-    // figures the fraction reads as noise, so it is rounded here.
-    put("Hours Taught", Math.round(totals?.hours?.taught));
-    put("Total Enrollments", totals?.enrollments?.total);
+    put("Volunteer Tutors", impact?.tutors);
+    put("Courses", impact?.courses?.total);
+    // The endpoint reports hours to one decimal place; the impact page prints
+    // the whole number, and so does this site.
+    put("Hours Taught", Math.round(impact?.hoursTaught));
+    put("Total Enrollments", impact?.enrollments);
 
     return Object.keys(figures).length > 0 ? figures : null;
   } catch {
