@@ -51,7 +51,7 @@ const Navbar = () => {
           Yan Xu
         </Link>
 
-        {/* Five items crowd a phone, so the row scrolls sideways instead of wrapping.
+        {/* Six items crowd a phone, so the row scrolls sideways instead of wrapping.
             Set in the display face to match the wordmark; the rest of the
             site's small labels are Inter. Tracking is tightened as the size
             goes up. */}

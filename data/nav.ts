@@ -10,6 +10,9 @@ export const navLinks = [
   { label: "Social Impact", href: "/social-impact" },
   { label: "Research", href: "/research" },
   { label: "Awards", href: "/awards" },
+  // Not a page: the hobbies live in a band on the home page, so the nav
+  // points at its anchor there.
+  { label: "Hobbies", href: "/#hobbies" },
 ];
 
 /** What the nav calls the page at `href`. */

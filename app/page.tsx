@@ -10,6 +10,8 @@ const grounds = {
 
 interface HomeSection {
   title: string;
+  /** Anchor for links that point at this band from elsewhere, like the nav. */
+  id?: string;
   /** Omitted by sections that are the whole story, with no page behind them. */
   href?: string;
   ground: (typeof grounds)[keyof typeof grounds];
@@ -125,8 +127,10 @@ const sections: HomeSection[] = [
   },
   {
     // No page behind this one, so it carries the whole subject itself: the
-    // stills and the clips together, and no button out.
+    // stills and the clips together, and no button out. The nav's Hobbies
+    // entry lands here.
     title: "Hobbies",
+    id: "hobbies",
     ground: grounds.navy,
     images: [
       {
@@ -228,7 +232,8 @@ export default function Home() {
       {sections.map((section) => (
         <section
           key={section.title}
-          className={`${section.ground} px-6 py-16 md:px-10 md:py-20`}
+          id={section.id}
+          className={`${section.ground} scroll-mt-28 px-6 py-16 md:px-10 md:py-20`}
         >
           <div className="mx-auto max-w-[1180px]">
             <Reveal>
