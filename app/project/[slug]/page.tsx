@@ -101,6 +101,16 @@ export default function ProjectDetail({
                 Visit Site
               </a>
             )}
+            {project.appStore && (
+              <a
+                href={project.appStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-cream"
+              >
+                App Store
+              </a>
+            )}
             {/* Work split across repositories lists each; a single repo keeps
                 the original button. Only genuinely unpublished work is marked
                 closed source. */}

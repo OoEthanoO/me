@@ -25,11 +25,10 @@ export default function TechPage() {
   // the Robotics section taking its place among them. A project without a
   // category no longer appears on this page; its own page still exists.
   const sections = categoryOrder
-    .map((category) =>
-      category === ROBOTICS_SECTION
-        ? { category, items: [] }
-        : { category, items: rest.filter((p) => p.category === category) },
-    )
+    .map((category) => ({
+      category,
+      items: rest.filter((p) => p.category === category),
+    }))
     .filter(
       ({ category, items }) =>
         category === ROBOTICS_SECTION || items.length > 0,
@@ -104,9 +103,24 @@ export default function TechPage() {
           >
             <div className="mx-auto max-w-[1180px]">
               {category === ROBOTICS_SECTION ? (
-                <Reveal>
-                  <RoboticsSection />
-                </Reveal>
+                <>
+                  <Reveal>
+                    <RoboticsSection />
+                  </Reveal>
+
+                  {/* Projects filed under Robotics follow the write-up; each
+                      entry's own top border divides it from the photographs
+                      above, so the wrapper only trims the last one's air. */}
+                  {items.length > 0 && (
+                    <div className="mt-8 [&>*:last-child_article]:pb-5 md:[&>*:last-child_article]:pb-7">
+                      {items.map((project) => (
+                        <Reveal key={project.title}>
+                          <ProjectFeature project={project} />
+                        </Reveal>
+                      ))}
+                    </div>
+                  )}
+                </>
               ) : (
                 <>
                   {/* A real heading: it sits above the h3 of each entry, and

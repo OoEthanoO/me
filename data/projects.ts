@@ -16,6 +16,8 @@ export interface Project {
   collaborators: Collaborator[];
   github?: string;
   website?: string;
+  /** App Store listing, linked as its own button beside the website. */
+  appStore?: string;
   images: string[];
   /** Flagship work. Renders as a full-width, accented card at the top of the grid. */
   featured?: boolean;
@@ -52,8 +54,9 @@ export interface Project {
 
 /**
  * Marks where the Robotics section is interleaved among the project
- * categories on /tech. It is not a project category — it has its own data and
- * layout — but it has a place in the running order, so the order records it.
+ * categories on /tech. It leads with its own write-up and pictures rather
+ * than a heading over entries, but projects filed under it print beneath
+ * that write-up the way entries sit under a category heading.
  */
 export const ROBOTICS_SECTION = "__robotics__";
 
@@ -185,6 +188,47 @@ export const projects: Project[] = [
     ],
     featureImages: ["/ecovision-confusion-matrix.jpg"],
     images: ["/ecovision-confusion-matrix.jpg"],
+  },
+  {
+    title: "Gentoo",
+    category: ROBOTICS_SECTION,
+    description:
+      "The app an FTC team runs its season on — projects and tasks, parts inventory, scouting, alliance picklists, and pit-duty scheduling — one codebase on the App Store, Android, and the web.",
+    overview:
+      "When we started the new team, I did not want its operations living in spreadsheets and chat threads, so I built Gentoo: projects and tasks, the parts inventory, pit and match scouting, the alliance picklist, and the pit-duty rotation for competition day, all in one app. It is a single codebase shipping to iPhone and iPad through the App Store, to Android, and to the web, and the whole team works inside it — the first account becomes admin and approves everyone else.",
+    longDescription:
+      "Gentoo is the app our robotics team runs its season on. It is one codebase — Expo Router, React Native and NativeWind over Supabase — shipping to iPhone and iPad through the App Store, to Android, and to the web, with a sidebar layout on a desktop and bottom tabs on a phone. Projects hold assignable tasks with status, assignee, due date, priority and blockers, reorderable and with a trash you can restore from; the parts inventory carries categories, photos, check-out tracking, low-stock flags and printable labels.\n\nThe competition half is the reason it exists. Pit scouting scores every team's capabilities against weighted criteria, match scouting hands out assignments from an imported schedule, and \"talkie\" requests let anyone in the stands ask the pit crew to go find something out. The picklist turns the scouting into a tiered alliance-selection board with a head-to-head compare view for settling a pair during the pick meeting, and official event and team stats come in from FTCScout. On event day a dashboard shows the next-match countdown, your pit shifts and the open talkie requests, with the pit staffed by an auto-generated rotation that spreads the shifts fairly. The oddest feature is the truest to the pit: photograph the wiring bin and a vision model counts the cables in the picture.\n\nIt is built to be usable before it is configured. With no backend attached the app runs a complete demo workspace from seeded fixtures rather than showing a dead screen, and a web bundle exported without its environment launches and says the backend is not configured instead of crashing — a guard script fails the export rather than shipping a bundle that would. Online, one app-level Supabase realtime channel maps each table to the queries it invalidates, and mutations apply optimistically with snapshot and rollback, so two phones in the same pit stay in step.\n\nAccounts sign in with Apple, Google, or email, and the first account becomes admin and approves the rest — a team app has no public signup. The detail that took the most care is deletion: the App Store wants Apple tokens revoked rather than orphaned when an account is deleted, so one edge function banks the Apple refresh token at sign-in and another spends it on the way out, with deletion never depending on the revocation succeeding. Push notifications ride Expo's service — talkie pings, task assignments, scouting submissions — and can be mirrored into Discord.",
+    technologies: [
+      "Expo Router",
+      "React Native",
+      "TypeScript",
+      "NativeWind",
+      "Supabase",
+      "TanStack Query",
+      "EAS",
+      "Groq Vision",
+    ],
+    collaborators: [
+      { name: "aqariio", github: "https://github.com/aqariio" },
+      { name: "Penguin60", github: "https://github.com/Penguin60" },
+      { name: "HuAsked", github: "https://github.com/HuAsked" },
+    ],
+    github: "https://github.com/gentoo-37006/gentoo-app",
+    website: "https://gentoo.ethanyanxu.com/sign-in",
+    appStore: "https://apps.apple.com/us/app/gentoo/id6785305308",
+    // All taken in the demo workspace rather than the team's real one, so no
+    // real scouting notes or member names are published. The /tech entry shows
+    // the first three: the picklist, event day, and a project's tasks; the
+    // two iPhone shots at the end pair up in the portrait grid.
+    images: [
+      "/gentoo1.png",
+      "/gentoo2.png",
+      "/gentoo3.png",
+      "/gentoo4.png",
+      "/gentoo5.png",
+      "/gentoo6.png",
+      "/gentoo7.png",
+    ],
   },
   {
     title: "Bare Metal Bard",

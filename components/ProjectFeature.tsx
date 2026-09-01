@@ -61,6 +61,17 @@ export default function ProjectFeature({ project }: { project: Project }) {
           <span aria-hidden="true">&#8594;</span>
         </a>
       )}
+      {project.appStore && (
+        <a
+          href={project.appStore}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-entry"
+        >
+          App Store
+          <span aria-hidden="true">&#8594;</span>
+        </a>
+      )}
       {/* Work split across repositories lists each; otherwise one Source link. */}
       {(project.repositories ??
         (project.github ? [{ label: "Source", url: project.github }] : [])
