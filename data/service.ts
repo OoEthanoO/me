@@ -96,7 +96,7 @@ export const serviceStrands: ServiceStrand[] = [
     liveFigures: [
       { value: "24", label: "Team Members" },
       { value: "61", label: "Courses" },
-      { value: "566.7", label: "Hours Taught" },
+      { value: "567", label: "Hours Taught" },
       { value: "421", label: "Total Enrollments" },
     ],
     href: "https://learn.ethanyanxu.com/",
@@ -150,12 +150,12 @@ export const serviceStrands: ServiceStrand[] = [
     description: "",
     stats: [],
     external: true,
-    totals: [{ value: "580", label: "Total volunteering hours" }],
+    totals: [{ value: "552", label: "Total volunteering hours" }],
     groups: [
       {
         title: "Waterloo Youth Accompanying Learning Community Group",
         stats: [
-          { value: "196.5", label: "Tutoring Hours" },
+          { value: "197", label: "Tutoring Hours" },
           { value: "131", label: "Sessions Hosted" },
         ],
       },

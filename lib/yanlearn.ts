@@ -66,7 +66,9 @@ export async function fetchYanLearnStats(): Promise<Record<
 
     put("Team Members", team?.count);
     put("Courses", totals?.courses?.total);
-    put("Hours Taught", totals?.hours?.taught);
+    // The board reports hours to one decimal place; beside three whole-number
+    // figures the fraction reads as noise, so it is rounded here.
+    put("Hours Taught", Math.round(totals?.hours?.taught));
     put("Total Enrollments", totals?.enrollments?.total);
 
     return Object.keys(figures).length > 0 ? figures : null;
