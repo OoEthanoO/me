@@ -4,6 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ImageLightbox from "@/components/ImageLightbox";
+import HashScroll from "@/components/HashScroll";
 
 // The site runs the typography of tides.ethanyanxu.com, where the paper lives:
 // Source Serif 4 carries every display line, Inter the body copy and labels.
@@ -55,6 +56,8 @@ export default function RootLayout({
         <Footer />
         {/* One delegated listener enlarges any image on the site. */}
         <ImageLightbox />
+        {/* Anchors land correctly even before the pictures above them load. */}
+        <HashScroll />
       </body>
     </html>
   );
