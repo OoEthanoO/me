@@ -127,7 +127,12 @@ export default function ProjectFeature({ project }: { project: Project }) {
   );
 
   return (
-    <article className="border-t border-[var(--entry-rule)] py-10 md:py-14">
+    /* Anchored by slug so other pages can link straight to an entry, the way
+       the coding club strand points at /tech#stroj. */
+    <article
+      id={slugify(project.title)}
+      className="scroll-mt-28 border-t border-[var(--entry-rule)] py-10 md:py-14"
+    >
       <h3 className="font-display text-[clamp(1.15rem,2.2vw,1.5rem)] leading-tight text-[var(--entry-ink)]">
         {project.title}
       </h3>

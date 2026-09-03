@@ -141,8 +141,11 @@ export const serviceStrands: ServiceStrand[] = [
     title: "St. Robert Coding Club",
     // As supplied for the site. No images yet, so the write-up runs full width.
     description:
-      "Curriculum Coordinator in G9, created AI courses in G10, Co-President in G11. Throughout these years, I had always noticed members leaving the club each school year, and usually it was because the content became difficult too quickly. By May, we would only have roughly half of the members we had in September. Thus, I separated the club into the junior and senior streams to ensure every member could learn at their level. I also created stroj so that we could have our own online judging platform that allowed us to upload our problems for our members to do. I even introduced a rating system and biweekly rated contests so that members could compete against other members and executives could have an objective way of weighing members’ performance for executive applications.",
+      "Curriculum Coordinator in G10, created AI courses in G11, Co-President in G12. Throughout these years, I had always noticed members leaving the club each school year, and usually it was because the content became difficult too quickly. By May, we would only have roughly half of the members we had in September. Thus, I separated the club into the junior and senior streams to ensure every member could learn at their level. I also created stroj so that we could have our own online judging platform that allowed us to upload our problems for our members to do. I even introduced a rating system and biweekly rated contests so that members could compete against other members and executives could have an objective way of weighing members’ performance for executive applications.",
     stats: [],
+    // Straight to the Stroj entry on Tech/Project, which the write-up names.
+    href: "/tech#stroj",
+    ctaLabel: "See Stroj",
   },
   {
     title: "Community Service",
