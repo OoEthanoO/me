@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "portfolio",
-      "runtimeExecutable": "C:\\Users\\ethan\\.node\\node-v24.20.0-win-x64\\npmw.cmd",
+      "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",
         "dev"
