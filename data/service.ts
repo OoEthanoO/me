@@ -90,6 +90,7 @@ export const serviceStrands: ServiceStrand[] = [
       {
         src: "/yanlearn-courses.png",
         alt: "The YanLearn course catalogue: a grid of available courses from Python and Java to IB Biology, French and Grade 7 Math, each showing its tutor and current enrollment.",
+        caption: "In the summer of 2026, we ran 20 courses.",
         kind: "screenshot",
       },
     ],
