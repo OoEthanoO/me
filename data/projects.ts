@@ -282,6 +282,29 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: "YanLearn Recorder",
+    category: "Used by Peers",
+    description:
+      "The desktop app that records YanLearn classes on macOS and Windows and uploads them to the site — arming itself before the class, following the tutor in and out of the Discord call, and deleting the recording after a week.",
+    overview:
+      "Every YanLearn class from September 2026 is recorded, and none of that can rest on a tutor remembering to press record. The app arms itself fifteen minutes before a class, starts at the start time — but only while the tutor is actually in that class's Discord voice channel — pauses when they leave, resumes when they come back, and refuses to quit until the recording has been uploaded. Screen and audio go through a bundled ffmpeg at 720p and 10 fps, around 60–120 MB an hour, and the students in the course can watch it for seven days before the file is deleted.",
+    longDescription:
+      "YanLearn Recorder is the desktop half of recording our classes: a Tauri app tutors install once and then largely forget about. It signs in with their YanLearn account, sits in the tray, and updates itself between classes. Fifteen minutes before a class it pre-arms; five minutes before it locks, so closing the window only hides it and Quit is refused until whatever was recorded has been uploaded. Recording starts by itself, but only while the tutor is in the class's live voice channel; leaving pauses within one poll and rejoining resumes. The pause hotkey means one thing pressed inside the call — a plain pause — and another pressed outside it: a forced pause that rejoining will not undo. The mute hotkey drops the tutor's microphone from the recording without muting them in Discord, with a banner saying so for as long as it lasts, because a tutor who forgets loses their own voice for the rest of the class. The status pill is draggable to any corner and content-protected, so it stays out of the screen share it is sitting on top of.\n\nA recording is a series of segments, one ffmpeg process per uninterrupted stretch, written as fragmented MP4 so a crash still leaves something playable and stitched together at the end without re-encoding. That last part sets the rule everything else obeys: the segments have to share one size, so each is scaled and letterboxed onto a canvas derived from the recorded display. Neither platform lets ffmpeg capture system audio by itself — the students' voices — so the Rust side feeds it raw PCM over a loopback TCP socket: WASAPI loopback of the chosen speaker on Windows, padded with silence against the wall clock because WASAPI stops delivering packets while nothing is playing, and a bundled ScreenCaptureKit helper on macOS, which captures the mix whatever the output device is.\n\nA tutor who would rather not share a whole display can instead tick the windows they are willing to show, and then only the focused one is recorded. It works by cropping the display capture to that window rather than by adding a second, per-window capture stack, and the interesting part is what happens on the way out: when focus moves somewhere unshared the picture freezes on the last frame pulled out of the segment that just ended, never on a fresh grab of the screen — by the time a focus change has been noticed, the thing the tutor wanted kept private may already be sitting on top of it. Focus is polled every 250 ms through a dozen Win32 and CoreGraphics calls declared by hand rather than pulled from a bindings crate, windows are matched by handle and fall back to the application and title they were picked under, and a window that cannot be identified at all counts as not shared. Every failure in the feature has to fail towards not recording. It is equally plain about what cropping cannot do: a few frames of a newly focused window can still land in the recording before ffmpeg stops, so anything genuinely sensitive belongs on another display.\n\nThere is no persistent Discord gateway in this deployment, so presence is polled — a tick every two seconds while a class is near or live and every thirty otherwise, reading the tutor's voice state from Discord's REST API without retries, and answering \"unknown\" rather than guessing when the call is rate-limited. Playback is deliberately awkward to pass on: a private bucket, a per-viewer token bound to one recording for six hours, and a stream endpoint that refuses any request a media element did not make before redirecting to a presigned URL good for two minutes. That removes every download affordance without pretending to defeat a screen recorder, and the file is deleted after seven days either way. Updates are signed with minisign and install themselves, but only at a moment the app has proven is safe: connected to the server, no class session, nothing waiting to upload, no quit lock, and the next class more than twenty minutes away. Downloading and installing are separate steps for the same reason, so a slow download can neither stall the tick loop nor restart the app in the middle of a lesson.",
+    technologies: [
+      "Tauri 2",
+      "Rust",
+      "Vanilla JS",
+      "ffmpeg",
+      "Swift",
+      "ScreenCaptureKit",
+      "WASAPI",
+      "Win32 API",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/tutoring/tree/master/recorder",
+    images: [],
+  },
+  {
     title: "YanPlanner",
     description:
       "An AI study planner that turns assignments, exams, and projects into day-by-day plans with automatically generated subtasks.",
