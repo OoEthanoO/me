@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 /**
- * Re-runs the jump to `#anchor` once the pictures above it have loaded.
+ * Keeps `#anchor` aligned while the content above it finishes laying out.
  *
  * None of the site's images declare their dimensions, so when a link lands on
  * a page at a hash the browser scrolls while every picture above the target is
@@ -13,32 +13,112 @@ import { useEffect } from "react";
  * and nothing re-runs it once the images arrive and the page grows — so
  * /tech#stroj finished at the foot of the page rather than on the entry.
  *
- * Scrolling again on load fixes every anchor on the site at once. It is left
- * to the browser on the first paint — that is right whenever the layout is
- * already settled, and this only corrects it afterwards.
+ * `window.load` is not enough here: a Next.js client-side navigation happens
+ * after that one-time event. A ResizeObserver catches the later image-driven
+ * layout changes instead, and disconnects as soon as the page has held still.
  */
 export default function HashScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const hash = window.location.hash;
-    if (!hash || hash.length < 2) return;
+    let stopCorrection: (() => void) | undefined;
 
-    const jump = () => {
+    const correctHash = () => {
+      stopCorrection?.();
+
+      const hash = window.location.hash;
+      if (!hash || hash.length < 2) return;
+
+      let id: string;
+      try {
+        id = decodeURIComponent(hash.slice(1));
+      } catch {
+        return;
+      }
+
       // The id can be missing: a stale link, or a hash meant for another page.
-      const target = document.getElementById(
-        decodeURIComponent(hash.slice(1)),
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      let frame = 0;
+      let settleTimer = 0;
+      let limitTimer = 0;
+      let targetTop = target.getBoundingClientRect().top + window.scrollY;
+
+      const pendingImages = new Set(
+        [...document.images].filter(
+          (image) =>
+            !image.complete &&
+            Boolean(
+              image.compareDocumentPosition(target) &
+                Node.DOCUMENT_POSITION_FOLLOWING,
+            ),
+        ),
       );
-      target?.scrollIntoView();
+
+      const jump = () => {
+        window.cancelAnimationFrame(frame);
+        frame = window.requestAnimationFrame(() => target.scrollIntoView());
+      };
+
+      const settle = (event: Event) => {
+        pendingImages.delete(event.currentTarget as HTMLImageElement);
+        if (pendingImages.size === 0) {
+          window.clearTimeout(settleTimer);
+          settleTimer = window.setTimeout(stop, 250);
+        }
+      };
+
+      // Follow only changes that actually move the target. A resize below it,
+      // or the visitor scrolling by hand, must not pull the page back.
+      const observer = new ResizeObserver(() => {
+        const nextTop = target.getBoundingClientRect().top + window.scrollY;
+        if (Math.abs(nextTop - targetTop) > 1) {
+          targetTop = nextTop;
+          jump();
+        }
+
+        if (pendingImages.size === 0) {
+          window.clearTimeout(settleTimer);
+          settleTimer = window.setTimeout(stop, 250);
+        }
+      });
+
+      const stop = () => {
+        observer.disconnect();
+        pendingImages.forEach((image) => {
+          image.removeEventListener("load", settle);
+          image.removeEventListener("error", settle);
+        });
+        window.cancelAnimationFrame(frame);
+        window.clearTimeout(settleTimer);
+        window.clearTimeout(limitTimer);
+      };
+
+      stopCorrection = stop;
+      observer.observe(document.body);
+      pendingImages.forEach((image) => {
+        image.addEventListener("load", settle, { once: true });
+        image.addEventListener("error", settle, { once: true });
+      });
+      jump();
+
+      if (pendingImages.size === 0) {
+        settleTimer = window.setTimeout(stop, 250);
+      }
+
+      // Do not retain an observer indefinitely if a page keeps changing for a
+      // reason unrelated to loading its initial content.
+      limitTimer = window.setTimeout(stop, 15000);
     };
 
-    // A page whose images are already cached never fires `load` again, so the
-    // first pass runs now and the listener only covers the uncached visit.
-    jump();
-    if (document.readyState === "complete") return;
+    correctHash();
+    window.addEventListener("hashchange", correctHash);
 
-    window.addEventListener("load", jump);
-    return () => window.removeEventListener("load", jump);
+    return () => {
+      window.removeEventListener("hashchange", correctHash);
+      stopCorrection?.();
+    };
   }, [pathname]);
 
   return null;
