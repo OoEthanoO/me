@@ -154,7 +154,7 @@ export const serviceStrands: ServiceStrand[] = [
     description: "",
     stats: [],
     external: true,
-    totals: [{ value: "552", label: "Total volunteering hours" }],
+    totals: [{ value: "551", label: "Total volunteering hours" }],
     groups: [
       {
         title: "Waterloo Youth Accompanying Learning Community Group",
