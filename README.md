@@ -22,8 +22,13 @@ CNAMEs to `finprint.ethanyanxu.com`, whose existing DDNS job tracks the home IP.
 The existing CAA and verification records remain in place.
 
 Production lives in `C:\ProgramData\Portfolio`, separate from the developer's
-checkout. No application secrets or database are needed. Server-side impact
-figures still refresh hourly. Windows scheduled tasks start the active release
+checkout. No application secrets or database are needed. YanLearn figures are
+read on each page request from its hourly refreshed impact API; other impact
+sources retain their hourly cache. Installation maps `learn.ethanyanxu.com` to
+`127.0.0.1` in the server's hosts file, keeping requests to the co-hosted app
+local while preserving normal HTTPS certificate verification. A hosts backup
+is saved under `logs`; remove this mapping if YanLearn moves off this server.
+Windows scheduled tasks start the active release
 at boot and restart it after a crash; `portfolio-deploy` checks `origin/main`
 every two minutes. Vercel Git deployments are disabled in `vercel.json`.
 

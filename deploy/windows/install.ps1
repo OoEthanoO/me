@@ -11,6 +11,24 @@ $config = [pscustomobject]@{
     caddy=(Resolve-Path -LiteralPath $CaddyExe).Path; mainCaddyfile=(Resolve-Path -LiteralPath $MainCaddyfile).Path
 }
 Write-Json (Join-Path $Root 'server.json') $config
+
+# YanLearn runs on this same Caddy server. Resolve its public TLS hostname
+# locally so a router's stale DNS cannot send impact reads back to Vercel.
+$hostsPath = Join-Path $env:SystemRoot 'System32\drivers\etc\hosts'
+$hostsText = [IO.File]::ReadAllText($hostsPath)
+$mappedAddresses = @($hostsText -split '\r?\n' | ForEach-Object {
+    $fields = (($_ -split '#', 2)[0].Trim()) -split '\s+'
+    if ($fields.Count -gt 1 -and $fields[1..($fields.Count - 1)] -contains 'learn.ethanyanxu.com') { $fields[0] }
+})
+if (@($mappedAddresses | Where-Object { $_ -ne '127.0.0.1' }).Count) {
+    throw 'A different hosts entry already exists for YanLearn; inspect before replacing it.'
+}
+if ($mappedAddresses.Count -eq 0) {
+    Copy-Item -LiteralPath $hostsPath -Destination (Join-Path $Root ('logs\hosts-before-' + (Get-Date -Format 'yyyyMMddHHmmss')))
+    [IO.File]::AppendAllText($hostsPath, "`r`n# Co-hosted YanLearn impact API (Portfolio)`r`n127.0.0.1 learn.ethanyanxu.com`r`n", (New-Object Text.UTF8Encoding $false))
+    Clear-DnsClientCache
+}
+
 $repo = Join-Path $Root 'repo'
 if (-not (Test-Path -LiteralPath (Join-Path $repo '.git'))) {
     Invoke-Tool $config.git @('clone','--branch','main','https://github.com/OoEthanoO/me.git',$repo) (Join-Path $Root 'logs\install.log')

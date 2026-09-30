@@ -1,18 +1,20 @@
 export const YANLEARN_URL = "https://learn.ethanyanxu.com/";
 const IMPACT_API = "https://learn.ethanyanxu.com/api/impact";
 
-/** One read, hourly, that answers null rather than throwing. */
+/** YanLearn already caches its impact response hourly; do not cache it again. */
 async function read(url: string) {
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3600 },
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
       headers: {
         "user-agent": "ethanyanxu.com (+https://www.ethanyanxu.com)",
       },
     });
-    if (!res.ok) return null;
+    if (!res.ok) throw new Error(`YanLearn impact returned HTTP ${res.status}`);
     return await res.json();
-  } catch {
+  } catch (error) {
+    console.warn("Could not read YanLearn impact figures:", error);
     return null;
   }
 }
@@ -38,7 +40,8 @@ async function read(url: string) {
  * fallback recorded in the data. A network error, a non-200 or a response
  * that no longer holds these keys returns null rather than throwing.
  *
- * Revalidated hourly, like the other two live reads.
+ * Read on each page request. YanLearn owns the hourly refresh, so a second
+ * cache here would keep this page behind the source even after it updates.
  */
 export async function fetchYanLearnStats(): Promise<Record<
   string,
@@ -58,7 +61,9 @@ export async function fetchYanLearnStats(): Promise<Record<
     put("Courses", impact?.courses?.total);
     // The endpoint reports hours to one decimal place; the impact page prints
     // the whole number, and so does this site.
-    put("Hours Taught", Math.round(impact?.hoursTaught));
+    if (typeof impact?.hoursTaught === "number") {
+      put("Hours Taught", Math.round(impact.hoursTaught));
+    }
     put("Total Enrollments", impact?.enrollments);
 
     return Object.keys(figures).length > 0 ? figures : null;
