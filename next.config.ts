@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   /**
    * A production build and a running dev server both write to .next, and the
    * build fails on the half-written files it finds there. Setting

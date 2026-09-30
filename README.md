@@ -13,6 +13,53 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Production hosting
+
+The portfolio runs on `finprint-host` at `https://www.ethanyanxu.com` and
+`https://ethanyanxu.com`. Caddy provides HTTPS and forwards to a Next.js
+standalone server on loopback port 3300 or 3301. Both DNS names are DNS-only
+CNAMEs to `finprint.ethanyanxu.com`, whose existing DDNS job tracks the home IP.
+The existing CAA and verification records remain in place.
+
+Production lives in `C:\ProgramData\Portfolio`, separate from the developer's
+checkout. No application secrets or database are needed. Server-side impact
+figures still refresh hourly. Windows scheduled tasks start the active release
+at boot and restart it after a crash; `portfolio-deploy` checks `origin/main`
+every two minutes. Vercel Git deployments are disabled in `vercel.json`.
+
+New releases build from the lockfile on the server and must answer `/api/health`
+with their exact commit before Caddy switches over. The previous release and
+immutable browser assets are retained for rollback and already-open tabs.
+
+Run these commands in an administrator PowerShell **on finprint-host**:
+
+```powershell
+# First installation from this repo's deploy/windows directory:
+.\install.ps1 -CaddyExe (Get-Command caddy.exe).Source -MainCaddyfile 'C:\Users\ethan\finprint\scripts\selfhost\Caddyfile'
+
+# Build and start without switching public traffic:
+& C:\ProgramData\Portfolio\ops\deploy.ps1 -PrepareOnly
+& C:\ProgramData\Portfolio\ops\activate.ps1
+
+# Enable automatic deployments only after verifying the first release:
+& C:\ProgramData\Portfolio\ops\install.ps1 -CaddyExe (Get-Command caddy.exe).Source -MainCaddyfile 'C:\Users\ethan\finprint\scripts\selfhost\Caddyfile' -EnableAutoDeploy
+
+# Status and logs:
+Get-Content C:\ProgramData\Portfolio\active.json
+Get-ScheduledTask -TaskName 'portfolio-*'
+Get-Content C:\ProgramData\Portfolio\logs\deploy.log -Tail 50
+
+# Roll back; pause the poller so it does not immediately redeploy main:
+Disable-ScheduledTask -TaskName portfolio-deploy
+& C:\ProgramData\Portfolio\ops\activate.ps1 -Rollback
+# Resume after fixing/reverting main:
+Enable-ScheduledTask -TaskName portfolio-deploy
+```
+
+Deployment errors leave the current release serving. Logs and saved release
+metadata live under the runtime directory. Caddy imports the portfolio's own
+`Caddyfile`; it is reloaded without restarting the other hosted applications.
+
 ## Features
 
 - Modern, animated UI
