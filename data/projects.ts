@@ -439,6 +439,34 @@ export const projects: Project[] = [
     images: ["/orgchem-stereoisomers.jpg", "/orgchem-resolve.png"],
   },
   {
+    title: "STR History",
+    category: "Used by Peers",
+    description:
+      "Our history department's website: a globe you can turn back through time to see the world's borders as they were, with the IB History notes pinned where and when each event happened.",
+    overview:
+      "A website for our school's history department, built around a globe. Move the timeline anywhere from 300,000 BCE to the present and the borders redraw as they were; the IB History notes are pinned where and when each event happened, so the storming of the Bastille appears in Paris in 1789 and nowhere else. Every note is interactive — highlighted, attributed quotations, key terms that reveal their significance when pressed, a historians' debate and self-test questions — and the globe is public, while the rest of the department's site sits behind a shared code.",
+    longDescription:
+      "STR History is the history department's home online: courses, teachers, news and study guides, and the notes for the IB History course first examined in 2028 — Political and economic transitions, Authoritarian rule, and for HL the French Revolution and German and Italian unification. At its centre is a globe. The timeline runs from approximate human origins to the present across 31 stops, most of them carrying the borders of their year, and every note has a place and an inclusive date range, so its pin appears only while the event is happening. A switch shows every pin at once, SL and HL filter the set, and each pin is a real link straight to its note. The notes are written in MDX against a small set of components: quotations are highlighted and attributed, key terms reveal their significance when pressed, and every topic ends with a historians' debate and self-test questions.\n\nBecause it is a teaching site, accuracy is enforced at build time rather than left to good intentions. Every collection — notes, glossary, timeline stops, teachers, courses — is checked against a Zod schema, and a content lint reports every broken reference and YAML slip in one pass instead of stopping at the first. The house rules are strict: a quotation is either verbatim from a named, dated source or paraphrased in prose, every historiographical claim names a real historian and a real work, and anything not yet real — the sample teachers and courses — carries a visible Sample badge.\n\nThe globe is the engineering half. MapLibre is about a megabyte and WebGL takes a moment to start, so the page arrives with a globe already drawn: a d3-geo SVG baked into the HTML that can be dragged, pinched, zoomed and driven from the keyboard while MapLibre loads lazily behind it, and that stays in place until the detailed map has actually rendered a frame. There is no loading screen, and a machine without WebGL keeps a working globe. The borders come from the historical-basemaps reconstructions, simplified with topology-aware Douglas–Peucker at 100 m, or 5 m for anything under 100 km², because a fixed vertex percentage turns small countries into triangles. Colour is chosen by the year of the geometry and then by a hash of the controlling power's name, so an empire stays recognisably itself from one stop to the next, and borders the source marks as approximate are drawn dashed.\n\nOnly the globe is public; everything else needs the department's shared code. Caddy asks a small Node service on loopback before serving any protected file, the code is checked against a salted scrypt hash in constant time, a successful unlock is a signed HttpOnly cookie good for a week, and attempts are limited to ten every fifteen minutes. If that service goes down, protected pages fail closed while the globe keeps working. The site runs on a home server with no inbound webhooks and no deploy secrets: a scheduled task polls GitHub every minute, builds each new commit on main into its own release folder, swaps a junction to make it live, checks the version it is serving, and keeps the last five releases for rollback.",
+    technologies: [
+      "Astro 7",
+      "React 19",
+      "MapLibre GL",
+      "d3-geo",
+      "MDX",
+      "TypeScript",
+      "Caddy",
+      "Node.js",
+    ],
+    collaborators: [
+      { name: "HuAsked", github: "https://github.com/HuAsked" },
+      { name: "HisMonDon", github: "https://github.com/HisMonDon" },
+      { name: "alcaholex", github: "https://github.com/alcaholex" },
+    ],
+    github: "https://github.com/OoEthanoO/strhistory",
+    website: "https://history.ethanyanxu.com/globe",
+    images: [],
+  },
+  {
     title: "CoolRoute",
     category: "Other",
     description:
