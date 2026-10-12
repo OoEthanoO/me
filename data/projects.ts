@@ -146,6 +146,14 @@ export const projects: Project[] = [
       "Watkins (WMMS)",
     ],
     collaborators: [],
+    recognitions: [
+      {
+        award: "Bronze Medal",
+        event: "IgniteAI Expo — Artificial Intelligence",
+        detail:
+          "Third place in Artificial Intelligence, October 2026, for using audio processing and machine learning to determine the species and type of a whale call.",
+      },
+    ],
     github: "https://github.com/OoEthanoO/finprint",
     website: "https://finprint.ethanyanxu.com/",
     // The listing shows the first three: a result, the spectrogram behind it,

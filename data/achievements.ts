@@ -16,6 +16,15 @@ export interface Achievement {
 export const achievements: Achievement[] = [
   {
     year: "2026",
+    month: 10,
+    kind: "award",
+    title: "IgniteAI Expo",
+    detail:
+      "3rd place in Artificial Intelligence, for Finprint, which uses audio processing and machine learning to determine the species and type of a whale call.",
+    href: "https://finprint.ethanyanxu.com/",
+  },
+  {
+    year: "2026",
     month: 6,
     kind: "award",
     title: "The York Catholic District School Board Recognizes",
