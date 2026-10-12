@@ -26,8 +26,11 @@ export const achievements: Achievement[] = [
   {
     year: "2026",
     month: 6,
-    kind: "award",
-    title: "The York Catholic District School Board Recognizes",
+    kind: "certificate",
+    title: "York Catholic District School Board",
+    detail:
+      "Received a YCDSB Certificate of Achievement recognizing my silver medal and first-place CMOS Award for Coastal Risk Analyzer.",
+    href: "https://cora.ethanyanxu.com/",
   },
   {
     year: "2026",
