@@ -198,6 +198,34 @@ export const projects: Project[] = [
     images: ["/ecovision-confusion-matrix.jpg"],
   },
   {
+    title: "Ajar",
+    category: "Environment",
+    description:
+      "A Bluetooth CO₂ monitor for classrooms — an ESP32-C6 reading a Sensirion SCD41 — and the iPhone app, widget and alert that tell a teacher when to open a window.",
+    overview:
+      "Ajar is a Bluetooth CO₂ monitor for classrooms, and the iPhone app that turns its reading into an instruction. CO₂ is a good stand-in for how stuffy a room has become, so the monitor — an ESP32-C6 reading a Sensirion SCD41 every five seconds — passes the number to the teacher's phone, which charts the last two hours, keeps a home-screen widget current, and raises a single notification when the room reaches 1200 ppm: time to open a window. It is a working breadboard prototype; a custom circuit board and an enclosure come next.",
+    longDescription:
+      "Ajar is a Bluetooth CO₂ monitor for classrooms, plus the iPhone app that pairs with it. CO₂ is a good stand-in for how stuffy a room has become, and the whole design is about turning that number into something a teacher acts on: open a window. The monitor is an ESP32-C6 development board wired over I²C to a Sensirion SCD41, which measures CO₂, temperature and humidity every five seconds, and the board's own RGB LED shows the air at a glance — green below 800 ppm, amber from 800, red from 1200 — kept dim enough for a desk.\n\nThe firmware does not invent a Bluetooth format. It publishes through the Bluetooth SIG's standard Environmental Sensing Service, using the assigned characteristics for CO₂ concentration, temperature and humidity, each readable and notifying, and each holding the specification's \"not known\" value until the first measurement arrives. Because the format is standard, a generic scanner such as nRF Connect can read the monitor without the app, which helps when debugging the firmware on its own. If no sensor answers on the bus at startup, the board does not simply fail: it adds \"(demo)\" to its name and broadcasts a simulated classroom, CO₂ climbing while the room is full and falling when someone opens a window, so the app can be built and tested before a sensor is wired up.\n\nWith a monitor in every classroom, the one next door is always in range, so pairing has to be right. Each board advertises its own name — \"Ajar\" and the last four hex digits of its Bluetooth address, such as Ajar A4BE — and the first time the app runs, it lists the monitors it can hear with signal bars. The list is sorted by name rather than by signal, so it holds still under a finger while the signals rise and fall, and a monitor that has been quiet for ten seconds drops off it. Once the teacher picks theirs, the app remembers it and reconnects only to that one. The connection request never times out, so when a monitor that was unplugged or out of range comes back, iOS reconnects to it straight away, even with Ajar in the background.\n\nThe alert is built not to nag. It fires once when CO₂ reaches 1200 ppm and then stays silent until the room has aired out below 800, so a room hovering around the threshold gets one notification rather than one every few seconds, and a repeat replaces the old notification instead of stacking beside it. Saving and alerting live outside the views and run under iOS's Bluetooth background mode, so readings and alerts keep coming while Ajar is in the background. The thresholds are starting points to tune with teachers, not health limits.\n\nThe monitor sends a reading every five seconds, but one a minute is plenty for a classroom, so that is what the app keeps — about 1,440 rows a day in SwiftData — and it charts the last two hours with both thresholds drawn as dashed lines. None of it leaves the phone: there is no account and no server. The home-screen widget, in small and medium sizes, shows the latest reading and what to do about it. iOS limits how often an app may refresh its widgets, so Ajar refreshes it when the air changes level — fresh, stuffy, open a window — and otherwise every fifteen minutes, while the widget's \"Updated … ago\" line keeps counting by itself in between.\n\nThe breadboard prototype has been working since November 4, 2026: the board reads the room, and an iPhone shows the live readings and saves one a minute to its history. The app ran ahead of the hardware — the chart, the alert, the widget and the monitor picker were planned for January and February and are already done — and Swift Testing covers the parts that make decisions: decoding the Bluetooth values, the alert that fires once per stale spell, which readings are saved, when the widget refreshes, and the monitor list. Next on the plan are a custom circuit board, a 3D-printed enclosure that belongs on a teacher's desk, and then monitors in real classrooms.",
+    technologies: [
+      "ESP32-C6",
+      "Sensirion SCD41",
+      "Arduino (C++)",
+      "Bluetooth LE",
+      "SwiftUI",
+      "CoreBluetooth",
+      "SwiftData",
+      "Swift Charts",
+      "WidgetKit",
+    ],
+    collaborators: [{ name: "Solo", github: "https://github.com/OoEthanoO" }],
+    github: "https://github.com/OoEthanoO/ajar",
+    // The breadboard prototype sits beside the write-up on /tech. The two
+    // iPhone screenshots — the app connected to the real monitor, and the
+    // home-screen widget — pair up in the portrait grid on its own page.
+    featureImages: ["/ajar1.jpg"],
+    images: ["/ajar1.jpg", "/ajar2.png", "/ajar3.jpg"],
+  },
+  {
     title: "Gentoo",
     category: ROBOTICS_SECTION,
     description:
