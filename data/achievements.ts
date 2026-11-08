@@ -81,6 +81,13 @@ export const achievements: Achievement[] = [
       "Selected as a finalist for the CJSJ 2025–2026 volume application cycle.",
   },
   {
+    year: "2026",
+    kind: "award",
+    title: "Principal’s List",
+    detail:
+      "Given to the ten students with the highest averages in the school. Earned in Grade 11, while taking IB Higher Level Math, Physics and Chemistry.",
+  },
+  {
     year: "2025",
     month: 9,
     kind: "award",
