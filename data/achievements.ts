@@ -18,6 +18,14 @@ export const achievements: Achievement[] = [
     year: "2026",
     month: 10,
     kind: "award",
+    title: "Principal’s Award",
+    detail:
+      "Given to the ten students with the highest averages in the school. Earned in Grade 11, while taking IB Higher Level Math, Physics and Chemistry.",
+  },
+  {
+    year: "2026",
+    month: 10,
+    kind: "award",
     title: "IgniteAI Expo",
     detail:
       "3rd place in Artificial Intelligence, for Finprint, which uses audio processing and machine learning to determine the species and type of a whale call.",
@@ -79,13 +87,6 @@ export const achievements: Achievement[] = [
     title: "Columbia Junior Science Journal",
     detail:
       "Selected as a finalist for the CJSJ 2025–2026 volume application cycle.",
-  },
-  {
-    year: "2026",
-    kind: "award",
-    title: "Principal’s List",
-    detail:
-      "Given to the ten students with the highest averages in the school. Earned in Grade 11, while taking IB Higher Level Math, Physics and Chemistry.",
   },
   {
     year: "2025",
